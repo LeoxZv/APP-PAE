@@ -1,0 +1,37 @@
+
++----------------------+      +-------------------------------------+      +-------------------------------------+
+| Frontend (HTML/CSS/JS)| <---> | Servicio de Autenticación y Autorización | <---> | Base de Datos de Usuarios          |
++----------------------+      +-------------------------------------+      +-------------------------------------+
+           |
+           | (Token de Acceso)
+           v
++----------------------+      +-------------------------------------+      +-------------------------------------+
+| Frontend (Landing    | ---> | Servicio de Registro de Entregas de  | ---> | Base de Datos de Logs de Alimentos  |
+| Pages Específicas)   |      | Alimentos                           |      +-------------------------------------+
++----------------------+      +-------------------------------------+
+           |
+           | (Datos para el registro)
+           v
++----------------------+      +-------------------------------------+      +-------------------------------------+
+| Frontend (Formularios | ---> | Servicio de Registro de Entregas de  | ---> | Base de Datos de Logs de Implementos|
+| de Implementos)      |      | Implementos                         |      +-------------------------------------+
+           |
+           | (Peticiones a otros servicios con Token)
+           v
++----------------------+      +-------------------------------------+      +-------------------------------------+
+| Frontend (Paneles de | <---> | Servicio de Gestión de Usuarios     | <---> | Base de Datos de Usuarios (Admin)   |
+| Administración)      |      +-------------------------------------+      +-------------------------------------+
+           |
+           |
+           v
++----------------------+      +-------------------------------------+      +-------------------------------------+
+| Frontend (Paneles de | <---> | Servicio de Gestión de Estudiantes  | <---> | Base de Datos de Estudiantes       |
+| Administración de    |      +-------------------------------------+      +-------------------------------------+
+| Colegios)            |
+           |
+           |
+           v
++----------------------+      +-------------------------------------+      +-------------------------------------+
+| Frontend (Paneles de | <---> | Servicio de Reportes                | <---> | (Consulta Bases de Datos de Otros   |
+| Reportes)            |      +-------------------------------------+      | Servicios: Entregas, etc.)         |
++----------------------+      +-------------------------------------+      +-------------------------------------+
