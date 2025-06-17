@@ -1,8 +1,12 @@
-from flask import Flask 
-from flask_cors import CORS
-# Enable CORS for all routes
+from flask import Flask
+from extensions import db, migrate, cors
 
 app = Flask(__name__)
+
+# Initialize extensions with app
+db.init_app(app)
+migrate.init_app(app, db)
+cors.init_app(app)
 
 @app.route('/')
 def hello_world():
