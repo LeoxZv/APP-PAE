@@ -1,7 +1,7 @@
 from extensions import db
 from datetime import datetime
 
-class RegistroColegio(db.Model):
+class RegistroEntrega(db.Model):
     __tablename__ = 'tbl_registro_entrega'
     
     entrega_id = db.Column(db.Integer, primary_key=True)
@@ -9,8 +9,8 @@ class RegistroColegio(db.Model):
     fk_alimento = db.Column(db.Integer, db.ForeignKey('tbl_alimento.alimento_id'), nullable=False)
     fecha_registro = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     cantidad_entregada = db.Column(db.Integer, nullable=False)
-    fk_repartidor = db.Column(db.Integer, db.ForeignKey('tbl_usuario.user.id'), nullable=False)
-    fk_cocinero = db.Column(db.Integer, db.ForeignKey('tbl_usuario.user.id'), nullable=False)
+    fk_repartidor = db.Column(db.Integer, db.ForeignKey('tbl_usuario.user_id'), nullable=False)
+    fk_cocinero = db.Column(db.Integer, db.ForeignKey('tbl_usuario.user_id'), nullable=False)
 
 
     def __repr__(self):
