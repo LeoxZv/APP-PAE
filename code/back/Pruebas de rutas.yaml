@@ -1,0 +1,870 @@
+type: collection.insomnia.rest/5.0
+name: My first collection
+meta:
+  id: wrk_c2f1854d1ba64f7490ffbe7e7513f755
+  created: 1751549329496
+  modified: 1751549329496
+  description: ""
+collection:
+  - name: Documento
+    meta:
+      id: fld_6eddd655d6a24c1aa0898bfc75c5d53f
+      created: 1751549336608
+      modified: 1751588406640
+      sortKey: -1751549336608
+      description: ""
+    children:
+      - url: localhost:3000/doc
+        name: Crear documento
+        meta:
+          id: req_2681bfb39d884b52b30a53445fad44fd
+          created: 1751549329645
+          modified: 1751589966596
+          isPrivate: false
+          description: ""
+          sortKey: -1751549390694
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "nombre": "Cedula",
+              "siglas": "CC"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.2.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:3000/doc
+        name: Listar documentos
+        meta:
+          id: req_affa89893cae4232a8133dd6292316e5
+          created: 1751549510235
+          modified: 1751549535431
+          isPrivate: false
+          description: ""
+          sortKey: -1751549390794
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.2.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:3000/doc/6
+        name: Documento by ID
+        meta:
+          id: req_3b454dc416c249aa9d0c345b473221f4
+          created: 1751549615411
+          modified: 1751565405976
+          isPrivate: false
+          description: ""
+          sortKey: -1751549390894
+        method: GET
+        parameters:
+          - id: pair_f1ffb163ca6a4bff83bbf23b33bb3732
+            name: ""
+            value: ""
+            description: ""
+            disabled: false
+        headers:
+          - name: User-Agent
+            value: insomnia/11.2.0
+        scripts:
+          preRequest: |-
+            {
+            	
+            }
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:3000/doc/id
+        name: Delete documento by ID
+        meta:
+          id: req_0576f7c3e9fd4aeca7d3cb5c492ec46c
+          created: 1751549877291
+          modified: 1751551035514
+          isPrivate: false
+          description: ""
+          sortKey: -1751549390994
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/11.2.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:3000/doc/id
+        name: Update doc
+        meta:
+          id: req_13a680bcdc894572b2dd642b8b275c30
+          created: 1751550745520
+          modified: 1751551052420
+          isPrivate: false
+          description: ""
+          sortKey: -1751549391094
+        method: PATCH
+        body:
+          mimeType: application/json
+          text: |-
+            {"nombre":"registro prueba 2",
+            	"siglas":"R.p 2"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.2.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Rol
+    meta:
+      id: fld_4807e0932d7a4f5fa8072265793870a3
+      created: 1751588416923
+      modified: 1751588442899
+      sortKey: -1751302544966
+      description: ""
+    children:
+      - url: localhost:3000/rol
+        name: Crear rol
+        meta:
+          id: req_2190095082b846c08c74b3efd4c4d5b5
+          created: 1751588416926
+          modified: 1751589446261
+          isPrivate: false
+          description: ""
+          sortKey: -1751549390694
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "nombre_rol": "Estudiante"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.2.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:3000/rol
+        name: Listar roles
+        meta:
+          id: req_485a2803afaf4a799c3735d4b131facc
+          created: 1751588416930
+          modified: 1751589272612
+          isPrivate: false
+          description: ""
+          sortKey: -1751549390794
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.2.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:3000/rol/id
+        name: Rol by ID
+        meta:
+          id: req_89fa4edffcee4e32a88d01b2234fa6c9
+          created: 1751588416932
+          modified: 1751589277740
+          isPrivate: false
+          description: ""
+          sortKey: -1751549390894
+        method: GET
+        parameters:
+          - id: pair_f1ffb163ca6a4bff83bbf23b33bb3732
+            name: ""
+            value: ""
+            description: ""
+            disabled: false
+        headers:
+          - name: User-Agent
+            value: insomnia/11.2.0
+        scripts:
+          preRequest: |-
+            {
+            	
+            }
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:3000/rol/id
+        name: Delete Rol by ID
+        meta:
+          id: req_1210340602a5443189a79a1cd6eaa61e
+          created: 1751588416934
+          modified: 1751589282886
+          isPrivate: false
+          description: ""
+          sortKey: -1751549390994
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/11.2.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:3000/rol/id
+        name: Update rol
+        meta:
+          id: req_d80ebdfbaa8f44eda962ba4bfc40a382
+          created: 1751588416936
+          modified: 1751589289212
+          isPrivate: false
+          description: ""
+          sortKey: -1751549391094
+        method: PATCH
+        body:
+          mimeType: application/json
+          text: |-
+            {"nombre":"registro prueba 2",
+            	"siglas":"R.p 2"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.2.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Colegio
+    meta:
+      id: fld_acc245c28cbe41539d61801a0eb8df79
+      created: 1751588448437
+      modified: 1751589487432
+      sortKey: -1751425940787
+      description: ""
+    children:
+      - url: localhost:3000/colegio
+        name: Crear colegios
+        meta:
+          id: req_e02c8d423f024b23bbd8888373d4a73d
+          created: 1751588448440
+          modified: 1751589423372
+          isPrivate: false
+          description: ""
+          sortKey: -1751549390694
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "nombre_colegio": "Colegio Central",
+              "direccion_colegio": "Calle 123 #45-67"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.2.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:3000/colegio
+        name: Listar colegio
+        meta:
+          id: req_650f421f29d145c3954cb0113a1d5362
+          created: 1751588448442
+          modified: 1751589300287
+          isPrivate: false
+          description: ""
+          sortKey: -1751549390794
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.2.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:3000/colegio/id
+        name: Colegio by ID
+        meta:
+          id: req_f6c9c83f257b4968b28b430704e35da6
+          created: 1751588448444
+          modified: 1751589305109
+          isPrivate: false
+          description: ""
+          sortKey: -1751549390894
+        method: GET
+        parameters:
+          - id: pair_f1ffb163ca6a4bff83bbf23b33bb3732
+            name: ""
+            value: ""
+            description: ""
+            disabled: false
+        headers:
+          - name: User-Agent
+            value: insomnia/11.2.0
+        scripts:
+          preRequest: |-
+            {
+            	
+            }
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:3000/colegio/id
+        name: Delete colegio by ID
+        meta:
+          id: req_58011ab8a70f48ac907575545ae05687
+          created: 1751588448446
+          modified: 1751589311205
+          isPrivate: false
+          description: ""
+          sortKey: -1751549390994
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/11.2.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:3000/colegio/id
+        name: Update colegio
+        meta:
+          id: req_e466b426b9704592a57dd77e8773f861
+          created: 1751588448447
+          modified: 1751589316577
+          isPrivate: false
+          description: ""
+          sortKey: -1751549391094
+        method: PATCH
+        body:
+          mimeType: application/json
+          text: |-
+            {"nombre":"registro prueba 2",
+            	"siglas":"R.p 2"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.2.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Alimentos
+    meta:
+      id: fld_9e57a2550208486aa5455a8fc51da69f
+      created: 1751588455719
+      modified: 1751588455719
+      sortKey: -1751487638697.5
+      description: ""
+    children:
+      - url: localhost:3000/alimento
+        name: Crear alimento
+        meta:
+          id: req_551269854e504f0a852ab3b9a70d1f70
+          created: 1751588455722
+          modified: 1751589457089
+          isPrivate: false
+          description: ""
+          sortKey: -1751549390694
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "descripcion_alimento": "Leche Entera"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.2.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:3000/alimento
+        name: Listar alimentos
+        meta:
+          id: req_890e3a8d2a51402787a8cf4ba5e5eeaf
+          created: 1751588455724
+          modified: 1751588617311
+          isPrivate: false
+          description: ""
+          sortKey: -1751549390794
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.2.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:3000/alimento/id
+        name: alimento by ID
+        meta:
+          id: req_1313fbe5cd1b40bcba71e4877d37e89e
+          created: 1751588455726
+          modified: 1751588629459
+          isPrivate: false
+          description: ""
+          sortKey: -1751549390894
+        method: GET
+        parameters:
+          - id: pair_f1ffb163ca6a4bff83bbf23b33bb3732
+            name: ""
+            value: ""
+            description: ""
+            disabled: false
+        headers:
+          - name: User-Agent
+            value: insomnia/11.2.0
+        scripts:
+          preRequest: |-
+            {
+            	
+            }
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:3000/alimento/id
+        name: Delete alimento by ID
+        meta:
+          id: req_c532f2179a4b42759a218422e7b56c21
+          created: 1751588455728
+          modified: 1751588623797
+          isPrivate: false
+          description: ""
+          sortKey: -1751549390994
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/11.2.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:3000/alimento/id
+        name: Update alimento
+        meta:
+          id: req_790771f0872a46d9ad242bba089e49bf
+          created: 1751588455730
+          modified: 1751588636475
+          isPrivate: false
+          description: ""
+          sortKey: -1751549391094
+        method: PATCH
+        body:
+          mimeType: application/json
+          text: |-
+            {"nombre":"registro prueba 2",
+            	"siglas":"R.p 2"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.2.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Usuarios
+    meta:
+      id: fld_83fecbf7ae0f4f5f911e0a512fb36f35
+      created: 1751589495365
+      modified: 1751589495365
+      sortKey: -1751456789742.25
+      description: ""
+    children:
+      - url: localhost:3000/user
+        name: Crear usuario
+        meta:
+          id: req_b67ad5162338429cb7b39263796a5587
+          created: 1751589495367
+          modified: 1751590196483
+          isPrivate: false
+          description: ""
+          sortKey: -1751549390694
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "nombre_user": "Juan",
+              "apellido_user": "Perez",
+              "numero_documento": "123456789",
+              "grado": "5A",
+              "jornada": "Tarde",
+              "tipo_doc": 1,      
+              "rol": 1,           
+              "colegio": 1
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.2.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:3000/user
+        name: Listar usuarios
+        meta:
+          id: req_6bfb45466a84438684cfa005351b3271
+          created: 1751589495370
+          modified: 1751589580434
+          isPrivate: false
+          description: ""
+          sortKey: -1751549390794
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.2.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:3000/user/id
+        name: usuario by ID
+        meta:
+          id: req_2f20699f94c3467e99e12a4a9e02b3ba
+          created: 1751589495372
+          modified: 1751589576971
+          isPrivate: false
+          description: ""
+          sortKey: -1751549390894
+        method: GET
+        parameters:
+          - id: pair_f1ffb163ca6a4bff83bbf23b33bb3732
+            name: ""
+            value: ""
+            description: ""
+            disabled: false
+        headers:
+          - name: User-Agent
+            value: insomnia/11.2.0
+        scripts:
+          preRequest: |-
+            {
+            	
+            }
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:3000/user/id
+        name: Delete usuario by ID
+        meta:
+          id: req_b6b00763b9a4402fab3e3a2355f15587
+          created: 1751589495373
+          modified: 1751589573287
+          isPrivate: false
+          description: ""
+          sortKey: -1751549390994
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/11.2.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:3000/user/id
+        name: Update usuario
+        meta:
+          id: req_71d9ae5ecb7245a9a600ea0d214d9f05
+          created: 1751589495375
+          modified: 1751589568706
+          isPrivate: false
+          description: ""
+          sortKey: -1751549391094
+        method: PATCH
+        body:
+          mimeType: application/json
+          text: |-
+            {"nombre":"registro prueba 2",
+            	"siglas":"R.p 2"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.2.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Entregas
+    meta:
+      id: fld_6542117b9f42449b928e9bccb8f30883
+      created: 1751589502437
+      modified: 1751589502437
+      sortKey: -1751472214219.875
+      description: ""
+    children:
+      - url: localhost:3000/entrega
+        name: Crear entrega
+        meta:
+          id: req_e77809206ba044bbb39bfdd66be14568
+          created: 1751589502439
+          modified: 1751589636713
+          isPrivate: false
+          description: ""
+          sortKey: -1751549390694
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "descripcion_alimento": "Leche Entera"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.2.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:3000/entrega
+        name: Listar entregas
+        meta:
+          id: req_7cfaeab2e57f4178bfa7c244d29d5768
+          created: 1751589502441
+          modified: 1751589629355
+          isPrivate: false
+          description: ""
+          sortKey: -1751549390794
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.2.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:3000/entrega/id
+        name: entrega by ID
+        meta:
+          id: req_6f5fb569e44b4b3da3f6f194acee2b19
+          created: 1751589502444
+          modified: 1751589624439
+          isPrivate: false
+          description: ""
+          sortKey: -1751549390894
+        method: GET
+        parameters:
+          - id: pair_f1ffb163ca6a4bff83bbf23b33bb3732
+            name: ""
+            value: ""
+            description: ""
+            disabled: false
+        headers:
+          - name: User-Agent
+            value: insomnia/11.2.0
+        scripts:
+          preRequest: |-
+            {
+            	
+            }
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:3000/entrega/id
+        name: Delete entrega by ID
+        meta:
+          id: req_747fe14c4aec4fa29fb0fd72e8ab6594
+          created: 1751589502446
+          modified: 1751589618507
+          isPrivate: false
+          description: ""
+          sortKey: -1751549390994
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/11.2.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:3000/entrega/id
+        name: Update entrega
+        meta:
+          id: req_30cef283b222453e9f72dc15f0b054ff
+          created: 1751589502448
+          modified: 1751589612307
+          isPrivate: false
+          description: ""
+          sortKey: -1751549391094
+        method: PATCH
+        body:
+          mimeType: application/json
+          text: |-
+            {"nombre":"registro prueba 2",
+            	"siglas":"R.p 2"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.2.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_57207f3cfd95bcfce46aeeab7c32b3d9d9024397
+    created: 1751549329521
+    modified: 1751565408267
+environments:
+  name: Base Environment
+  meta:
+    id: env_57207f3cfd95bcfce46aeeab7c32b3d9d9024397
+    created: 1751549329516
+    modified: 1751565408270
+    isPrivate: false
