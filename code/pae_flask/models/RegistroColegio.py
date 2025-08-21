@@ -8,8 +8,8 @@ class RegistroColegio(db.Model):
     fk_colegio = db.Column(db.Integer, db.ForeignKey('tbl_colegio.colegio_id'), nullable=False)
     fk_alimento = db.Column(db.Integer, db.ForeignKey('tbl_alimento.alimento_id'), nullable=False)
     fecha_registro = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
-    fk_estudiante = db.Column(db.Integer, db.ForeignKey('tbl_usuario.user_id'), nullable=False)
-    fk_cocinero = db.Column(db.Integer, db.ForeignKey('tbl_usuario.user_id'), nullable=False)
+    fk_estudiante = db.Column(db.Integer, db.ForeignKey('tbl_usuario.user.id'), nullable=False)
+    fk_cocinero = db.Column(db.Integer, db.ForeignKey('tbl_usuario.user.id'), nullable=False)
 
 
     def __repr__(self):
