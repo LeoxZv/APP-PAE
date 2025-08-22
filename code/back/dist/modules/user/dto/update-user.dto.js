@@ -17,9 +17,8 @@ class UpdateUserDto extends (0, mapped_types_1.PartialType)(create_user_dto_1.Cr
     nombre;
     apellido;
     numero_documento;
-    grado;
-    jornada;
     tipo_doc;
+    password_user;
     rol;
     colegio;
 }
@@ -44,21 +43,15 @@ __decorate([
 ], UpdateUserDto.prototype, "numero_documento", void 0);
 __decorate([
     (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsString)(),
-    (0, class_validator_1.Length)(1, 15),
-    __metadata("design:type", String)
-], UpdateUserDto.prototype, "grado", void 0);
-__decorate([
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsString)(),
-    (0, class_validator_1.Length)(1, 15),
-    __metadata("design:type", String)
-], UpdateUserDto.prototype, "jornada", void 0);
-__decorate([
-    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)
 ], UpdateUserDto.prototype, "tipo_doc", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.Length)(1, 64),
+    __metadata("design:type", String)
+], UpdateUserDto.prototype, "password_user", void 0);
 __decorate([
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsNumber)(),

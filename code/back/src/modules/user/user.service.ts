@@ -46,6 +46,7 @@ export class UserService {
     const newUser = this.userRepository.create({
       nombre_user: user.nombre_user,
       apellido_user: user.apellido_user,
+      password_user: user.password_user,
       numero_documento: user.numero_documento,
       rol,
       colegio,

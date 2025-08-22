@@ -18,9 +18,8 @@ let User = class User {
     id_user;
     nombre_user;
     apellido_user;
+    password_user;
     numero_documento;
-    grado;
-    jornada;
     tipo_doc;
     rol;
     colegio;
@@ -39,17 +38,13 @@ __decorate([
     __metadata("design:type", String)
 ], User.prototype, "apellido_user", void 0);
 __decorate([
+    (0, typeorm_1.Column)({ type: 'varchar', length: 64 }),
+    __metadata("design:type", String)
+], User.prototype, "password_user", void 0);
+__decorate([
     (0, typeorm_1.Column)({ type: 'varchar', length: 20 }),
     __metadata("design:type", String)
 ], User.prototype, "numero_documento", void 0);
-__decorate([
-    (0, typeorm_1.Column)({ type: 'varchar', length: 15 }),
-    __metadata("design:type", String)
-], User.prototype, "grado", void 0);
-__decorate([
-    (0, typeorm_1.Column)({ type: 'varchar', length: 15 }),
-    __metadata("design:type", String)
-], User.prototype, "jornada", void 0);
 __decorate([
     (0, typeorm_1.ManyToOne)(() => doc_entity_1.Doc, (doc) => doc.id_doc),
     __metadata("design:type", doc_entity_1.Doc)

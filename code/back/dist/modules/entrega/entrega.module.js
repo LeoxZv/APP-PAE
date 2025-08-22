@@ -14,12 +14,13 @@ const entrega_controller_1 = require("./entrega.controller");
 const entrega_entity_1 = require("./entities/entrega.entity");
 const user_entity_1 = require("../user/entities/user.entity");
 const alimento_entity_1 = require("../alimento/entities/alimento.entity");
+const estudiante_entity_1 = require("../estudiante/entities/estudiante.entity");
 let EntregaModule = class EntregaModule {
 };
 exports.EntregaModule = EntregaModule;
 exports.EntregaModule = EntregaModule = __decorate([
     (0, common_1.Module)({
-        imports: [typeorm_1.TypeOrmModule.forFeature([entrega_entity_1.Entrega, user_entity_1.User, alimento_entity_1.Alimento])],
+        imports: [typeorm_1.TypeOrmModule.forFeature([entrega_entity_1.Entrega, user_entity_1.User, alimento_entity_1.Alimento, estudiante_entity_1.Estudiante])],
         controllers: [entrega_controller_1.EntregaController],
         providers: [entrega_service_1.EntregaService],
     })

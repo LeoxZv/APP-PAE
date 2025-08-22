@@ -13,6 +13,9 @@ export class User {
   @Column({ type: 'varchar', length: 55 })
   apellido_user: string;
 
+  @Column({ type: 'varchar', length: 64 })
+  password_user: string;
+
   @Column({ type: 'varchar', length: 20 })
   numero_documento: string;
 

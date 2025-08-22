@@ -23,6 +23,11 @@ export class UpdateUserDto extends PartialType(CreateUserDto) {
   tipo_doc?: number;
 
   @IsOptional()
+  @IsString()
+  @Length(1, 64)
+  password_user?: string;
+
+  @IsOptional()
   @IsNumber()
   rol?: number;
 

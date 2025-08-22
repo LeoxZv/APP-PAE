@@ -5,9 +5,8 @@ export declare class User {
     id_user: number;
     nombre_user: string;
     apellido_user: string;
+    password_user: string;
     numero_documento: string;
-    grado: string;
-    jornada: string;
     tipo_doc: Doc;
     rol: Rol;
     colegio: Colegio;

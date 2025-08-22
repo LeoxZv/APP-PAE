@@ -16,6 +16,8 @@ const alimento_module_1 = require("./modules/alimento/alimento.module");
 const user_module_1 = require("./modules/user/user.module");
 const entrega_module_1 = require("./modules/entrega/entrega.module");
 const rol_module_1 = require("./modules/rol/rol.module");
+const estudiante_module_1 = require("./modules/estudiante/estudiante.module");
+const auth_module_1 = require("./modules/auth/auth.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -47,6 +49,8 @@ exports.AppModule = AppModule = __decorate([
             user_module_1.UserModule,
             entrega_module_1.EntregaModule,
             rol_module_1.RolModule,
+            estudiante_module_1.EstudianteModule,
+            auth_module_1.AuthModule,
         ],
     })
 ], AppModule);

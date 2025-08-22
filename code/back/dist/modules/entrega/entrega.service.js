@@ -18,14 +18,17 @@ const typeorm_1 = require("@nestjs/typeorm");
 const entrega_entity_1 = require("./entities/entrega.entity");
 const typeorm_2 = require("typeorm");
 const user_entity_1 = require("../user/entities/user.entity");
+const estudiante_entity_1 = require("../estudiante/entities/estudiante.entity");
 const alimento_entity_1 = require("../alimento/entities/alimento.entity");
 let EntregaService = class EntregaService {
     entregaRepository;
     userRepository;
+    estudianteRepository;
     alimentoRepository;
-    constructor(entregaRepository, userRepository, alimentoRepository) {
+    constructor(entregaRepository, userRepository, estudianteRepository, alimentoRepository) {
         this.entregaRepository = entregaRepository;
         this.userRepository = userRepository;
+        this.estudianteRepository = estudianteRepository;
         this.alimentoRepository = alimentoRepository;
     }
     async create(createEntregaDto) {
@@ -35,12 +38,9 @@ let EntregaService = class EntregaService {
         if (!emisor) {
             throw new common_1.HttpException('Emisor not found', common_1.HttpStatus.NOT_FOUND);
         }
-        const receptor = await this.userRepository.findOne({
-            where: { id_user: createEntregaDto.receptor },
+        const receptor = await this.estudianteRepository.findOne({
+            where: { id_estudiante: createEntregaDto.receptor },
         });
-        if (emisor == receptor) {
-            throw new Error('Emisor and Receptor cannot be the same user');
-        }
         if (!receptor) {
             throw new common_1.HttpException('Receptor not found', common_1.HttpStatus.NOT_FOUND);
         }
@@ -97,8 +97,10 @@ exports.EntregaService = EntregaService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(entrega_entity_1.Entrega)),
     __param(1, (0, typeorm_1.InjectRepository)(user_entity_1.User)),
-    __param(2, (0, typeorm_1.InjectRepository)(alimento_entity_1.Alimento)),
+    __param(2, (0, typeorm_1.InjectRepository)(estudiante_entity_1.Estudiante)),
+    __param(3, (0, typeorm_1.InjectRepository)(alimento_entity_1.Alimento)),
     __metadata("design:paramtypes", [typeorm_2.Repository,
+        typeorm_2.Repository,
         typeorm_2.Repository,
         typeorm_2.Repository])
 ], EntregaService);

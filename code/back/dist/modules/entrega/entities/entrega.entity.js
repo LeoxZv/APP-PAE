@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Entrega = void 0;
 const alimento_entity_1 = require("../../alimento/entities/alimento.entity");
+const estudiante_entity_1 = require("../../estudiante/entities/estudiante.entity");
 const user_entity_1 = require("../../user/entities/user.entity");
 const typeorm_1 = require("typeorm");
 let Entrega = class Entrega {
@@ -40,7 +41,7 @@ __decorate([
     __metadata("design:type", user_entity_1.User)
 ], Entrega.prototype, "emisor", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => user_entity_1.User),
+    (0, typeorm_1.ManyToOne)(() => estudiante_entity_1.Estudiante),
     (0, typeorm_1.JoinColumn)({ name: 'id_receptor' }),
     __metadata("design:type", user_entity_1.User)
 ], Entrega.prototype, "receptor", void 0);
