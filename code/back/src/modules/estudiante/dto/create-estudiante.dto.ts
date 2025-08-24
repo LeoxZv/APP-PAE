@@ -4,12 +4,12 @@ export class CreateEstudianteDto {
   @IsString()
   @IsNotEmpty()
   @Length(1, 55)
-  nombre_user: string;
+  nombre_estudiante: string;
 
   @IsString()
   @IsNotEmpty()
   @Length(1, 55)
-  apellido_user: string;
+  apellido_estudiante: string;
 
   @IsString()
   @IsNotEmpty()

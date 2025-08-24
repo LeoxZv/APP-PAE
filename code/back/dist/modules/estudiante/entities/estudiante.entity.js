@@ -15,8 +15,8 @@ const doc_entity_1 = require("../../doc/entities/doc.entity");
 const typeorm_1 = require("typeorm");
 let Estudiante = class Estudiante {
     id_estudiante;
-    nombre_user;
-    apellido_user;
+    nombre_estudiante;
+    apellido_estudiante;
     numero_documento;
     grado;
     jornada;
@@ -31,11 +31,11 @@ __decorate([
 __decorate([
     (0, typeorm_1.Column)({ type: 'varchar', length: 55 }),
     __metadata("design:type", String)
-], Estudiante.prototype, "nombre_user", void 0);
+], Estudiante.prototype, "nombre_estudiante", void 0);
 __decorate([
     (0, typeorm_1.Column)({ type: 'varchar', length: 55 }),
     __metadata("design:type", String)
-], Estudiante.prototype, "apellido_user", void 0);
+], Estudiante.prototype, "apellido_estudiante", void 0);
 __decorate([
     (0, typeorm_1.Column)({ type: 'varchar', length: 20 }),
     __metadata("design:type", String)

@@ -4,7 +4,6 @@ import { UpdateEstudianteDto } from './dto/update-estudiante.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Estudiante } from './entities/estudiante.entity';
-import { Rol } from '../rol/entities/rol.entity';
 import { Colegio } from '../colegio/entities/colegio.entity';
 import { Doc } from '../doc/entities/doc.entity';
 
@@ -12,10 +11,7 @@ import { Doc } from '../doc/entities/doc.entity';
 export class EstudianteService {
   constructor(
     @InjectRepository(Estudiante)
-    private readonly userRepository: Repository<Estudiante>,
-
-    @InjectRepository(Rol)
-    private readonly rolRepository: Repository<Rol>,
+    private readonly estudianteRepository: Repository<Estudiante>,
 
     @InjectRepository(Colegio)
     private readonly colegioRepository: Repository<Colegio>,
@@ -37,24 +33,24 @@ export class EstudianteService {
     if (!doc) {
       throw new HttpException('Doc not found', HttpStatus.NOT_FOUND);
     }
-    const newUser = this.userRepository.create({
-      nombre_user: estudiante.nombre_user,
-      apellido_user: estudiante.apellido_user,
+    const newEstudiante = this.estudianteRepository.create({
+      nombre_estudiante: estudiante.nombre_estudiante,
+      apellido_estudiante: estudiante.apellido_estudiante,
       numero_documento: estudiante.numero_documento,
       colegio,
       tipo_doc: doc,
     });
-    return this.userRepository.save(newUser);
+    return this.estudianteRepository.save(newEstudiante);
   }
   async findAll(): Promise<Estudiante[]> {
-    return this.userRepository.find({
-      relations: ['rol', 'colegio', 'tipo_doc'],
+    return this.estudianteRepository.find({
+      relations: ['colegio', 'tipo_doc'],
       order: { id_estudiante: 'ASC' },
     });
   }
 
   async findOne(id: number): Promise<Estudiante> {
-    const estudiante = await this.userRepository.findOne({
+    const estudiante = await this.estudianteRepository.findOne({
       where: { id_estudiante: id },
     });
     if (!estudiante) {
@@ -67,18 +63,18 @@ export class EstudianteService {
     id: number,
     updateUserDto: UpdateEstudianteDto,
   ): Promise<Estudiante> {
-    const estudiante = await this.userRepository.findOne({
+    const estudiante = await this.estudianteRepository.findOne({
       where: { id_estudiante: id },
     });
     if (!estudiante) {
       throw new HttpException('Estudiante not found', HttpStatus.NOT_FOUND);
     }
     const updatedUser = Object.assign(estudiante, updateUserDto);
-    return this.userRepository.save(updatedUser);
+    return this.estudianteRepository.save(updatedUser);
   }
 
   async remove(id: number) {
-    const deleteResult = await this.userRepository.delete(id);
+    const deleteResult = await this.estudianteRepository.delete(id);
     if (deleteResult.affected === 0) {
       throw new HttpException('Estudiante not found', HttpStatus.NOT_FOUND);
     }

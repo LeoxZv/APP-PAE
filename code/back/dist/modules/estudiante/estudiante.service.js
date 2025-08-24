@@ -17,17 +17,14 @@ const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
 const estudiante_entity_1 = require("./entities/estudiante.entity");
-const rol_entity_1 = require("../rol/entities/rol.entity");
 const colegio_entity_1 = require("../colegio/entities/colegio.entity");
 const doc_entity_1 = require("../doc/entities/doc.entity");
 let EstudianteService = class EstudianteService {
-    userRepository;
-    rolRepository;
+    estudianteRepository;
     colegioRepository;
     docRepository;
-    constructor(userRepository, rolRepository, colegioRepository, docRepository) {
-        this.userRepository = userRepository;
-        this.rolRepository = rolRepository;
+    constructor(estudianteRepository, colegioRepository, docRepository) {
+        this.estudianteRepository = estudianteRepository;
         this.colegioRepository = colegioRepository;
         this.docRepository = docRepository;
     }
@@ -44,23 +41,23 @@ let EstudianteService = class EstudianteService {
         if (!doc) {
             throw new common_1.HttpException('Doc not found', common_1.HttpStatus.NOT_FOUND);
         }
-        const newUser = this.userRepository.create({
-            nombre_user: estudiante.nombre_user,
-            apellido_user: estudiante.apellido_user,
+        const newEstudiante = this.estudianteRepository.create({
+            nombre_estudiante: estudiante.nombre_estudiante,
+            apellido_estudiante: estudiante.apellido_estudiante,
             numero_documento: estudiante.numero_documento,
             colegio,
             tipo_doc: doc,
         });
-        return this.userRepository.save(newUser);
+        return this.estudianteRepository.save(newEstudiante);
     }
     async findAll() {
-        return this.userRepository.find({
-            relations: ['rol', 'colegio', 'tipo_doc'],
+        return this.estudianteRepository.find({
+            relations: ['colegio', 'tipo_doc'],
             order: { id_estudiante: 'ASC' },
         });
     }
     async findOne(id) {
-        const estudiante = await this.userRepository.findOne({
+        const estudiante = await this.estudianteRepository.findOne({
             where: { id_estudiante: id },
         });
         if (!estudiante) {
@@ -69,17 +66,17 @@ let EstudianteService = class EstudianteService {
         return estudiante;
     }
     async update(id, updateUserDto) {
-        const estudiante = await this.userRepository.findOne({
+        const estudiante = await this.estudianteRepository.findOne({
             where: { id_estudiante: id },
         });
         if (!estudiante) {
             throw new common_1.HttpException('Estudiante not found', common_1.HttpStatus.NOT_FOUND);
         }
         const updatedUser = Object.assign(estudiante, updateUserDto);
-        return this.userRepository.save(updatedUser);
+        return this.estudianteRepository.save(updatedUser);
     }
     async remove(id) {
-        const deleteResult = await this.userRepository.delete(id);
+        const deleteResult = await this.estudianteRepository.delete(id);
         if (deleteResult.affected === 0) {
             throw new common_1.HttpException('Estudiante not found', common_1.HttpStatus.NOT_FOUND);
         }
@@ -90,11 +87,9 @@ exports.EstudianteService = EstudianteService;
 exports.EstudianteService = EstudianteService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(estudiante_entity_1.Estudiante)),
-    __param(1, (0, typeorm_1.InjectRepository)(rol_entity_1.Rol)),
-    __param(2, (0, typeorm_1.InjectRepository)(colegio_entity_1.Colegio)),
-    __param(3, (0, typeorm_1.InjectRepository)(doc_entity_1.Doc)),
+    __param(1, (0, typeorm_1.InjectRepository)(colegio_entity_1.Colegio)),
+    __param(2, (0, typeorm_1.InjectRepository)(doc_entity_1.Doc)),
     __metadata("design:paramtypes", [typeorm_2.Repository,
-        typeorm_2.Repository,
         typeorm_2.Repository,
         typeorm_2.Repository])
 ], EstudianteService);

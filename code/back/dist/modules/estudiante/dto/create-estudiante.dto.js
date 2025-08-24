@@ -12,8 +12,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateEstudianteDto = void 0;
 const class_validator_1 = require("class-validator");
 class CreateEstudianteDto {
-    nombre_user;
-    apellido_user;
+    nombre_estudiante;
+    apellido_estudiante;
     numero_documento;
     grado;
     jornada;
@@ -27,13 +27,13 @@ __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.Length)(1, 55),
     __metadata("design:type", String)
-], CreateEstudianteDto.prototype, "nombre_user", void 0);
+], CreateEstudianteDto.prototype, "nombre_estudiante", void 0);
 __decorate([
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.Length)(1, 55),
     __metadata("design:type", String)
-], CreateEstudianteDto.prototype, "apellido_user", void 0);
+], CreateEstudianteDto.prototype, "apellido_estudiante", void 0);
 __decorate([
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsNotEmpty)(),

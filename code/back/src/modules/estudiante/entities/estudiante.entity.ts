@@ -7,9 +7,9 @@ export class Estudiante {
   @PrimaryGeneratedColumn()
   id_estudiante: number;
   @Column({ type: 'varchar', length: 55 })
-  nombre_user: string;
+  nombre_estudiante: string;
   @Column({ type: 'varchar', length: 55 })
-  apellido_user: string;
+  apellido_estudiante: string;
   @Column({ type: 'varchar', length: 20 })
   numero_documento: string;
   @Column({ type: 'varchar', length: 15 })

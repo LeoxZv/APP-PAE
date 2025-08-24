@@ -1,31 +1,62 @@
 <!DOCTYPE html>
 <html lang="es">
 
-<head>
-    <meta charset="UTF-8">
-    <title>Dashboard estudiantes - PAE</title>
-    <link rel="stylesheet" href="../assets/dashboard.css">
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <title>Dashboard estudiantes - PAE</title>
+        <link rel="stylesheet" href="../assets/dashboard.css">
+    </head>
 
-<body>
-    <div class="encabezado"></div>
+    <body>
 
-    <div class="dashboard">
-        <table class="dashboard">
-            <tr>
-                <th>Nombre</th>
-                <th>Apellido</th>
-                <th>Tipo doc</th>
-                <th>Documento</th>
-                <th>Curso</th>
-                <th>Jornada</th>
-                <th>Colegio</th>
-            </tr>
+        <div class="encabezado"></div>
+        <h1>Dashboard Estudiantes</h1>
+        <div class="filtros">
+            <button id="formulario_crear">Añadir estudiante</button>
+            <div class="formulario_añadir" id="formulario_añadir"> 
+                <div class="formulario_contenido">
+                    <h2>Registrar estudiante</h2>
+                    <button id="cerrar_formulario" class="cerrar_btn">X</button> 
+                    <form action="" method="post">
+                        <input type="text" name="nombre_usuario" placeholder="Nombre" class="input" required>
+                        <input type="text" name="apellido" placeholder="Apellido" class="input" required>
+                        <input type="text" name="documento" placeholder="Documento" class="input" required>
+                        <select name="Grado" id="grado">
 
-            <tbody id="cuerpo_tabla"></tbody>
-        </table>
-    </div>
+                        </select>
+                        <select name="Jornada" id="Jornada">
+                            
+                        </select>
+                        <select name="Colegio" id="colegio">
 
-    <script src="dashboard_estudiante.js"></script>
-</body>
+                        </select>
+                        <select name="Tipo de documento" id="tipo_doc">
+
+                        </select>
+                        <button type="submit" class="btn-default">Registrar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="dashboard">
+            <table class="dashboard">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Tipo doc</th>
+                    <th>Documento</th>
+                    <th>Curso</th>
+                    <th>Jornada</th>
+                    <th>Colegio</th>
+                </tr>
+
+                <tbody id="cuerpo_tabla"></tbody>
+            </table>
+        </div>
+
+        <script src="dashboard_estudiante.js"></script>
+    </body>
 </html>
