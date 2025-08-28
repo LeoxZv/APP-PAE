@@ -9,6 +9,8 @@ boton_abrir.addEventListener("click", () => {
     formulario_añadir.classList.add("open");
 	fetchTipo_doc();
 	fetchColegios();
+    fetchGrado();
+    fecthJornada();
 });
 
 boton_cerrar.addEventListener("click", () => {
@@ -73,27 +75,91 @@ async function fetchColegios() {
 		return [];
 	}
 }
+async function fetchGrado() {
+	try {
+		const response = await fetch('http://localhost:3000/grado', {
+			method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+		const grado_select = document.getElementById('grado');
+		const data = await response.json(); // 'data' ahora es el array de colegios
+		console.log('exitoso, pudimos traer los grados:', data);
+		// Limpiar opciones existentes y añadir una opción por defecto
+		grado_select.innerHTML = '';
+		// Iterar directamente sobre el array 'data' para crear las opciones
+		data.forEach(grado => {
+			const option = document.createElement('option');
+			option.value = grado.id_grado;
+			option.textContent = grado.numero_grado;
+			grado_select.appendChild(option);
+		});
+	} catch (error) {
+		console.error('Error:', error);
+		alert('Hubo un problema al cargar los grados.');
+		return [];
+	}
+}
 
-    fetch('http://localhost:3000/estudiante', { // Cambia la URL si tu servidor está en otro puerto
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData)
-    })
-    .then(response => response.json()) // Verifica que la respuesta sea JSON
-    .then(data => {
-        if (data.success) {
-            console.log('exitoso, pudimos traer los estudiantes:', data.message);
-        } else {
-            console.log('Conexion fallida:', data.message);
-            alert('No pudimos traer los estudiantes. Intenta nuevamente.');
+async function fecthJornada() {
+	try {
+		const response = await fetch('http://localhost:3000/jornada', {
+			method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+		const jornada_select = document.getElementById('Jornada');
+		const data = await response.json(); // 'data' ahora es el array de colegios
+		console.log('exitoso, pudimos traer las jornadas:', data);
+		// Limpiar opciones existentes y añadir una opción por defecto
+		jornada_select.innerHTML = '';
+		// Iterar directamente sobre el array 'data' para crear las opciones
+		data.forEach(jornada => {
+			const option = document.createElement('option');
+			option.value = jornada.id_jornada;
+			option.textContent = jornada.nombre_jornada;
+			jornada_select.appendChild(option);
+		});
+	} catch (error) {
+		console.error('Error:', error);
+		alert('Hubo un problema al cargar los colegios.');
+		return [];
+	}
+}
+
+async function obtenerEstudiantes() {
+    try {
+        const response = await fetch('http://localhost:3000/estudiante', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
-    })
-    .catch((error) => {
+
+        const data = await response.json(); 
+        
+        // Verifica si la respuesta es un array o un objeto con un array
+        const estudiantes = data.message || data; 
+
+        if (Array.isArray(estudiantes)) {
+            console.log('Éxito, pudimos traer los estudiantes:', estudiantes);
+            construir_tabla(estudiantes); 
+        } else {
+            console.log('Conexión fallida: La respuesta no es un array.', data);
+            alert('No pudimos obtener los estudiantes. La respuesta del servidor es inesperada.');
+        }
+
+    } catch (error) {
         console.error('Error:', error);
-        alert('Hubo un problema al intentar iniciar sesión.');
-    });
+        alert('Hubo un problema al conectar con el servidor.');
+    }
+}
 
 function construir_tabla(data){
 
@@ -103,10 +169,10 @@ function construir_tabla(data){
         var fila = `<tr>
                         <td>${data[i].nombre_estudiante}</td>
                         <td>${data[i].apellido_estudiante}</td>
-                        <td>${data[i].tipo_doc.siglas}</td>
+                        <td>${data[i].id_doc.siglas}</td>
                         <td>${data[i].numero_documento}</td>
-                        <td>${data[i].grado}</td>
-                        <td>${data[i].jornada}</td>
+                        <td>${data[i].id_grado.numero_grado}</td>
+                        <td>${data[i].id_jornada.nombre_jornada}</td>
                         <td>${data[i].colegio.nombre_colegio}</td>
 
                     </tr>`;
@@ -114,4 +180,4 @@ function construir_tabla(data){
     }
 }
 
-construir_tabla(ejemplo_data);
+obtenerEstudiantes();

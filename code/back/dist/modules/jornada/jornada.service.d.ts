@@ -6,7 +6,7 @@ export declare class JornadaService {
     private readonly jornadaRepository;
     constructor(jornadaRepository: Repository<Jornada>);
     create(createJornadaDto: CreateJornadaDto): Promise<Jornada>;
-    findAll(): string;
+    findAll(): Promise<Jornada[]>;
     findOne(id: number): Promise<Jornada | null>;
     update(id: number, updateJornadaDto: UpdateJornadaDto): Promise<Jornada & UpdateJornadaDto>;
     remove(id: number): Promise<{

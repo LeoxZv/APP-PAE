@@ -71,7 +71,7 @@ export class EstudianteService {
 
   async findAll(): Promise<Estudiante[]> {
     return this.estudianteRepository.find({
-      relations: ['colegio', 'id_doc'],
+      relations: ['colegio', 'id_doc', 'id_grado', 'id_jornada'],
       order: { id_estudiante: 'ASC' },
     });
   }
@@ -108,5 +108,3 @@ export class EstudianteService {
     return { message: 'Estudiante deleted successfully' };
   }
 }
-
-//ayuda

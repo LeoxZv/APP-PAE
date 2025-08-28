@@ -27,7 +27,7 @@ let GradoService = class GradoService {
         return this.gradoRepository.save(grado);
     }
     findAll() {
-        return (this.gradoRepository.find(), 'encontraste todos');
+        return this.gradoRepository.find();
     }
     findOne(id) {
         return this.gradoRepository.findOne({ where: { id_grado: id } });

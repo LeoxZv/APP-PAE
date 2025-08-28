@@ -5,7 +5,7 @@ export declare class JornadaController {
     private readonly jornadaService;
     constructor(jornadaService: JornadaService);
     create(createJornadaDto: CreateJornadaDto): Promise<import("./entities/jornada.entity").Jornada>;
-    findAll(): string;
+    findAll(): Promise<import("./entities/jornada.entity").Jornada[]>;
     findOne(id: string): Promise<import("./entities/jornada.entity").Jornada | null>;
     update(id: string, updateJornadaDto: UpdateJornadaDto): Promise<import("./entities/jornada.entity").Jornada & UpdateJornadaDto>;
     remove(id: string): Promise<{

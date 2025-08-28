@@ -18,7 +18,7 @@ export class GradoService {
   }
 
   findAll() {
-    return (this.gradoRepository.find(), 'encontraste todos');
+    return this.gradoRepository.find();
   }
 
   findOne(id: number) {

@@ -23,9 +23,8 @@ class CreateEstudianteDto {
 exports.CreateEstudianteDto = CreateEstudianteDto;
 __decorate([
     (0, class_validator_1.IsString)(),
-    (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.Length)(1, 55),
-    __metadata("design:type", Object)
+    __metadata("design:type", String)
 ], CreateEstudianteDto.prototype, "nombre_estudiante", void 0);
 __decorate([
     (0, class_validator_1.IsString)(),

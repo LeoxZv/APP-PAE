@@ -27,7 +27,7 @@ let JornadaService = class JornadaService {
         return this.jornadaRepository.save(jornada);
     }
     findAll() {
-        return (this.jornadaRepository.find(), 'encontraste todos');
+        return this.jornadaRepository.find();
     }
     findOne(id) {
         return this.jornadaRepository.findOne({ where: { id_jornada: id } });

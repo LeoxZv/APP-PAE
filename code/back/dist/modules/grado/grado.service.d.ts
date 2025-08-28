@@ -6,7 +6,7 @@ export declare class GradoService {
     private readonly gradoRepository;
     constructor(gradoRepository: Repository<Grado>);
     create(createGradoDto: CreateGradoDto): Promise<Grado>;
-    findAll(): string;
+    findAll(): Promise<Grado[]>;
     findOne(id: number): Promise<Grado | null>;
     update(id: number, updateGradoDto: UpdateGradoDto): Promise<Grado & UpdateGradoDto>;
     remove(id: number): Promise<{

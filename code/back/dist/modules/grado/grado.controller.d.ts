@@ -5,7 +5,7 @@ export declare class GradoController {
     private readonly gradoService;
     constructor(gradoService: GradoService);
     create(createGradoDto: CreateGradoDto): Promise<import("./entities/grado.entity").Grado>;
-    findAll(): string;
+    findAll(): Promise<import("./entities/grado.entity").Grado[]>;
     findOne(id: string): Promise<import("./entities/grado.entity").Grado | null>;
     update(id: string, updateGradoDto: UpdateGradoDto): Promise<import("./entities/grado.entity").Grado & UpdateGradoDto>;
     remove(id: string): Promise<{

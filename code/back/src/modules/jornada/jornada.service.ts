@@ -18,7 +18,7 @@ export class JornadaService {
   }
 
   findAll() {
-    return (this.jornadaRepository.find(), 'encontraste todos');
+    return this.jornadaRepository.find();
   }
 
   findOne(id: number) {

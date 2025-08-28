@@ -44,20 +44,26 @@ let EstudianteService = class EstudianteService {
         const doc = await this.docRepository.findOne({
             where: { id_doc: estudiante.id_doc },
         });
+        if (!doc) {
+            throw new common_1.HttpException('Doc not found', common_1.HttpStatus.NOT_FOUND);
+        }
         const grado = await this.gradoRepository.findOne({
             where: { id_grado: estudiante.id_grado },
         });
+        if (!grado) {
+            throw new common_1.HttpException('Grado not found', common_1.HttpStatus.NOT_FOUND);
+        }
         const jornada = await this.jornadaRepository.findOne({
             where: { id_jornada: estudiante.id_jornada },
         });
-        if (!doc) {
-            throw new common_1.HttpException('Doc not found', common_1.HttpStatus.NOT_FOUND);
+        if (!jornada) {
+            throw new common_1.HttpException('Jornada not found', common_1.HttpStatus.NOT_FOUND);
         }
         const newEstudiante = this.estudianteRepository.create({
             nombre_estudiante: estudiante.nombre_estudiante,
             apellido_estudiante: estudiante.apellido_estudiante,
             numero_documento: estudiante.numero_documento,
-            colegio,
+            colegio: colegio,
             id_doc: doc,
             id_grado: grado,
             id_jornada: jornada,
@@ -66,7 +72,7 @@ let EstudianteService = class EstudianteService {
     }
     async findAll() {
         return this.estudianteRepository.find({
-            relations: ['colegio', 'id_doc'],
+            relations: ['colegio', 'id_doc', 'id_grado', 'id_jornada'],
             order: { id_estudiante: 'ASC' },
         });
     }
