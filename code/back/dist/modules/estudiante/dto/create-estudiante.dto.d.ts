@@ -1,10 +1,9 @@
 export declare class CreateEstudianteDto {
-    nombre_estudiante: string;
+    nombre_estudiante: string | undefined;
     apellido_estudiante: string;
     numero_documento: string;
-    grado: string;
-    jornada: string;
-    tipo_doc: number;
+    id_grado: number;
+    id_jornada: number;
+    id_doc: number;
     colegio: number;
-    nombre: string | undefined;
 }

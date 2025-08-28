@@ -18,6 +18,8 @@ const entrega_module_1 = require("./modules/entrega/entrega.module");
 const rol_module_1 = require("./modules/rol/rol.module");
 const estudiante_module_1 = require("./modules/estudiante/estudiante.module");
 const auth_module_1 = require("./modules/auth/auth.module");
+const grado_module_1 = require("./modules/grado/grado.module");
+const jornada_module_1 = require("./modules/jornada/jornada.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -51,6 +53,8 @@ exports.AppModule = AppModule = __decorate([
             rol_module_1.RolModule,
             estudiante_module_1.EstudianteModule,
             auth_module_1.AuthModule,
+            grado_module_1.GradoModule,
+            jornada_module_1.JornadaModule,
         ],
     })
 ], AppModule);

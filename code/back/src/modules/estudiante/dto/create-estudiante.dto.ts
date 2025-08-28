@@ -2,7 +2,6 @@ import { IsNotEmpty, IsNumber, IsString, Length } from 'class-validator';
 
 export class CreateEstudianteDto {
   @IsString()
-  @IsNotEmpty()
   @Length(1, 55)
   nombre_estudiante: string;
 
@@ -16,20 +15,19 @@ export class CreateEstudianteDto {
   @Length(1, 20)
   numero_documento: string;
 
-  @IsString()
-  @Length(1, 15)
-  grado: string;
-
-  @IsString()
-  @Length(1, 15)
-  jornada: string;
+  @IsNotEmpty()
+  @IsNumber()
+  id_grado: number;
 
   @IsNotEmpty()
   @IsNumber()
-  tipo_doc: number;
+  id_jornada: number;
+
+  @IsNotEmpty()
+  @IsNumber()
+  id_doc: number;
 
   @IsNotEmpty()
   @IsNumber()
   colegio: number;
-  nombre: string | undefined;
 }

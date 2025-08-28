@@ -14,12 +14,12 @@ const mapped_types_1 = require("@nestjs/mapped-types");
 const create_estudiante_dto_1 = require("./create-estudiante.dto");
 const class_validator_1 = require("class-validator");
 class UpdateEstudianteDto extends (0, mapped_types_1.PartialType)(create_estudiante_dto_1.CreateEstudianteDto) {
-    nombre;
-    apellido;
+    nombre_estudiante;
+    apellido_estudiante;
     numero_documento;
-    grado;
-    jornada;
-    tipo_doc;
+    id_grado;
+    id_jornada;
+    id_doc;
     colegio;
 }
 exports.UpdateEstudianteDto = UpdateEstudianteDto;
@@ -28,13 +28,13 @@ __decorate([
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.Length)(1, 55),
     __metadata("design:type", String)
-], UpdateEstudianteDto.prototype, "nombre", void 0);
+], UpdateEstudianteDto.prototype, "nombre_estudiante", void 0);
 __decorate([
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.Length)(1, 55),
     __metadata("design:type", String)
-], UpdateEstudianteDto.prototype, "apellido", void 0);
+], UpdateEstudianteDto.prototype, "apellido_estudiante", void 0);
 __decorate([
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
@@ -43,21 +43,19 @@ __decorate([
 ], UpdateEstudianteDto.prototype, "numero_documento", void 0);
 __decorate([
     (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsString)(),
-    (0, class_validator_1.Length)(1, 15),
-    __metadata("design:type", String)
-], UpdateEstudianteDto.prototype, "grado", void 0);
-__decorate([
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsString)(),
-    (0, class_validator_1.Length)(1, 15),
-    __metadata("design:type", String)
-], UpdateEstudianteDto.prototype, "jornada", void 0);
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], UpdateEstudianteDto.prototype, "id_grado", void 0);
 __decorate([
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)
-], UpdateEstudianteDto.prototype, "tipo_doc", void 0);
+], UpdateEstudianteDto.prototype, "id_jornada", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], UpdateEstudianteDto.prototype, "id_doc", void 0);
 __decorate([
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsNumber)(),

@@ -18,24 +18,24 @@ const estudiante_service_1 = require("./estudiante.service");
 const create_estudiante_dto_1 = require("./dto/create-estudiante.dto");
 const update_estudiante_dto_1 = require("./dto/update-estudiante.dto");
 let EstudianteController = class EstudianteController {
-    userService;
-    constructor(userService) {
-        this.userService = userService;
+    EstudianteService;
+    constructor(EstudianteService) {
+        this.EstudianteService = EstudianteService;
     }
     create(createEstudianteDto) {
-        return this.userService.create(createEstudianteDto);
+        return this.EstudianteService.create(createEstudianteDto);
     }
     findAll() {
-        return this.userService.findAll();
+        return this.EstudianteService.findAll();
     }
     findOne(id) {
-        return this.userService.findOne(+id);
+        return this.EstudianteService.findOne(+id);
     }
     update(id, updateEstudianteDto) {
-        return this.userService.update(+id, updateEstudianteDto);
+        return this.EstudianteService.update(+id, updateEstudianteDto);
     }
     remove(id) {
-        return this.userService.remove(+id);
+        return this.EstudianteService.remove(+id);
     }
 };
 exports.EstudianteController = EstudianteController;

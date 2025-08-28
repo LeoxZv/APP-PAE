@@ -14,12 +14,16 @@ const typeorm_1 = require("@nestjs/typeorm");
 const estudiante_entity_1 = require("./entities/estudiante.entity");
 const colegio_entity_1 = require("../colegio/entities/colegio.entity");
 const doc_entity_1 = require("../doc/entities/doc.entity");
+const grado_entity_1 = require("../grado/entities/grado.entity");
+const jornada_entity_1 = require("../jornada/entities/jornada.entity");
 let EstudianteModule = class EstudianteModule {
 };
 exports.EstudianteModule = EstudianteModule;
 exports.EstudianteModule = EstudianteModule = __decorate([
     (0, common_1.Module)({
-        imports: [typeorm_1.TypeOrmModule.forFeature([estudiante_entity_1.Estudiante, colegio_entity_1.Colegio, doc_entity_1.Doc])],
+        imports: [
+            typeorm_1.TypeOrmModule.forFeature([estudiante_entity_1.Estudiante, colegio_entity_1.Colegio, doc_entity_1.Doc, grado_entity_1.Grado, jornada_entity_1.Jornada]),
+        ],
         controllers: [estudiante_controller_1.EstudianteController],
         providers: [estudiante_service_1.EstudianteService],
         exports: [typeorm_1.TypeOrmModule],

@@ -15,18 +15,17 @@ class CreateEstudianteDto {
     nombre_estudiante;
     apellido_estudiante;
     numero_documento;
-    grado;
-    jornada;
-    tipo_doc;
+    id_grado;
+    id_jornada;
+    id_doc;
     colegio;
-    nombre;
 }
 exports.CreateEstudianteDto = CreateEstudianteDto;
 __decorate([
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.Length)(1, 55),
-    __metadata("design:type", String)
+    __metadata("design:type", Object)
 ], CreateEstudianteDto.prototype, "nombre_estudiante", void 0);
 __decorate([
     (0, class_validator_1.IsString)(),
@@ -41,20 +40,20 @@ __decorate([
     __metadata("design:type", String)
 ], CreateEstudianteDto.prototype, "numero_documento", void 0);
 __decorate([
-    (0, class_validator_1.IsString)(),
-    (0, class_validator_1.Length)(1, 15),
-    __metadata("design:type", String)
-], CreateEstudianteDto.prototype, "grado", void 0);
-__decorate([
-    (0, class_validator_1.IsString)(),
-    (0, class_validator_1.Length)(1, 15),
-    __metadata("design:type", String)
-], CreateEstudianteDto.prototype, "jornada", void 0);
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], CreateEstudianteDto.prototype, "id_grado", void 0);
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)
-], CreateEstudianteDto.prototype, "tipo_doc", void 0);
+], CreateEstudianteDto.prototype, "id_jornada", void 0);
+__decorate([
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], CreateEstudianteDto.prototype, "id_doc", void 0);
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsNumber)(),

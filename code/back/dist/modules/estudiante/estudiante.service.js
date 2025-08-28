@@ -19,14 +19,20 @@ const typeorm_2 = require("typeorm");
 const estudiante_entity_1 = require("./entities/estudiante.entity");
 const colegio_entity_1 = require("../colegio/entities/colegio.entity");
 const doc_entity_1 = require("../doc/entities/doc.entity");
+const grado_entity_1 = require("../grado/entities/grado.entity");
+const jornada_entity_1 = require("../jornada/entities/jornada.entity");
 let EstudianteService = class EstudianteService {
     estudianteRepository;
     colegioRepository;
     docRepository;
-    constructor(estudianteRepository, colegioRepository, docRepository) {
+    gradoRepository;
+    jornadaRepository;
+    constructor(estudianteRepository, colegioRepository, docRepository, gradoRepository, jornadaRepository) {
         this.estudianteRepository = estudianteRepository;
         this.colegioRepository = colegioRepository;
         this.docRepository = docRepository;
+        this.gradoRepository = gradoRepository;
+        this.jornadaRepository = jornadaRepository;
     }
     async create(estudiante) {
         const colegio = await this.colegioRepository.findOne({
@@ -36,7 +42,13 @@ let EstudianteService = class EstudianteService {
             throw new common_1.HttpException('Colegio not found', common_1.HttpStatus.NOT_FOUND);
         }
         const doc = await this.docRepository.findOne({
-            where: { id_doc: estudiante.tipo_doc },
+            where: { id_doc: estudiante.id_doc },
+        });
+        const grado = await this.gradoRepository.findOne({
+            where: { id_grado: estudiante.id_grado },
+        });
+        const jornada = await this.jornadaRepository.findOne({
+            where: { id_jornada: estudiante.id_jornada },
         });
         if (!doc) {
             throw new common_1.HttpException('Doc not found', common_1.HttpStatus.NOT_FOUND);
@@ -46,13 +58,15 @@ let EstudianteService = class EstudianteService {
             apellido_estudiante: estudiante.apellido_estudiante,
             numero_documento: estudiante.numero_documento,
             colegio,
-            tipo_doc: doc,
+            id_doc: doc,
+            id_grado: grado,
+            id_jornada: jornada,
         });
         return this.estudianteRepository.save(newEstudiante);
     }
     async findAll() {
         return this.estudianteRepository.find({
-            relations: ['colegio', 'tipo_doc'],
+            relations: ['colegio', 'id_doc'],
             order: { id_estudiante: 'ASC' },
         });
     }
@@ -89,7 +103,11 @@ exports.EstudianteService = EstudianteService = __decorate([
     __param(0, (0, typeorm_1.InjectRepository)(estudiante_entity_1.Estudiante)),
     __param(1, (0, typeorm_1.InjectRepository)(colegio_entity_1.Colegio)),
     __param(2, (0, typeorm_1.InjectRepository)(doc_entity_1.Doc)),
+    __param(3, (0, typeorm_1.InjectRepository)(grado_entity_1.Grado)),
+    __param(4, (0, typeorm_1.InjectRepository)(jornada_entity_1.Jornada)),
     __metadata("design:paramtypes", [typeorm_2.Repository,
+        typeorm_2.Repository,
+        typeorm_2.Repository,
         typeorm_2.Repository,
         typeorm_2.Repository])
 ], EstudianteService);

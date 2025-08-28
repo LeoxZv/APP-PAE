@@ -9,6 +9,8 @@ import { EntregaModule } from './modules/entrega/entrega.module';
 import { RolModule } from './modules/rol/rol.module';
 import { EstudianteModule } from './modules/estudiante/estudiante.module';
 import { AuthModule } from './modules/auth/auth.module';
+import { GradoModule } from './modules/grado/grado.module';
+import { JornadaModule } from './modules/jornada/jornada.module';
 
 @Module({
   imports: [
@@ -39,6 +41,8 @@ import { AuthModule } from './modules/auth/auth.module';
     RolModule,
     EstudianteModule,
     AuthModule,
+    GradoModule,
+    JornadaModule,
   ],
 })
 export class AppModule {}

@@ -6,12 +6,12 @@ export class UpdateEstudianteDto extends PartialType(CreateEstudianteDto) {
   @IsOptional()
   @IsString()
   @Length(1, 55)
-  nombre?: string;
+  nombre_estudiante?: string;
 
   @IsOptional()
   @IsString()
   @Length(1, 55)
-  apellido?: string;
+  apellido_estudiante?: string;
 
   @IsOptional()
   @IsString()
@@ -19,18 +19,16 @@ export class UpdateEstudianteDto extends PartialType(CreateEstudianteDto) {
   numero_documento?: string;
 
   @IsOptional()
-  @IsString()
-  @Length(1, 15)
-  grado?: string;
-
-  @IsOptional()
-  @IsString()
-  @Length(1, 15)
-  jornada?: string;
+  @IsNumber()
+  id_grado?: number;
 
   @IsOptional()
   @IsNumber()
-  tipo_doc?: number;
+  id_jornada?: number;
+
+  @IsOptional()
+  @IsNumber()
+  id_doc?: number;
 
   @IsOptional()
   @IsNumber()
