@@ -11,6 +11,7 @@
     width: auto;
     height: 8vh;
     margin-inline-end: auto;
+    cursor: pointer;
 }
 
 .nav{
@@ -31,16 +32,20 @@
     color: black;
     padding: 10px;
     text-align: end;
-    background-color: #6b8ee5;
     font-weight: 500;
 }
 
+.nav-links a:hover{
+    background-color: #6b8ee581;
+    border-radius: 15px;
+}
 
 .nav i{
     font-size: 4vh;
     color: #6b8ee5;
     margin-top: 10px;    
     margin-right: 20px;
+    cursor: pointer;
 }
 
 h1{
