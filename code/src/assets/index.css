@@ -18,6 +18,7 @@
     display: flex;
     padding: 10px 0;
     border-bottom: 1px solid;
+    background: rgba(238, 238, 238, 0.322);
 }
 
 .nav-links{
@@ -38,6 +39,7 @@
 .nav-links a:hover{
     background-color: #6b8ee581;
     border-radius: 15px;
+    transition: 0.3s;
 }
 
 .nav i{
