@@ -183,5 +183,4 @@ function construir_tabla(data){
         tabla.innerHTML += fila;
     }
 }
-
 obtenerEstudiantes();
