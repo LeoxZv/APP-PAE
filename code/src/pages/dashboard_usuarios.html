@@ -3,9 +3,11 @@
 
     <head>
         <meta charset="UTF-8">
-        <title>Dashboard estudiantes - PAE</title>
-        <link rel="stylesheet" href="../assets/dashboard.css">
+        <title>Dashboard usuarios - PAE</title>
+        <link rel="stylesheet" href="../assets/dashboard_usuarios.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <link rel="icon" type="image/png" href="../assets/img/logo.png">
+
     </head>
 
     <body>
@@ -22,47 +24,47 @@
         </nav>
 
 
-        <h1>Dashboard Estudiantes</h1>
+        <h1>Usuarios Registrados</h1>
         <div class="filtros">
-            <button id="formulario_crear" class="boton_añadir">Añadir Usuario</button>
+            <button id="formulario_crear" class="boton_añadir">Añadir usuarios</button>
             <div class="formulario_añadir" id="formulario_añadir"> 
                 <div class="formulario_contenido">
-                    <button id="cerrar_formulario" class="cerrar_btn">X</button>
-                    <h2>Registrar Usuario</h2>
+                    <h2>Registro Usuarios</h2>
+                    <button id="cerrar_formulario" class="cerrar_btn">X</button> 
                     <form action="" method="post">
                         <input type="text" name="nombre_usuario" placeholder="Nombre" class="input" required>
                         <input type="text" name="apellido" placeholder="Apellido" class="input" required>
                         <input type="text" name="documento" placeholder="Documento" class="input" required>
-                        <select name="Grado" id="grado">
-
-                        </select>
-                        <select name="Colegio" id="colegio">
-
-                        </select>
-                        <select name="Tipo de documento" id="tipo_doc">
-
-                        </select>
+                        <input type="password" name="contraseña" placeholder="Contraseña" class="input" required>
+                        <div class="selects-estudiante">
+                            <select name="Colegio" id="colegio">    
+                            </select>
+                            <select name="Rol" id="rol">
+                            </select>
+                            <select name="Tipo de documento" id="tipo_doc">
+                            </select>
+                        </div>
                         <button type="submit" class="btn-default">Registrar</button>
                     </form>
+                   
                 </div>
             </div>
         </div>
 
 
-
-        <div class="dashboard">
-            <table class="dashboard">
-                <tr>
+        <div class="table-div">
+            <table class="dashboard-table">
+                <tr class="titulos-table">
                     <th>Nombre</th>
                     <th>Apellido</th>
                     <th>Tipo doc</th>
                     <th>Documento</th>
-                    <th>Curso</th>
-                    <th>Jornada</th>
+                    <th>Rol</th>
                     <th>Colegio</th>
+                    <th>Acciones</th>
                 </tr>
-
-                <tbody id="cuerpo_tabla"></tbody>
+                <tbody id="cuerpo_tabla">
+                </tbody>
             </table>
         
 

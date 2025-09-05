@@ -27,15 +27,22 @@ async function fetchTipo_doc() {
         });
 
         const tipo_doc_select = document.getElementById('tipo_doc');
-        const data = await response.json(); // 'data' ahora es el array de documentos
+        const data = await response.json(); 
 
-        // La respuesta del servidor es directamente el array, por lo que no se necesita `data.success`
         console.log('exitoso, pudimos traer los tipos de documento:', data);
 
-        // Limpiar opciones existentes y añadir una opción por defecto
+        // Limpia las opciones existentes
         tipo_doc_select.innerHTML = '';
 
-        // Iterar directamente sobre el array 'data' para crear las opciones
+        // Agrega la opción por defecto
+        const defaultOption = document.createElement('option');
+        defaultOption.textContent = 'Tipo de documento';
+        defaultOption.value = ''; 
+        defaultOption.disabled = true;
+        defaultOption.selected = true;
+        tipo_doc_select.appendChild(defaultOption);
+
+        // Itera sobre el array 'data' para crear las opciones
         data.forEach(tipo_doc => {
             const option = document.createElement('option');
             option.value = tipo_doc.id_doc;
@@ -50,56 +57,77 @@ async function fetchTipo_doc() {
 }
 
 async function fetchColegios() {
-	try {
-		const response = await fetch('http://localhost:3000/colegio', {
-			method: 'GET',
+    try {
+        const response = await fetch('http://localhost:3000/colegio', {
+            method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
             }
         });
-		const colegio_select = document.getElementById('colegio');
-		const data = await response.json(); // 'data' ahora es el array de colegios
-		console.log('exitoso, pudimos traer los colegios:', data);
-		// Limpiar opciones existentes y añadir una opción por defecto
-		colegio_select.innerHTML = '';
-		// Iterar directamente sobre el array 'data' para crear las opciones
-		data.forEach(colegio => {
-			const option = document.createElement('option');
-			option.value = colegio.id_colegio;
-			option.textContent = colegio.nombre_colegio;
-			colegio_select.appendChild(option);
-		});
-	} catch (error) {
-		console.error('Error:', error);
-		alert('Hubo un problema al cargar los colegios.');
-		return [];
-	}
+        const colegio_select = document.getElementById('colegio');
+        const data = await response.json(); 
+        console.log('exitoso, pudimos traer los colegios:', data);
+        
+        // Limpia las opciones existentes
+        colegio_select.innerHTML = '';
+        
+        // Agrega la opción por defecto
+        const defaultOption = document.createElement('option');
+        defaultOption.textContent = 'Colegio';
+        defaultOption.value = ''; 
+        defaultOption.disabled = true;
+        defaultOption.selected = true;
+        colegio_select.appendChild(defaultOption);
+
+        // Itera sobre el array 'data' para crear las opciones
+        data.forEach(colegio => {
+            const option = document.createElement('option');
+            option.value = colegio.id_colegio;
+            option.textContent = colegio.nombre_colegio;
+            colegio_select.appendChild(option);
+        });
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Hubo un problema al cargar los colegios.');
+        return [];
+    }
 }
+
 async function fetchGrado() {
-	try {
-		const response = await fetch('http://localhost:3000/grado', {
-			method: 'GET',
+    try {
+        const response = await fetch('http://localhost:3000/grado', {
+            method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
             }
         });
-		const grado_select = document.getElementById('grado');
-		const data = await response.json(); // 'data' ahora es el array de colegios
-		console.log('exitoso, pudimos traer los grados:', data);
-		// Limpiar opciones existentes y añadir una opción por defecto
-		grado_select.innerHTML = '';
-		// Iterar directamente sobre el array 'data' para crear las opciones
-		data.forEach(grado => {
-			const option = document.createElement('option');
-			option.value = grado.id_grado;
-			option.textContent = grado.numero_grado;
-			grado_select.appendChild(option);
-		});
-	} catch (error) {
-		console.error('Error:', error);
-		alert('Hubo un problema al cargar los grados.');
-		return [];
-	}
+        const grado_select = document.getElementById('grado');
+        const data = await response.json(); 
+        console.log('exitoso, pudimos traer los grados:', data);
+        
+        // Limpia las opciones existentes
+        grado_select.innerHTML = '';
+
+        // Agrega la opción por defecto
+        const defaultOption = document.createElement('option');
+        defaultOption.textContent = 'Grado';
+        defaultOption.value = ''; 
+        defaultOption.disabled = true;
+        defaultOption.selected = true;
+        grado_select.appendChild(defaultOption);
+
+        // Itera sobre el array 'data' para crear las opciones
+        data.forEach(grado => {
+            const option = document.createElement('option');
+            option.value = grado.id_grado;
+            option.textContent = grado.numero_grado;
+            grado_select.appendChild(option);
+        });
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Hubo un problema al cargar los grados.');
+        return [];
+    }
 }
 
 async function fecthJornada() {
@@ -115,6 +143,14 @@ async function fecthJornada() {
 		console.log('exitoso, pudimos traer las jornadas:', data);
 		// Limpiar opciones existentes y añadir una opción por defecto
 		jornada_select.innerHTML = '';
+
+                // Agrega una opción por defecto para guiar al usuario
+        const defaultOption = document.createElement('option');
+        defaultOption.textContent = 'Jornada';
+        defaultOption.value = ''; // Opcional: valor vacío para validación
+        defaultOption.disabled = true;
+        defaultOption.selected = true;
+        jornada_select.appendChild(defaultOption); 
 		// Iterar directamente sobre el array 'data' para crear las opciones
 		data.forEach(jornada => {
 			const option = document.createElement('option');
@@ -169,7 +205,7 @@ function construir_tabla(data){
     let tabla = document.getElementById("cuerpo_tabla");
 
     for (i= 0; i < data.length; i++) {
-        var fila = `<tr>
+        var fila = `<tr class="fila-cuerpo">
                         <td>${data[i].nombre_estudiante}</td>
                         <td>${data[i].apellido_estudiante}</td>
                         <td>${data[i].id_doc.siglas}</td>
@@ -177,8 +213,8 @@ function construir_tabla(data){
                         <td>${data[i].id_grado.numero_grado}</td>
                         <td>${data[i].id_jornada.nombre_jornada}</td>
                         <td>${data[i].colegio.nombre_colegio}</td>
-                        <td><button class="editar_btn">Editar</button>
-                        <button class="confirmacion_btn">Eliminar</button></td>
+                        <td><button class="editar_btn">Editar ✍️</button>
+                        <button class="confirmacion_btn">Eliminar 🗑️</button></td>
                     </tr>`;
         tabla.innerHTML += fila;
     }

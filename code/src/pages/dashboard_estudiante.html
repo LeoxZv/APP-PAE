@@ -4,8 +4,10 @@
     <head>
         <meta charset="UTF-8">
         <title>Dashboard estudiantes - PAE</title>
-        <link rel="stylesheet" href="../assets/dashboard.css">
+        <link rel="stylesheet" href="../assets/dashboard_estudiantes.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <link rel="icon" type="image/png" href="../assets/img/logo.png">
+
     </head>
 
     <body>
@@ -22,9 +24,10 @@
         </nav>
 
 
-        <h1>Estudiantes</h1>
+        <h1>Estudiantes Registrados</h1>
         <div class="filtros">
             <button id="formulario_crear" class="boton_añadir">Añadir estudiante</button>
+            <button id="formulario_crear" class="boton_añadir">Generar reporte</button>
             <div class="formulario_añadir" id="formulario_añadir"> 
                 <div class="formulario_contenido">
                     <h2>Registro estudiantes</h2>
@@ -49,9 +52,9 @@
         </div>
 
 
-        <div class="dashboard">
-            <table class="dashboard">
-                <tr>
+        <div class="table-div">
+            <table class="dashboard-table">
+                <tr class="titulos-table">
                     <th>Nombre</th>
                     <th>Apellido</th>
                     <th>Tipo doc</th>
@@ -61,8 +64,8 @@
                     <th>Colegio</th>
                     <th>Acciones</th>
                 </tr>
-
-                <tbody id="cuerpo_tabla"></tbody>
+                <tbody id="cuerpo_tabla">
+                </tbody>
             </table>
         
 

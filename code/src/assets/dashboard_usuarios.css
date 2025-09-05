@@ -1,4 +1,3 @@
-/* /* /* Global Reset */
 * {
     margin: 0;
     padding: 0;
@@ -158,12 +157,12 @@ h1{
 .selects-estudiante{
     border:5px;
     margin-top:20px;
-    max-width:300px;
+    max-width:400px;
 }
 
 .selects-estudiante select{
     padding: 3px;
-    width: 80px;
+    width: 90px;
     border: none;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
     background-color: #5592bb6b;
@@ -208,7 +207,6 @@ option {
   justify-content: flex-start;
   gap: 5px;
   font-size: 15px;
-
   border: 2px solid #dddddd;
   background: #eeeeee;
   padding: 7px;
@@ -271,45 +269,48 @@ option:checked {
     color: #333;
 }
 
-
-table.dashboard {
-  border: 1px solid #1C6EA4;
-  background-color: #EEEEEE;
-  width: 90%;
-  text-align: center;
-  border-collapse: collapse;
-  z-index: 0;
-  margin: 20px auto;
-}
-table.dashboard td, table.dashboard th {
-  border: 1px solid #AAAAAA;
-  padding: 3px 2px;
-}
-table.dashboard tbody td {
-  font-size: 13px;
-}
-table.dashboard tr:nth-child(even) {
-  background: #D0E4F5;
-}
-table.dashboard th{
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-weight: 400;
-}
-table.dashboard thead {
-  background: #1C6EA4;
-  background: -moz-linear-gradient(top, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
-  background: -webkit-linear-gradient(top, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
-  background: linear-gradient(to bottom, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
-  border-bottom: 2px solid #444444;
-}
-table.dashboard thead th {
-  font-size: 15px;
+.table-div{
+  display: flex;
+  justify-content: center;
   font-weight: bold;
-  color: #FFFFFF;
-  border-left: 2px solid #D0E4F5;
+  color: #333;
 }
-table.dashboard thead th:first-child {
-  border-left: none;
+
+.dashboard-table{
+    width: 80%;
+    border-collapse: collapse;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    text-align: center;
+}
+
+.dashboard-table tr th{
+  padding: 5px;
+  background-color: #6b8ee5;
+  font-weight: 300;
+  font-size: 0.9em;
+  padding-left: 10px;
+  color: black;
+  
+}
+
+.fila-cuerpo:nth-of-type(even) {
+    background-color: #6b8ee54b;
+}
+
+.fila-cuerpo:hover {
+    background-color: #6b8ee56c;
+}
+
+.fila-cuerpo{
+  font-weight: 200;
+  font-size: 0.5;
+}
+
+.cuerpo-tabla{
+  padding: 10px;
 }
 
 .boton_añadir {
@@ -321,7 +322,9 @@ table.dashboard thead th:first-child {
     cursor: pointer;
     font-size: 16px;
     transition: background-color 0.3s ease;
+    margin-right: 10px;
 }
+
 
 .boton_añadir:hover{
     color: white; 
@@ -330,6 +333,44 @@ table.dashboard thead th:first-child {
 }
 
 .cerrar_btn:hover {
+    color: white; 
+    transform: scale(1.1); 
+    transition: 0.5s;
+}
+
+
+.editar_btn {
+    background-color: #77DD77;
+    color: white;
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background-color 0.3s ease;
+    margin: 5px;
+    text-align: center;
+}
+
+.editar_btn:hover {
+    color: white; 
+    transform: scale(1.1); 
+    transition: 0.5s;
+}
+
+.confirmacion_btn {
+    background-color: #ff6961;
+    color: white;
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background-color 0.3s ease;
+    text-align: center;
+}
+
+.confirmacion_btn:hover {
     color: white; 
     transform: scale(1.1); 
     transition: 0.5s;
