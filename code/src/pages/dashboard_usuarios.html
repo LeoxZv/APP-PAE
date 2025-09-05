@@ -22,31 +22,32 @@
         </nav>
 
 
-        <h1>Estudiantes</h1>
+        <h1>Dashboard Estudiantes</h1>
         <div class="filtros">
-            <button id="formulario_crear" class="boton_añadir">Añadir estudiante</button>
+            <button id="formulario_crear" class="boton_añadir">Añadir Usuario</button>
             <div class="formulario_añadir" id="formulario_añadir"> 
                 <div class="formulario_contenido">
-                    <h2>Registro estudiantes</h2>
-                    <button id="cerrar_formulario" class="cerrar_btn">X</button> 
+                    <button id="cerrar_formulario" class="cerrar_btn">X</button>
+                    <h2>Registrar Usuario</h2>
                     <form action="" method="post">
                         <input type="text" name="nombre_usuario" placeholder="Nombre" class="input" required>
                         <input type="text" name="apellido" placeholder="Apellido" class="input" required>
                         <input type="text" name="documento" placeholder="Documento" class="input" required>
-                        <div class="selects-estudiante">
-                            <select name="Grado" id="grado">    
-                            </select>
-                            <select name="Jornada" id="Jornada">
-                            </select>
-                            <select name="Tipo de documento" id="tipo_doc">
-                            </select>
-                        </div>
+                        <select name="Grado" id="grado">
+
+                        </select>
+                        <select name="Colegio" id="colegio">
+
+                        </select>
+                        <select name="Tipo de documento" id="tipo_doc">
+
+                        </select>
                         <button type="submit" class="btn-default">Registrar</button>
                     </form>
-                   
                 </div>
             </div>
         </div>
+
 
 
         <div class="dashboard">
@@ -59,13 +60,12 @@
                     <th>Curso</th>
                     <th>Jornada</th>
                     <th>Colegio</th>
-                    <th>Acciones</th>
                 </tr>
 
                 <tbody id="cuerpo_tabla"></tbody>
             </table>
         
 
-        <script src="dashboard_estudiante.js"></script>
+        <script src="dashboard_users.js"></script>
     </body>
 </html>

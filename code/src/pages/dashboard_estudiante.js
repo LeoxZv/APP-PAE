@@ -177,8 +177,8 @@ function construir_tabla(data){
                         <td>${data[i].id_grado.numero_grado}</td>
                         <td>${data[i].id_jornada.nombre_jornada}</td>
                         <td>${data[i].colegio.nombre_colegio}</td>
-                        <td><button class="editar_btn">Editar</button></td>
-                        <td><button class="confirmacion_btn">Eliminar</button></td>
+                        <td><button class="editar_btn">Editar</button>
+                        <button class="confirmacion_btn">Eliminar</button></td>
                     </tr>`;
         tabla.innerHTML += fila;
     }
