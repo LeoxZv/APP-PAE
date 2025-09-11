@@ -1,0 +1,225 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+
+/* Background styling */
+/* body {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    overflow: hidden;
+} */
+
+.nav img{
+    width: auto;
+    height: 8vh;
+    margin-inline-end: auto;
+    cursor: pointer;
+}
+
+.nav{
+    display: flex;
+    padding: 10px 0;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+
+.icon-user{
+    margin-left: 88%;
+
+}
+
+.icon-user:hover{
+    transform: scale(1.1);
+    transition: 0.5s;
+}
+
+.volver {
+    margin-left: 10px;
+    text-decoration: none;
+    color: black;
+    text-align: end;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    padding: auto;
+}
+
+.volver a{
+    text-decoration: none;
+    color: black;
+    font-weight: 500;
+    margin: 10px 0px 0px 10px;
+    font-size: 20px;
+    padding: 5px;
+}
+
+.volver a:hover{
+    transform: scale(1.1);
+    transition: 0.5s; 
+
+}
+
+.nav i{
+    font-size: 4vh;
+    color: #6b8ee5;
+    margin-top: 10px;    
+    cursor: pointer;
+}
+
+
+.filtros {
+    margin: 40px 5px 35px 135px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    padding: 20px;
+    border-radius: 10px;
+}
+.filtros h2{
+    margin-bottom: 5px;
+    font-weight: 500;
+
+}
+.input-filtro{
+    width: 100%;
+    height: 40px;
+    border-color: #6b6b6b1f;
+    border-radius: 10px;
+}
+.input-filtro:focus{
+    outline: none;
+}
+
+
+
+.table-div{
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+  color: #333;
+}
+
+.dashboard-table{
+    width: 80%;
+    border-collapse: collapse;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    text-align: center;
+}
+
+.dashboard-table tr th{
+  padding: 5px;
+  background-color: #6b8ee5;
+  font-weight: 300;
+  font-size: 0.9em;
+  padding-left: 10px;
+  color: black;
+  
+}
+
+.fila-cuerpo:nth-of-type(even) {
+    background-color: #6b8ee54b;
+}
+
+.fila-cuerpo:hover {
+    background-color: #6b8ee56c;
+}
+
+.fila-cuerpo{
+  font-weight: 200;
+  font-size: 0.5;
+}
+
+.cuerpo-tabla{
+  padding: 10px;
+}
+
+.boton_añadir {
+    background-color: #6b8ee5;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    margin-right: 10px;
+}
+
+
+.boton_añadir:hover{
+    color: white; 
+    transform: scale(1.1); 
+    transition: 0.5s;
+}
+
+.cerrar_btn:hover {
+    color: white; 
+    transform: scale(1.1); 
+    transition: 0.5s;
+}
+
+
+.editar_btn {
+    background-color: #77DD77;
+    color: white;
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background-color 0.3s ease;
+    margin: 5px;
+    text-align: center;
+}
+
+.editar_btn:hover {
+    color: white; 
+    transform: scale(1.1); 
+    transition: 0.5s;
+}
+
+.confirmacion_btn {
+    background-color: #ff6961;
+    color: white;
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background-color 0.3s ease;
+    text-align: center;
+}
+
+.confirmacion_btn:hover {
+    color: white; 
+    transform: scale(1.1); 
+    transition: 0.5s;
+}
+
+.btn-default{
+    background-color: #6b8ee5;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 20px;
+    width: 50%;
+    transition: background-color 0.3s ease;
+}
+
+.btn-default:hover{
+    color: white; 
+    transform: scale(1.1); 
+    transition: 0.5s;
+}  
