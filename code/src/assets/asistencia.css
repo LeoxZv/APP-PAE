@@ -81,10 +81,15 @@
     width: 80%;
     padding: 20px;
     border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }
 .filtros h2{
+    color: #6b8ee5e3;
+    font-size: 1.5rem;
     margin-bottom: 5px;
-    font-weight: 500;
+    font-weight: 600;
 
 }
 .input-filtro{
@@ -92,11 +97,31 @@
     height: 40px;
     border-color: #6b6b6b1f;
     border-radius: 10px;
+    padding: 10px;
+    font-size: 15px;
 }
+
+
 .input-filtro:focus{
     outline: none;
 }
 
+.generar-reporte{
+    padding: 5px;
+    margin-bottom: 5px;
+    background-color: #6b8ee5;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background-color 0.3s ease;
+    border: none;
+}
+.generar-reporte:hover{
+    color: white; 
+    transform: scale(1.1); 
+    transition: 0.5s;
+}
 
 
 .table-div{
@@ -143,83 +168,5 @@
   padding: 10px;
 }
 
-.boton_añadir {
-    background-color: #6b8ee5;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-    margin-right: 10px;
-}
 
 
-.boton_añadir:hover{
-    color: white; 
-    transform: scale(1.1); 
-    transition: 0.5s;
-}
-
-.cerrar_btn:hover {
-    color: white; 
-    transform: scale(1.1); 
-    transition: 0.5s;
-}
-
-
-.editar_btn {
-    background-color: #77DD77;
-    color: white;
-    border: none;
-    padding: 5px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 12px;
-    transition: background-color 0.3s ease;
-    margin: 5px;
-    text-align: center;
-}
-
-.editar_btn:hover {
-    color: white; 
-    transform: scale(1.1); 
-    transition: 0.5s;
-}
-
-.confirmacion_btn {
-    background-color: #ff6961;
-    color: white;
-    border: none;
-    padding: 5px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 12px;
-    transition: background-color 0.3s ease;
-    text-align: center;
-}
-
-.confirmacion_btn:hover {
-    color: white; 
-    transform: scale(1.1); 
-    transition: 0.5s;
-}
-
-.btn-default{
-    background-color: #6b8ee5;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 20px;
-    width: 50%;
-    transition: background-color 0.3s ease;
-}
-
-.btn-default:hover{
-    color: white; 
-    transform: scale(1.1); 
-    transition: 0.5s;
-}  
