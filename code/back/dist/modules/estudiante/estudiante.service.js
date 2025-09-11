@@ -34,6 +34,11 @@ let EstudianteService = class EstudianteService {
         this.gradoRepository = gradoRepository;
         this.jornadaRepository = jornadaRepository;
     }
+    capitalize(str) {
+        if (!str)
+            return str;
+        return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+    }
     async create(estudiante) {
         const colegio = await this.colegioRepository.findOne({
             where: { id_colegio: estudiante.colegio },
@@ -60,8 +65,8 @@ let EstudianteService = class EstudianteService {
             throw new common_1.HttpException('Jornada not found', common_1.HttpStatus.NOT_FOUND);
         }
         const newEstudiante = this.estudianteRepository.create({
-            nombre_estudiante: estudiante.nombre_estudiante,
-            apellido_estudiante: estudiante.apellido_estudiante,
+            nombre_estudiante: this.capitalize(estudiante.nombre_estudiante),
+            apellido_estudiante: this.capitalize(estudiante.apellido_estudiante),
             numero_documento: estudiante.numero_documento,
             colegio: colegio,
             id_doc: doc,
