@@ -22,20 +22,29 @@
         </nav>
         <div class="filtros">
             <h2>Asistencia</h2>
-            <button></button>
-            <input type="text" placeholder=" Buscar" class="input-filtro">            
+            <button class="generar-reporte" onclick="generarPdf()">Generar Reporte</button>
+            <input type="text" placeholder="Buscar" class="input-filtro">            
         </div>
         <div class="table-div">
             <table class="dashboard-table">
                 <tr class="titulos-table">
-                    <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>Tipo doc</th>
-                    <th>Documento</th>
-                    <th>Acciones</th>
+                    <th>Nombre Estudiante</th>
+                    <th>Apellido Estudiante</th>
+                    <th>Nombre Cocinero</th>
+                    <th>Apellido Cocinero</th>
+                    <th>Alimento</th>
+                    <th>Fecha</th>
                 </tr>
                 <tbody id="cuerpo_tabla">
                 </tbody>
             </table>
+
+    <script>
+        import { convertHtmlPdf } from "convertHtmlPdf.js";
+
+        const generarPdf = () => {
+            convertHtmlPdf('pagePdf')
+        }
+    </script>
 </body>
 </html>
