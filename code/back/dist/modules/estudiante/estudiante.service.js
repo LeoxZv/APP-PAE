@@ -39,45 +39,45 @@ let EstudianteService = class EstudianteService {
             return str;
         return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
     }
-    async create(estudiante) {
+    async create(estudianteDto) {
         const colegio = await this.colegioRepository.findOne({
-            where: { id_colegio: estudiante.colegio },
+            where: { id_colegio: estudianteDto.colegio },
         });
         if (!colegio) {
             throw new common_1.HttpException('Colegio not found', common_1.HttpStatus.NOT_FOUND);
         }
         const doc = await this.docRepository.findOne({
-            where: { id_doc: estudiante.id_doc },
+            where: { id_doc: estudianteDto.id_doc },
         });
         if (!doc) {
             throw new common_1.HttpException('Doc not found', common_1.HttpStatus.NOT_FOUND);
         }
         const grado = await this.gradoRepository.findOne({
-            where: { id_grado: estudiante.id_grado },
+            where: { id_grado: estudianteDto.id_grado },
         });
         if (!grado) {
             throw new common_1.HttpException('Grado not found', common_1.HttpStatus.NOT_FOUND);
         }
         const jornada = await this.jornadaRepository.findOne({
-            where: { id_jornada: estudiante.id_jornada },
+            where: { id_jornada: estudianteDto.id_jornada },
         });
         if (!jornada) {
             throw new common_1.HttpException('Jornada not found', common_1.HttpStatus.NOT_FOUND);
         }
         const newEstudiante = this.estudianteRepository.create({
-            nombre_estudiante: this.capitalize(estudiante.nombre_estudiante),
-            apellido_estudiante: this.capitalize(estudiante.apellido_estudiante),
-            numero_documento: estudiante.numero_documento,
+            nombre_estudiante: this.capitalize(estudianteDto.nombre_estudiante),
+            apellido_estudiante: this.capitalize(estudianteDto.apellido_estudiante),
+            numero_documento: estudianteDto.numero_documento,
             colegio: colegio,
-            id_doc: doc,
-            id_grado: grado,
-            id_jornada: jornada,
+            tipo_doc: doc,
+            grado: grado,
+            jornada: jornada,
         });
         return this.estudianteRepository.save(newEstudiante);
     }
     async findAll() {
         return this.estudianteRepository.find({
-            relations: ['colegio', 'id_doc', 'id_grado', 'id_jornada'],
+            relations: ['colegio', 'tipo_doc', 'grado', 'jornada'],
             order: { id_estudiante: 'ASC' },
         });
     }

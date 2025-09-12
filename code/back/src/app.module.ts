@@ -1,6 +1,8 @@
+// src/app.module.ts
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { JwtModule } from '@nestjs/jwt'; // Importar JwtModule
 import { DocModule } from './modules/doc/doc.module';
 import { ColegioModule } from './modules/colegio/colegio.module';
 import { AlimentoModule } from './modules/alimento/alimento.module';
@@ -32,6 +34,15 @@ import { JornadaModule } from './modules/jornada/jornada.module';
         synchronize: true,
         charset: 'utf8mb4',
       }),
+    }),
+    JwtModule.registerAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => ({
+        secret: configService.get<string>('JWT_SECRET'),
+        signOptions: { expiresIn: configService.get<string>('JWT_EXPIRATION') },
+      }),
+      global: true,
     }),
     DocModule,
     ColegioModule,

@@ -33,49 +33,57 @@ export class EstudianteService {
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
   }
 
-  async create(estudiante: CreateEstudianteDto) {
+  async create(estudianteDto: CreateEstudianteDto) {
     const colegio = await this.colegioRepository.findOne({
-      where: { id_colegio: estudiante.colegio },
+      where: { id_colegio: estudianteDto.colegio },
     });
     if (!colegio) {
       throw new HttpException('Colegio not found', HttpStatus.NOT_FOUND);
     }
 
     const doc = await this.docRepository.findOne({
-      where: { id_doc: estudiante.id_doc },
+      where: { id_doc: estudianteDto.id_doc },
     });
     if (!doc) {
       throw new HttpException('Doc not found', HttpStatus.NOT_FOUND);
     }
 
     const grado = await this.gradoRepository.findOne({
-      where: { id_grado: estudiante.id_grado },
+      where: { id_grado: estudianteDto.id_grado },
     });
     if (!grado) {
       throw new HttpException('Grado not found', HttpStatus.NOT_FOUND);
     }
 
     const jornada = await this.jornadaRepository.findOne({
-      where: { id_jornada: estudiante.id_jornada },
+      where: { id_jornada: estudianteDto.id_jornada },
     });
     if (!jornada) {
       throw new HttpException('Jornada not found', HttpStatus.NOT_FOUND);
     }
+
+    // Corrige las asignaciones para que coincidan las propiedades del DTO con las de la entidad
     const newEstudiante = this.estudianteRepository.create({
-      nombre_estudiante: this.capitalize(estudiante.nombre_estudiante),
-      apellido_estudiante: this.capitalize(estudiante.apellido_estudiante),
-      numero_documento: estudiante.numero_documento,
+      nombre_estudiante: this.capitalize(estudianteDto.nombre_estudiante),
+      apellido_estudiante: this.capitalize(estudianteDto.apellido_estudiante),
+      numero_documento: estudianteDto.numero_documento,
+
+      // Asigna la entidad completa que acabas de encontrar
       colegio: colegio,
-      id_doc: doc,
-      id_grado: grado,
-      id_jornada: jornada,
+
+      // Asigna las entidades a las propiedades de relación correctas
+      tipo_doc: doc,
+      grado: grado,
+      jornada: jornada,
     });
+
     return this.estudianteRepository.save(newEstudiante);
   }
 
   async findAll(): Promise<Estudiante[]> {
     return this.estudianteRepository.find({
-      relations: ['colegio', 'id_doc', 'id_grado', 'id_jornada'],
+      // Corrige los nombres de las relaciones para que coincidan con la entidad
+      relations: ['colegio', 'tipo_doc', 'grado', 'jornada'],
       order: { id_estudiante: 'ASC' },
     });
   }

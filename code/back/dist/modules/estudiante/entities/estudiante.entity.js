@@ -20,9 +20,9 @@ let Estudiante = class Estudiante {
     nombre_estudiante;
     apellido_estudiante;
     numero_documento;
-    id_grado;
-    id_jornada;
-    id_doc;
+    grado;
+    jornada;
+    tipo_doc;
     colegio;
 };
 exports.Estudiante = Estudiante;
@@ -43,19 +43,23 @@ __decorate([
     __metadata("design:type", String)
 ], Estudiante.prototype, "numero_documento", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => grado_entity_1.Grado, (grado) => grado.id_grado),
+    (0, typeorm_1.ManyToOne)(() => grado_entity_1.Grado),
+    (0, typeorm_1.JoinColumn)({ name: 'grado_id' }),
     __metadata("design:type", grado_entity_1.Grado)
-], Estudiante.prototype, "id_grado", void 0);
+], Estudiante.prototype, "grado", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => jornada_entity_1.Jornada, (jornada) => jornada.id_jornada),
+    (0, typeorm_1.ManyToOne)(() => jornada_entity_1.Jornada),
+    (0, typeorm_1.JoinColumn)({ name: 'jornada_id' }),
     __metadata("design:type", jornada_entity_1.Jornada)
-], Estudiante.prototype, "id_jornada", void 0);
+], Estudiante.prototype, "jornada", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => doc_entity_1.Doc, (doc) => doc.id_doc),
+    (0, typeorm_1.ManyToOne)(() => doc_entity_1.Doc),
+    (0, typeorm_1.JoinColumn)({ name: 'tipo_doc_id' }),
     __metadata("design:type", doc_entity_1.Doc)
-], Estudiante.prototype, "id_doc", void 0);
+], Estudiante.prototype, "tipo_doc", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => colegio_entity_1.Colegio, (colegio) => colegio.users),
+    (0, typeorm_1.ManyToOne)(() => colegio_entity_1.Colegio),
+    (0, typeorm_1.JoinColumn)({ name: 'colegio_id' }),
     __metadata("design:type", colegio_entity_1.Colegio)
 ], Estudiante.prototype, "colegio", void 0);
 exports.Estudiante = Estudiante = __decorate([

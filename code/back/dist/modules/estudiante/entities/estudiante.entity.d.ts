@@ -7,8 +7,8 @@ export declare class Estudiante {
     nombre_estudiante: string;
     apellido_estudiante: string;
     numero_documento: string;
-    id_grado: Grado;
-    id_jornada: Jornada;
-    id_doc: Doc;
+    grado: Grado;
+    jornada: Jornada;
+    tipo_doc: Doc;
     colegio: Colegio;
 }

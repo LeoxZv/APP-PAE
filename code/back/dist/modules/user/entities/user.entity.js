@@ -38,7 +38,7 @@ __decorate([
     __metadata("design:type", String)
 ], User.prototype, "apellido_user", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: 'varchar', length: 64 }),
+    (0, typeorm_1.Column)({ type: 'varchar' }),
     __metadata("design:type", String)
 ], User.prototype, "password_user", void 0);
 __decorate([
@@ -46,15 +46,18 @@ __decorate([
     __metadata("design:type", String)
 ], User.prototype, "numero_documento", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => doc_entity_1.Doc, (doc) => doc.id_doc),
+    (0, typeorm_1.ManyToOne)(() => doc_entity_1.Doc),
+    (0, typeorm_1.JoinColumn)({ name: 'tipo_doc_id' }),
     __metadata("design:type", doc_entity_1.Doc)
 ], User.prototype, "tipo_doc", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => rol_entity_1.Rol, (rol) => rol.id_rol),
+    (0, typeorm_1.ManyToOne)(() => rol_entity_1.Rol),
+    (0, typeorm_1.JoinColumn)({ name: 'rol_id' }),
     __metadata("design:type", rol_entity_1.Rol)
 ], User.prototype, "rol", void 0);
 __decorate([
     (0, typeorm_1.ManyToOne)(() => colegio_entity_1.Colegio, (colegio) => colegio.users),
+    (0, typeorm_1.JoinColumn)({ name: 'colegio_id' }),
     __metadata("design:type", colegio_entity_1.Colegio)
 ], User.prototype, "colegio", void 0);
 exports.User = User = __decorate([

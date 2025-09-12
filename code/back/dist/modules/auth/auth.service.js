@@ -17,29 +17,44 @@ const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
 const user_entity_1 = require("../user/entities/user.entity");
+const bcrypt = require("bcrypt");
+const jwt_1 = require("@nestjs/jwt");
 let AuthService = class AuthService {
     usersRepository;
-    constructor(usersRepository) {
+    jwtService;
+    constructor(usersRepository, jwtService) {
         this.usersRepository = usersRepository;
+        this.jwtService = jwtService;
     }
     async validateUser(documento, password_user) {
-        const user = await this.usersRepository.findOne({
+        const foundUser = await this.usersRepository.findOne({
             where: { numero_documento: documento },
+            relations: ['rol', 'colegio', 'tipo_doc'],
         });
-        if (user && user.password_user === password_user) {
-            const { password_user, ...result } = user;
-            return result;
+        if (!foundUser) {
+            throw new common_1.UnauthorizedException('El documento ingresado no corresponde a ningún usuario.');
         }
-        return null;
+        const isMatch = await bcrypt.compare(password_user, foundUser.password_user);
+        if (!isMatch) {
+            throw new common_1.UnauthorizedException('La contraseña es incorrecta.');
+        }
+        return foundUser;
     }
-    getHello() {
-        return 'Hello World!';
+    login(user) {
+        const payload = {
+            ...user,
+            password_user: undefined,
+        };
+        return {
+            access_token: this.jwtService.sign(payload),
+        };
     }
 };
 exports.AuthService = AuthService;
 exports.AuthService = AuthService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(user_entity_1.User)),
-    __metadata("design:paramtypes", [typeorm_2.Repository])
+    __metadata("design:paramtypes", [typeorm_2.Repository,
+        jwt_1.JwtService])
 ], AuthService);
 //# sourceMappingURL=auth.service.js.map

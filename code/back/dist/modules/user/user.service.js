@@ -20,6 +20,7 @@ const user_entity_1 = require("./entities/user.entity");
 const rol_entity_1 = require("../rol/entities/rol.entity");
 const colegio_entity_1 = require("../colegio/entities/colegio.entity");
 const doc_entity_1 = require("../doc/entities/doc.entity");
+const bcrypt = require("bcrypt");
 let UserService = class UserService {
     userRepository;
     rolRepository;
@@ -31,33 +32,40 @@ let UserService = class UserService {
         this.colegioRepository = colegioRepository;
         this.docRepository = docRepository;
     }
+    capitalize(str) {
+        if (!str)
+            return str;
+        return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+    }
     async create(user) {
-        const rol = await this.rolRepository.findOne({
+        const rolEntity = await this.rolRepository.findOne({
             where: { id_rol: user.rol },
         });
-        if (!rol) {
+        if (!rolEntity) {
             throw new common_1.HttpException('Rol not found', common_1.HttpStatus.NOT_FOUND);
         }
-        const colegio = await this.colegioRepository.findOne({
+        const colegioEntity = await this.colegioRepository.findOne({
             where: { id_colegio: user.colegio },
         });
-        if (!colegio) {
+        if (!colegioEntity) {
             throw new common_1.HttpException('Colegio not found', common_1.HttpStatus.NOT_FOUND);
         }
-        const doc = await this.docRepository.findOne({
+        const docEntity = await this.docRepository.findOne({
             where: { id_doc: user.tipo_doc },
         });
-        if (!doc) {
+        if (!docEntity) {
             throw new common_1.HttpException('Doc not found', common_1.HttpStatus.NOT_FOUND);
         }
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(user.password_user, salt);
         const newUser = this.userRepository.create({
-            nombre_user: user.nombre_user,
-            apellido_user: user.apellido_user,
-            password_user: user.password_user,
+            nombre_user: this.capitalize(user.nombre_user),
+            apellido_user: this.capitalize(user.apellido_user),
+            password_user: hashedPassword,
             numero_documento: user.numero_documento,
-            rol,
-            colegio,
-            tipo_doc: doc,
+            rol: rolEntity,
+            colegio: colegioEntity,
+            tipo_doc: docEntity,
         });
         return this.userRepository.save(newUser);
     }

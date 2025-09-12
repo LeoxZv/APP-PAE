@@ -43,10 +43,11 @@ __decorate([
 __decorate([
     (0, typeorm_1.ManyToOne)(() => estudiante_entity_1.Estudiante),
     (0, typeorm_1.JoinColumn)({ name: 'id_receptor' }),
-    __metadata("design:type", user_entity_1.User)
+    __metadata("design:type", estudiante_entity_1.Estudiante)
 ], Entrega.prototype, "receptor", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => alimento_entity_1.Alimento, (alimento) => alimento.id_alimento),
+    (0, typeorm_1.ManyToOne)(() => alimento_entity_1.Alimento),
+    (0, typeorm_1.JoinColumn)({ name: 'alimento_id' }),
     __metadata("design:type", alimento_entity_1.Alimento)
 ], Entrega.prototype, "alimento", void 0);
 exports.Entrega = Entrega = __decorate([

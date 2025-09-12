@@ -1,6 +1,12 @@
 import { Colegio } from 'src/modules/colegio/entities/colegio.entity';
 import { Doc } from 'src/modules/doc/entities/doc.entity';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { Grado } from '../../grado/entities/grado.entity';
 import { Jornada } from 'src/modules/jornada/entities/jornada.entity';
 
@@ -18,15 +24,19 @@ export class Estudiante {
   @Column({ type: 'varchar', length: 20 })
   numero_documento: string;
 
-  @ManyToOne(() => Grado, (grado) => grado.id_grado)
-  id_grado: Grado;
+  @ManyToOne(() => Grado)
+  @JoinColumn({ name: 'grado_id' })
+  grado: Grado;
 
-  @ManyToOne(() => Jornada, (jornada) => jornada.id_jornada)
-  id_jornada: Jornada;
+  @ManyToOne(() => Jornada)
+  @JoinColumn({ name: 'jornada_id' })
+  jornada: Jornada;
 
-  @ManyToOne(() => Doc, (doc) => doc.id_doc)
-  id_doc: Doc;
+  @ManyToOne(() => Doc)
+  @JoinColumn({ name: 'tipo_doc_id' })
+  tipo_doc: Doc;
 
-  @ManyToOne(() => Colegio, (colegio) => colegio.users)
+  @ManyToOne(() => Colegio)
+  @JoinColumn({ name: 'colegio_id' })
   colegio: Colegio;
 }

@@ -11,6 +11,7 @@ export declare class UserService {
     private readonly colegioRepository;
     private readonly docRepository;
     constructor(userRepository: Repository<User>, rolRepository: Repository<Rol>, colegioRepository: Repository<Colegio>, docRepository: Repository<Doc>);
+    private capitalize;
     create(user: CreateUserDto): Promise<User>;
     findAll(): Promise<User[]>;
     findOne(id: number): Promise<User>;

@@ -26,8 +26,9 @@ export class Entrega {
 
   @ManyToOne(() => Estudiante)
   @JoinColumn({ name: 'id_receptor' })
-  receptor: User;
+  receptor: Estudiante;
 
-  @ManyToOne(() => Alimento, (alimento) => alimento.id_alimento)
+  @ManyToOne(() => Alimento)
+  @JoinColumn({ name: 'alimento_id' })
   alimento: Alimento;
 }

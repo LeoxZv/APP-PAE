@@ -10,6 +10,7 @@ exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
 const config_1 = require("@nestjs/config");
 const typeorm_1 = require("@nestjs/typeorm");
+const jwt_1 = require("@nestjs/jwt");
 const doc_module_1 = require("./modules/doc/doc.module");
 const colegio_module_1 = require("./modules/colegio/colegio.module");
 const alimento_module_1 = require("./modules/alimento/alimento.module");
@@ -44,6 +45,15 @@ exports.AppModule = AppModule = __decorate([
                     synchronize: true,
                     charset: 'utf8mb4',
                 }),
+            }),
+            jwt_1.JwtModule.registerAsync({
+                imports: [config_1.ConfigModule],
+                inject: [config_1.ConfigService],
+                useFactory: (configService) => ({
+                    secret: configService.get('JWT_SECRET'),
+                    signOptions: { expiresIn: configService.get('JWT_EXPIRATION') },
+                }),
+                global: true,
             }),
             doc_module_1.DocModule,
             colegio_module_1.ColegioModule,

@@ -7,6 +7,7 @@ import { User } from './entities/user.entity';
 import { Rol } from '../rol/entities/rol.entity';
 import { Colegio } from '../colegio/entities/colegio.entity';
 import { Doc } from '../doc/entities/doc.entity';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UserService {
@@ -24,36 +25,49 @@ export class UserService {
     private readonly docRepository: Repository<Doc>,
   ) {}
 
+  private capitalize(str: string): string {
+    if (!str) return str;
+    return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+  }
+
   async create(user: CreateUserDto) {
-    const rol = await this.rolRepository.findOne({
+    const rolEntity = await this.rolRepository.findOne({
       where: { id_rol: user.rol },
     });
-    if (!rol) {
+    if (!rolEntity) {
       throw new HttpException('Rol not found', HttpStatus.NOT_FOUND);
     }
-    const colegio = await this.colegioRepository.findOne({
+
+    const colegioEntity = await this.colegioRepository.findOne({
       where: { id_colegio: user.colegio },
     });
-    if (!colegio) {
+    if (!colegioEntity) {
       throw new HttpException('Colegio not found', HttpStatus.NOT_FOUND);
     }
-    const doc = await this.docRepository.findOne({
+
+    const docEntity = await this.docRepository.findOne({
       where: { id_doc: user.tipo_doc },
     });
-    if (!doc) {
+    if (!docEntity) {
       throw new HttpException('Doc not found', HttpStatus.NOT_FOUND);
     }
+
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(user.password_user, salt);
+
     const newUser = this.userRepository.create({
-      nombre_user: user.nombre_user,
-      apellido_user: user.apellido_user,
-      password_user: user.password_user,
+      nombre_user: this.capitalize(user.nombre_user), // Aplicar capitalización aquí
+      apellido_user: this.capitalize(user.apellido_user), // Aplicar capitalización aquí
+      password_user: hashedPassword,
       numero_documento: user.numero_documento,
-      rol,
-      colegio,
-      tipo_doc: doc,
+      rol: rolEntity,
+      colegio: colegioEntity,
+      tipo_doc: docEntity,
     });
+
     return this.userRepository.save(newUser);
   }
+
   async findAll(): Promise<User[]> {
     return this.userRepository.find({
       relations: ['rol', 'colegio', 'tipo_doc'],

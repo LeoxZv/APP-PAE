@@ -14,7 +14,7 @@ export declare class EstudianteService {
     private readonly jornadaRepository;
     constructor(estudianteRepository: Repository<Estudiante>, colegioRepository: Repository<Colegio>, docRepository: Repository<Doc>, gradoRepository: Repository<Grado>, jornadaRepository: Repository<Jornada>);
     private capitalize;
-    create(estudiante: CreateEstudianteDto): Promise<Estudiante>;
+    create(estudianteDto: CreateEstudianteDto): Promise<Estudiante>;
     findAll(): Promise<Estudiante[]>;
     findOne(id: number): Promise<Estudiante>;
     update(id: number, updateUserDto: UpdateEstudianteDto): Promise<Estudiante>;

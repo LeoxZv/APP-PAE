@@ -36,7 +36,6 @@ __decorate([
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
-    (0, class_validator_1.Length)(1, 64),
     __metadata("design:type", String)
 ], CreateUserDto.prototype, "password_user", void 0);
 __decorate([
