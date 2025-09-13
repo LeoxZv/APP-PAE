@@ -5,4 +5,6 @@ export declare class AuthController {
     private readonly authService;
     constructor(authService: AuthService);
     login(loginDto: LoginDto, res: Response): Promise<Response<any, Record<string, any>>>;
+    logout(res: Response): Response<any, Record<string, any>>;
+    getProfile(req: any): any;
 }

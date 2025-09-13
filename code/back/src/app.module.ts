@@ -2,7 +2,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { JwtModule } from '@nestjs/jwt'; // Importar JwtModule
+import { JwtModule } from '@nestjs/jwt';
 import { DocModule } from './modules/doc/doc.module';
 import { ColegioModule } from './modules/colegio/colegio.module';
 import { AlimentoModule } from './modules/alimento/alimento.module';
@@ -13,12 +13,14 @@ import { EstudianteModule } from './modules/estudiante/estudiante.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { GradoModule } from './modules/grado/grado.module';
 import { JornadaModule } from './modules/jornada/jornada.module';
+import { APP_GUARD, Reflector } from '@nestjs/core';
+import { JwtAuthGuard } from './modules/auth/jwt-auth/jwt-auth.guard';
+import { RolesGuard } from './modules/auth/roles/roles.guard';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      envFilePath: '.env',
     }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
@@ -54,6 +56,17 @@ import { JornadaModule } from './modules/jornada/jornada.module';
     AuthModule,
     GradoModule,
     JornadaModule,
+  ],
+  providers: [
+    // Register global guards in the correct order
+    {
+      provide: APP_GUARD,
+      useClass: JwtAuthGuard,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: RolesGuard,
+    },
   ],
 })
 export class AppModule {}

@@ -7,7 +7,6 @@
         <link rel="stylesheet" href="../assets/dashboard_estudiantes.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
         <link rel="icon" type="image/png" href="../assets/img/logo.png">
-
     </head>
 
     <body>
@@ -16,41 +15,34 @@
                 <i class="fa-solid fa-arrow-left"></i>
                 <a href="index.html">Volver</a>
             </div>
-
-        <div class="icon-user">
-            <i class="fa-solid fa-user"></i>
-
-        </div>
+            <div class="icon-user">
+                <i class="fa-solid fa-user"></i>
+            </div>
         </nav>
-
 
         <h1>Estudiantes Registrados</h1>
         <div class="filtros">
             <button id="formulario_crear" class="boton_añadir">Añadir estudiante</button>
-            <button id="formulario_crear" class="boton_añadir">Generar reporte</button>
-            <div class="formulario_añadir" id="formulario_añadir"> 
+            <button id="generar_reporte" class="boton_añadir">Generar reporte</button>
+            
+            <div class="formulario_añadir" id="formulario_añadir">
                 <div class="formulario_contenido">
                     <h2>Registro estudiantes</h2>
-                    <button id="cerrar_formulario" class="cerrar_btn">X</button> 
+                    <button id="cerrar_formulario" class="cerrar_btn">X</button>
                     <form action="" method="post">
                         <input type="text" name="nombre_usuario" placeholder="Nombre" class="input" required>
                         <input type="text" name="apellido" placeholder="Apellido" class="input" required>
                         <input type="text" name="documento" placeholder="Documento" class="input" required>
                         <div class="selects-estudiante">
-                            <select name="Grado" id="grado">    
-                            </select>
-                            <select name="Jornada" id="Jornada">
-                            </select>
-                            <select name="Tipo de documento" id="tipo_doc">
-                            </select>
+                            <select name="Grado" id="grado"></select>
+                            <select name="Jornada" id="Jornada"></select>
+                            <select name="Tipo de documento" id="tipo_doc"></select>
                         </div>
                         <button type="submit" class="btn-default">Registrar</button>
                     </form>
-                   
                 </div>
             </div>
         </div>
-
 
         <div class="table-div">
             <table class="dashboard-table">
@@ -67,8 +59,8 @@
                 <tbody id="cuerpo_tabla">
                 </tbody>
             </table>
-        
+        </div>
 
-        <script src="dashboard_estudiante.js"></script>
+        <script type="module" src="dashboard_estudiante.js"></script>
     </body>
 </html>

@@ -17,7 +17,7 @@ export declare class EstudianteService {
     create(estudianteDto: CreateEstudianteDto): Promise<Estudiante>;
     findAll(): Promise<Estudiante[]>;
     findOne(id: number): Promise<Estudiante>;
-    update(id: number, updateUserDto: UpdateEstudianteDto): Promise<Estudiante>;
+    update(id: number, updateEstudianteDto: UpdateEstudianteDto): Promise<Estudiante>;
     remove(id: number): Promise<{
         message: string;
     }>;

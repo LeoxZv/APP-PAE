@@ -21,6 +21,9 @@ const estudiante_module_1 = require("./modules/estudiante/estudiante.module");
 const auth_module_1 = require("./modules/auth/auth.module");
 const grado_module_1 = require("./modules/grado/grado.module");
 const jornada_module_1 = require("./modules/jornada/jornada.module");
+const core_1 = require("@nestjs/core");
+const jwt_auth_guard_1 = require("./modules/auth/jwt-auth/jwt-auth.guard");
+const roles_guard_1 = require("./modules/auth/roles/roles.guard");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -29,7 +32,6 @@ exports.AppModule = AppModule = __decorate([
         imports: [
             config_1.ConfigModule.forRoot({
                 isGlobal: true,
-                envFilePath: '.env',
             }),
             typeorm_1.TypeOrmModule.forRootAsync({
                 imports: [config_1.ConfigModule],
@@ -65,6 +67,16 @@ exports.AppModule = AppModule = __decorate([
             auth_module_1.AuthModule,
             grado_module_1.GradoModule,
             jornada_module_1.JornadaModule,
+        ],
+        providers: [
+            {
+                provide: core_1.APP_GUARD,
+                useClass: jwt_auth_guard_1.JwtAuthGuard,
+            },
+            {
+                provide: core_1.APP_GUARD,
+                useClass: roles_guard_1.RolesGuard,
+            },
         ],
     })
 ], AppModule);

@@ -76,7 +76,10 @@ let UserService = class UserService {
         });
     }
     async findOne(id) {
-        const user = await this.userRepository.findOne({ where: { id_user: id } });
+        const user = await this.userRepository.findOne({
+            where: { id_user: id },
+            relations: ['rol', 'colegio', 'tipo_doc'],
+        });
         if (!user) {
             throw new common_1.HttpException('User not found', common_1.HttpStatus.NOT_FOUND);
         }
@@ -87,7 +90,48 @@ let UserService = class UserService {
         if (!user) {
             throw new common_1.HttpException('User not found', common_1.HttpStatus.NOT_FOUND);
         }
-        const updatedUser = Object.assign(user, updateUserDto);
+        const updatedData = {};
+        if (updateUserDto.nombre_user) {
+            updatedData.nombre_user = this.capitalize(updateUserDto.nombre_user);
+        }
+        if (updateUserDto.apellido_user) {
+            updatedData.apellido_user = this.capitalize(updateUserDto.apellido_user);
+        }
+        if (updateUserDto.numero_documento) {
+            updatedData.numero_documento = updateUserDto.numero_documento;
+        }
+        if (updateUserDto.password_user) {
+            const salt = await bcrypt.genSalt(10);
+            updatedData.password_user = await bcrypt.hash(updateUserDto.password_user, salt);
+        }
+        if (updateUserDto.rol) {
+            const rolEntity = await this.rolRepository.findOne({
+                where: { id_rol: updateUserDto.rol },
+            });
+            if (!rolEntity) {
+                throw new common_1.HttpException('Rol not found', common_1.HttpStatus.NOT_FOUND);
+            }
+            updatedData.rol = rolEntity;
+        }
+        if (updateUserDto.colegio) {
+            const colegioEntity = await this.colegioRepository.findOne({
+                where: { id_colegio: updateUserDto.colegio },
+            });
+            if (!colegioEntity) {
+                throw new common_1.HttpException('Colegio not found', common_1.HttpStatus.NOT_FOUND);
+            }
+            updatedData.colegio = colegioEntity;
+        }
+        if (updateUserDto.tipo_doc) {
+            const docEntity = await this.docRepository.findOne({
+                where: { id_doc: updateUserDto.tipo_doc },
+            });
+            if (!docEntity) {
+                throw new common_1.HttpException('Doc not found', common_1.HttpStatus.NOT_FOUND);
+            }
+            updatedData.tipo_doc = docEntity;
+        }
+        const updatedUser = Object.assign(user, updatedData);
         return this.userRepository.save(updatedUser);
     }
     async remove(id) {

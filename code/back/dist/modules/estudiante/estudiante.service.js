@@ -84,21 +84,62 @@ let EstudianteService = class EstudianteService {
     async findOne(id) {
         const estudiante = await this.estudianteRepository.findOne({
             where: { id_estudiante: id },
+            relations: ['tipo_doc', 'grado', 'jornada', 'colegio'],
         });
         if (!estudiante) {
             throw new common_1.HttpException('Estudiante not found', common_1.HttpStatus.NOT_FOUND);
         }
         return estudiante;
     }
-    async update(id, updateUserDto) {
+    async update(id, updateEstudianteDto) {
         const estudiante = await this.estudianteRepository.findOne({
             where: { id_estudiante: id },
         });
         if (!estudiante) {
             throw new common_1.HttpException('Estudiante not found', common_1.HttpStatus.NOT_FOUND);
         }
-        const updatedUser = Object.assign(estudiante, updateUserDto);
-        return this.estudianteRepository.save(updatedUser);
+        if (updateEstudianteDto.nombre_estudiante) {
+            estudiante.nombre_estudiante = this.capitalize(updateEstudianteDto.nombre_estudiante);
+        }
+        if (updateEstudianteDto.apellido_estudiante) {
+            estudiante.apellido_estudiante = this.capitalize(updateEstudianteDto.apellido_estudiante);
+        }
+        if (updateEstudianteDto.numero_documento) {
+            estudiante.numero_documento = updateEstudianteDto.numero_documento;
+        }
+        if (updateEstudianteDto.id_doc) {
+            const doc = await this.docRepository.findOne({
+                where: { id_doc: updateEstudianteDto.id_doc },
+            });
+            if (!doc)
+                throw new common_1.HttpException('Doc not found', common_1.HttpStatus.NOT_FOUND);
+            estudiante.tipo_doc = doc;
+        }
+        if (updateEstudianteDto.id_grado) {
+            const grado = await this.gradoRepository.findOne({
+                where: { id_grado: updateEstudianteDto.id_grado },
+            });
+            if (!grado)
+                throw new common_1.HttpException('Grado not found', common_1.HttpStatus.NOT_FOUND);
+            estudiante.grado = grado;
+        }
+        if (updateEstudianteDto.id_jornada) {
+            const jornada = await this.jornadaRepository.findOne({
+                where: { id_jornada: updateEstudianteDto.id_jornada },
+            });
+            if (!jornada)
+                throw new common_1.HttpException('Jornada not found', common_1.HttpStatus.NOT_FOUND);
+            estudiante.jornada = jornada;
+        }
+        if (updateEstudianteDto.colegio) {
+            const colegio = await this.colegioRepository.findOne({
+                where: { id_colegio: updateEstudianteDto.colegio },
+            });
+            if (!colegio)
+                throw new common_1.HttpException('Colegio not found', common_1.HttpStatus.NOT_FOUND);
+            estudiante.colegio = colegio;
+        }
+        return this.estudianteRepository.save(estudiante);
     }
     async remove(id) {
         const deleteResult = await this.estudianteRepository.delete(id);

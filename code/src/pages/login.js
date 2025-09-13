@@ -1,43 +1,64 @@
-const formulario = document.getElementsByName("formulario")[0];
+// login.js
 
-console.log('Formulario encontrado:', formulario);
+const formulario = document.getElementsByName("formulario")[0];
 
 formulario.addEventListener('submit', (e) => {
     e.preventDefault();
 
     const documento = document.getElementsByName("documento")[0].value;
-    console.log('Documento:', documento);
     const password = document.getElementsByName("password")[0].value;
-    console.log('Password:', password);
 
     const formData = {
         numero_documento: documento,
         password_user: password
     };
 
-    // Envía los datos al backend
-    fetch('http://localhost:3000/auth/login', { // Cambia la URL si tu servidor está en otro puerto
+    fetch('http://localhost:3000/auth/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData)
+        credentials: 'include',
+        body: JSON.stringify(formData),
     })
-    .then(response => response.json()) // Verifica que la respuesta sea JSON
+    .then(response => {
+        // Handle a server error (e.g., 500 Internal Server Error)
+        if (response.status >= 500) {
+            throw new Error('No se pudo conectar con el servidor.');
+        }
+        
+        // Handle a client error (e.g., 401 Unauthorized for bad credentials)
+        if (response.status === 401) {
+            throw new Error('Credenciales incorrectas');
+        }
+
+        // Check if the response is valid and parse it as JSON
+        if (response.ok && response.headers.get('content-type')?.includes('application/json')) {
+            return response.json();
+        }
+        
+        // If the response is not JSON or not OK, it's an unexpected error
+        if (!response.ok) {
+            throw new Error('Ocurrió un error inesperado.');
+        }
+
+        // If the response is OK but not JSON (e.g., a simple redirect), handle it.
+        // We will just return a placeholder.
+        return {};
+    })
     .then(data => {
+        // Redirect only if the login was successful and the data indicates it
         if (data.success) {
             console.log('Login exitoso:', data.message);
-            // Redirige al usuario a la página principal o dashboard
             window.location.href = '/code/src/pages/index.html';
-            localStorage.setItem('currentUser', JSON.stringify(data.user));
         } else {
-            console.log('Login fallido:', data.message);
-            alert('Credenciales incorrectas');
+            // Handle login failure messages from the backend
+            throw new Error(data.message || 'Credenciales incorrectas');
         }
     })
     .catch((error) => {
         console.error('Error:', error);
-        alert('Hubo un problema al intentar iniciar sesión.');
+        alert(error.message);
     });
 
     formulario.reset();

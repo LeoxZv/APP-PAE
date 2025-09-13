@@ -17,40 +17,34 @@
                 <a href="index.html">Volver</a>
             </div>
 
-        <div class="icon-user">
-            <i class="fa-solid fa-user"></i>
-
-        </div>
+            <div class="icon-user">
+                <i class="fa-solid fa-user"></i>
+            </div>
         </nav>
-
 
         <h1>Usuarios Registrados</h1>
         <div class="filtros">
             <button id="formulario_crear" class="boton_añadir">Añadir usuarios</button>
-            <div class="formulario_añadir" id="formulario_añadir"> 
+            <div class="formulario_añadir" id="formulario_añadir">
                 <div class="formulario_contenido">
                     <h2>Registro Usuarios</h2>
-                    <button id="cerrar_formulario" class="cerrar_btn">X</button> 
+                    <button id="cerrar_formulario" class="cerrar_btn">X</button>
                     <form action="" method="post">
                         <input type="text" name="nombre_usuario" placeholder="Nombre" class="input" required>
                         <input type="text" name="apellido" placeholder="Apellido" class="input" required>
                         <input type="text" name="documento" placeholder="Documento" class="input" required>
                         <input type="password" name="contraseña" placeholder="Contraseña" class="input" required>
                         <div class="selects-estudiante">
-                            <select name="Colegio" id="colegio">    
-                            </select>
-                            <select name="Rol" id="rol">
-                            </select>
-                            <select name="Tipo de documento" id="tipo_doc">
-                            </select>
+                            <select name="Colegio" id="colegio"></select>
+                            <select name="Rol" id="rol"></select>
+                            <select name="Tipo de documento" id="tipo_doc"></select>
                         </div>
                         <button type="submit" class="btn-default">Registrar</button>
                     </form>
-                   
+
                 </div>
             </div>
         </div>
-
 
         <div class="table-div">
             <table class="dashboard-table">
@@ -66,8 +60,8 @@
                 <tbody id="cuerpo_tabla">
                 </tbody>
             </table>
-        
+        </div>
 
-        <script src="dashboard_users.js"></script>
+        <script type="module" src="dashboard_users.js"></script>
     </body>
 </html>

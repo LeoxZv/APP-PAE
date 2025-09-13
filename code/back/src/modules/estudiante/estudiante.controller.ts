@@ -1,3 +1,4 @@
+// src/modules/estudiante/estudiante.controller.ts
 import {
   Controller,
   Get,
@@ -10,17 +11,20 @@ import {
 import { EstudianteService } from './estudiante.service';
 import { CreateEstudianteDto } from './dto/create-estudiante.dto';
 import { UpdateEstudianteDto } from './dto/update-estudiante.dto';
+import { Roles } from '../auth/roles/roles.decorator';
 
 @Controller('estudiante')
 export class EstudianteController {
   constructor(private readonly EstudianteService: EstudianteService) {}
 
   @Post()
+  @Roles(1)
   create(@Body() createEstudianteDto: CreateEstudianteDto) {
     return this.EstudianteService.create(createEstudianteDto);
   }
 
   @Get()
+  @Roles(1)
   findAll() {
     return this.EstudianteService.findAll();
   }

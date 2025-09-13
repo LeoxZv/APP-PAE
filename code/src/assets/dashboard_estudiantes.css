@@ -5,40 +5,35 @@
     font-family: 'Arial', sans-serif;
 }
 
-
-/* Background styling */
-/* body {
-    height: 100vh;
-    width: 100%;
+/* --- Navigation --- */
+.nav {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: white;
-    overflow: hidden;
-} */
+    padding: 10px 0;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
 
-.nav img{
+.nav img {
     width: auto;
     height: 8vh;
     margin-inline-end: auto;
     cursor: pointer;
 }
 
-.nav{
-    display: flex;
-    padding: 10px 0;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-}
-
-
-.icon-user{
+.icon-user {
     margin-left: 88%;
-
 }
 
-.icon-user:hover{
-    transform: scale(1.1);
+.icon-user,
+.icon-user i,
+.volver a,
+.nav i {
     transition: 0.5s;
+    cursor: pointer;
+}
+
+.icon-user:hover,
+.volver a:hover {
+    transform: scale(1.1);
 }
 
 .volver {
@@ -52,7 +47,7 @@
     padding: auto;
 }
 
-.volver a{
+.volver a {
     text-decoration: none;
     color: black;
     font-weight: 500;
@@ -61,20 +56,14 @@
     padding: 5px;
 }
 
-.volver a:hover{
-    transform: scale(1.1);
-    transition: 0.5s; 
-
-}
-
-.nav i{
+.nav i {
     font-size: 4vh;
     color: #6b8ee5;
-    margin-top: 10px;    
-    cursor: pointer;
+    margin-top: 10px;
 }
 
-h1{
+/* --- Main Content --- */
+h1 {
     text-align: center;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-weight: 500;
@@ -87,8 +76,8 @@ h1{
     margin: 20px;
 }
 
-/* elementos del formulario */
-
+/* --- Formulario de Añadir (Modal) --- */
+/* Cambios aquí: Usar `display: none` para ocultar y deshabilitar interacción */
 .formulario_añadir {
     position: fixed;
     top: 0;
@@ -97,23 +86,16 @@ h1{
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.5);
     transition: all 0.3s ease;
-    display: flex;
+    display: none; /* Oculta completamente el elemento */
     justify-content: center;
     align-items: center;
-    opacity: 0;
-    z-index: -1;
+    z-index: 999; /* Usa un z-index alto en el estado 'open' */
 }
 
 .formulario_añadir.open {
-    opacity: 1;
-    z-index: 999;
+    display: flex; /* Muestra el elemento cuando se añade la clase */
 }
 
-.formulario_contenido h2{
-    color: #6b8ee5;
-    text-align: center;
-}
-/* Estilos para el contenido del popup */
 .formulario_contenido {
     background-color: #fff;
     border-radius: 8px;
@@ -122,7 +104,11 @@ h1{
     width: 50%;
     max-width: 400px;
     padding: 15px;
-    
+}
+
+.formulario_contenido h2 {
+    color: #6b8ee5;
+    text-align: center;
 }
 
 .formulario_contenido form {
@@ -133,7 +119,7 @@ h1{
     align-items: center;
 }
 
-.formulario_contenido form input{
+.formulario_contenido form input {
     margin: 8px 0;
     padding: 5px;
     border: none;
@@ -142,25 +128,14 @@ h1{
     background-color: #6b8ee536;
     width: 85%;
 }
-.formulario_contenido button{
-    background-color: #6b8ee5;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 12px;
-    transition: background-color 0.3s ease;
-    margin-top: 25px;
+
+.selects-estudiante {
+    border: 5px;
+    margin-top: 20px;
+    max-width: 300px;
 }
 
-.selects-estudiante{
-    border:5px;
-    margin-top:20px;
-    max-width:300px;
-}
-
-.selects-estudiante select{
+.selects-estudiante select {
     padding: 3px;
     width: 80px;
     border: none;
@@ -171,113 +146,27 @@ h1{
     text-align: center;
     cursor: pointer;
     appearance: none;
+    border: 1px solid #dddddd;
+    background: #eeeeee;
+    transition: 0.4s;
 }
 
-
-.selects-estudiante select,
-::picker(select) {
-  appearance: base-select;
+.selects-estudiante select:hover,
+.selects-estudiante select:focus {
+    background: #dddddd;
 }
 
-select {
-  flex: 1;
-}
-.selects-estudiante select{
-  border: 1px solid #dddddd;
-  background: #eeeeee;
-  transition: 0.4s;
-}
+/* ... (el resto de tu CSS para los selectores de opción es correcto) ... */
 
-select:hover,
-select:focus {
-  background: #dddddd;
-}
-select::picker-icon {
-  color: #999999;
-  transition: 0.4s rotate;
-}
-select:open::picker-icon {
-  rotate: 180deg;
-}
-::picker(select) {
-  border: none;
-}
-option {
-  display: flex;
-  justify-content: flex-start;
-  gap: 5px;
-  font-size: 15px;
-
-  border: 2px solid #dddddd;
-  background: #eeeeee;
-  padding: 7px;
-  transition: 0.4s;
-}
-option:first-of-type {
-  border-radius: 8px 8px 0 0;
-}
-
-option:last-of-type {
-  border-radius: 0 0 8px 8px;
-}
-
-option:not(option:last-of-type) {
-  border-bottom: none;
-}
-option:nth-of-type(odd) {
-  background: white;
-}
-
-option:hover,
-option:focus {
-  background: #6b8ee573;
-}
-
-option:checked {
-  font-weight: bold;
-}
-::picker(select) {
-  opacity: 0;
-  transition: all 0.4s allow-discrete;
-}
-::picker(select):popover-open {
-  opacity: 1;
-}
-@starting-style {
-  ::picker(select):popover-open {
-    opacity: 0;
-  }
-}
-::picker(select) {
-  top: calc(anchor(bottom) + 1px);
-  left: anchor(10%);
-}
-
-/* option:hover{
-    background-color: black;
-    transform: scale(1.1);
-    transition: 0.5s;
-} */
-/* Estilos para el botón de cerrar */
-.cerrar_btn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: none;
-    border: none;
-    font-size: 5px;
-    cursor: pointer;
+/* --- Tabla --- */
+.table-div {
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
     color: #333;
 }
 
-.table-div{
-  display: flex;
-  justify-content: center;
-  font-weight: bold;
-  color: #333;
-}
-
-.dashboard-table{
+.dashboard-table {
     width: 80%;
     border-collapse: collapse;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
@@ -287,14 +176,13 @@ option:checked {
     text-align: center;
 }
 
-.dashboard-table tr th{
-  padding: 5px;
-  background-color: #6b8ee5;
-  font-weight: 300;
-  font-size: 0.9em;
-  padding-left: 10px;
-  color: black;
-  
+.dashboard-table tr th {
+    padding: 5px;
+    background-color: #6b8ee5;
+    font-weight: 300;
+    font-size: 0.9em;
+    padding-left: 10px;
+    color: black;
 }
 
 .fila-cuerpo:nth-of-type(even) {
@@ -305,16 +193,17 @@ option:checked {
     background-color: #6b8ee56c;
 }
 
-.fila-cuerpo{
-  font-weight: 200;
-  font-size: 0.5;
+.fila-cuerpo {
+    font-weight: 200;
+    font-size: 0.5;
 }
 
-.cuerpo-tabla{
-  padding: 10px;
-}
-
-.boton_añadir {
+/* --- Botones --- */
+.boton_añadir,
+.btn-default,
+.editar_btn,
+.confirmacion_btn,
+.cerrar_btn {
     background-color: #6b8ee5;
     color: white;
     border: none;
@@ -322,75 +211,46 @@ option:checked {
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
-    transition: background-color 0.3s ease;
+    transition: transform 0.5s ease;
+}
+
+.boton_añadir, .btn-default {
     margin-right: 10px;
 }
 
-
-.boton_añadir:hover{
-    color: white; 
-    transform: scale(1.1); 
-    transition: 0.5s;
+.cerrar_btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 1.5rem; /* Usar un tamaño de fuente relativo */
+    cursor: pointer;
+    color: #333;
 }
-
-.cerrar_btn:hover {
-    color: white; 
-    transform: scale(1.1); 
-    transition: 0.5s;
-}
-
 
 .editar_btn {
     background-color: #77DD77;
-    color: white;
-    border: none;
     padding: 5px;
-    border-radius: 5px;
-    cursor: pointer;
     font-size: 12px;
-    transition: background-color 0.3s ease;
     margin: 5px;
-    text-align: center;
-}
-
-.editar_btn:hover {
-    color: white; 
-    transform: scale(1.1); 
-    transition: 0.5s;
 }
 
 .confirmacion_btn {
     background-color: #ff6961;
-    color: white;
-    border: none;
     padding: 5px;
-    border-radius: 5px;
-    cursor: pointer;
     font-size: 12px;
-    transition: background-color 0.3s ease;
-    text-align: center;
 }
 
-.confirmacion_btn:hover {
-    color: white; 
-    transform: scale(1.1); 
-    transition: 0.5s;
+/* Hover effects */
+.boton_añadir:hover,
+.btn-default:hover,
+.editar_btn:hover,
+.confirmacion_btn:hover,
+.cerrar_btn:hover {
+    transform: scale(1.1);
 }
 
-.btn-default{
-    background-color: #6b8ee5;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 20px;
-    width: 50%;
-    transition: background-color 0.3s ease;
+.cerrar_btn:hover {
+    color: white; /* El color de la X en hover */
 }
-
-.btn-default:hover{
-    color: white; 
-    transform: scale(1.1); 
-    transition: 0.5s;
-}  

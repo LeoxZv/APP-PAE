@@ -17,6 +17,7 @@ const common_1 = require("@nestjs/common");
 const estudiante_service_1 = require("./estudiante.service");
 const create_estudiante_dto_1 = require("./dto/create-estudiante.dto");
 const update_estudiante_dto_1 = require("./dto/update-estudiante.dto");
+const roles_decorator_1 = require("../auth/roles/roles.decorator");
 let EstudianteController = class EstudianteController {
     EstudianteService;
     constructor(EstudianteService) {
@@ -41,6 +42,7 @@ let EstudianteController = class EstudianteController {
 exports.EstudianteController = EstudianteController;
 __decorate([
     (0, common_1.Post)(),
+    (0, roles_decorator_1.Roles)(1),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [create_estudiante_dto_1.CreateEstudianteDto]),
@@ -48,6 +50,7 @@ __decorate([
 ], EstudianteController.prototype, "create", null);
 __decorate([
     (0, common_1.Get)(),
+    (0, roles_decorator_1.Roles)(1),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)

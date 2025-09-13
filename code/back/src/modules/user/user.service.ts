@@ -56,8 +56,8 @@ export class UserService {
     const hashedPassword = await bcrypt.hash(user.password_user, salt);
 
     const newUser = this.userRepository.create({
-      nombre_user: this.capitalize(user.nombre_user), // Aplicar capitalización aquí
-      apellido_user: this.capitalize(user.apellido_user), // Aplicar capitalización aquí
+      nombre_user: this.capitalize(user.nombre_user),
+      apellido_user: this.capitalize(user.apellido_user),
       password_user: hashedPassword,
       numero_documento: user.numero_documento,
       rol: rolEntity,
@@ -76,7 +76,10 @@ export class UserService {
   }
 
   async findOne(id: number): Promise<User> {
-    const user = await this.userRepository.findOne({ where: { id_user: id } });
+    const user = await this.userRepository.findOne({
+      where: { id_user: id },
+      relations: ['rol', 'colegio', 'tipo_doc'],
+    });
     if (!user) {
       throw new HttpException('User not found', HttpStatus.NOT_FOUND);
     }
@@ -88,7 +91,62 @@ export class UserService {
     if (!user) {
       throw new HttpException('User not found', HttpStatus.NOT_FOUND);
     }
-    const updatedUser = Object.assign(user, updateUserDto);
+
+    // Crea un objeto para almacenar los datos a actualizar
+    const updatedData: Partial<User> = {};
+
+    // 1. Actualizar campos simples si existen en el DTO
+    if (updateUserDto.nombre_user) {
+      updatedData.nombre_user = this.capitalize(updateUserDto.nombre_user);
+    }
+    if (updateUserDto.apellido_user) {
+      updatedData.apellido_user = this.capitalize(updateUserDto.apellido_user);
+    }
+    if (updateUserDto.numero_documento) {
+      updatedData.numero_documento = updateUserDto.numero_documento;
+    }
+
+    // 2. Manejar la actualización de la contraseña
+    if (updateUserDto.password_user) {
+      const salt = await bcrypt.genSalt(10);
+      updatedData.password_user = await bcrypt.hash(
+        updateUserDto.password_user,
+        salt,
+      );
+    }
+
+    // 3. Manejar las relaciones (Foreign Keys)
+    if (updateUserDto.rol) {
+      const rolEntity = await this.rolRepository.findOne({
+        where: { id_rol: updateUserDto.rol },
+      });
+      if (!rolEntity) {
+        throw new HttpException('Rol not found', HttpStatus.NOT_FOUND);
+      }
+      updatedData.rol = rolEntity;
+    }
+
+    if (updateUserDto.colegio) {
+      const colegioEntity = await this.colegioRepository.findOne({
+        where: { id_colegio: updateUserDto.colegio },
+      });
+      if (!colegioEntity) {
+        throw new HttpException('Colegio not found', HttpStatus.NOT_FOUND);
+      }
+      updatedData.colegio = colegioEntity;
+    }
+
+    if (updateUserDto.tipo_doc) {
+      const docEntity = await this.docRepository.findOne({
+        where: { id_doc: updateUserDto.tipo_doc },
+      });
+      if (!docEntity) {
+        throw new HttpException('Doc not found', HttpStatus.NOT_FOUND);
+      }
+      updatedData.tipo_doc = docEntity;
+    }
+
+    const updatedUser = Object.assign(user, updatedData);
     return this.userRepository.save(updatedUser);
   }
 
