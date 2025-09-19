@@ -56,9 +56,9 @@ __decorate([
     __metadata("design:type", rol_entity_1.Rol)
 ], User.prototype, "rol", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => colegio_entity_1.Colegio, (colegio) => colegio.users),
+    (0, typeorm_1.ManyToOne)(() => colegio_entity_1.Colegio, (colegio) => colegio.users, { nullable: true }),
     (0, typeorm_1.JoinColumn)({ name: 'colegio_id' }),
-    __metadata("design:type", colegio_entity_1.Colegio)
+    __metadata("design:type", Object)
 ], User.prototype, "colegio", void 0);
 exports.User = User = __decorate([
     (0, typeorm_1.Entity)()

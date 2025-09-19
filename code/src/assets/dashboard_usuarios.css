@@ -81,10 +81,53 @@ h1{
     margin-top: 5vh;
 }
 
-.filtros {
+.botones {
     display: flex;
     justify-content: center;
     margin: 20px;
+}
+
+/* Estilos para la barra de filtros */
+.filter-options-bar {
+    display: none; /* Oculta el contenedor por defecto */
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    flex-wrap: wrap;
+}
+
+.filter-options-bar.show {
+    display: flex; /* Muestra el contenedor al tener la clase 'show' */
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0;
+}
+
+.filter-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    white-space: nowrap;
+}
+
+.filter-group input, .filter-group select {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    width: auto;
+}
+
+/* Ocultar el colegio por defecto, el JS se encargará de mostrarlo */
+#filter-colegio {
+    display: none;
 }
 
 /* elementos del formulario */
@@ -179,9 +222,7 @@ h1{
   appearance: base-select;
 }
 
-select {
-  flex: 1;
-}
+
 .selects-estudiante select{
   border: 1px solid #dddddd;
   background: #eeeeee;

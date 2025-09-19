@@ -26,14 +26,14 @@ let EstudianteController = class EstudianteController {
     create(createEstudianteDto) {
         return this.EstudianteService.create(createEstudianteDto);
     }
-    findAll() {
-        return this.EstudianteService.findAll();
+    findAll(req) {
+        return this.EstudianteService.findAll(req.user);
     }
     findOne(id) {
         return this.EstudianteService.findOne(+id);
     }
-    update(id, updateEstudianteDto) {
-        return this.EstudianteService.update(+id, updateEstudianteDto);
+    update(id, updateEstudianteDto, req) {
+        return this.EstudianteService.update(+id, updateEstudianteDto, req.user);
     }
     remove(id) {
         return this.EstudianteService.remove(+id);
@@ -42,7 +42,7 @@ let EstudianteController = class EstudianteController {
 exports.EstudianteController = EstudianteController;
 __decorate([
     (0, common_1.Post)(),
-    (0, roles_decorator_1.Roles)(1),
+    (0, roles_decorator_1.Roles)(1, 4),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [create_estudiante_dto_1.CreateEstudianteDto]),
@@ -50,13 +50,15 @@ __decorate([
 ], EstudianteController.prototype, "create", null);
 __decorate([
     (0, common_1.Get)(),
-    (0, roles_decorator_1.Roles)(1),
+    (0, roles_decorator_1.Roles)(1, 2, 3, 4),
+    __param(0, (0, common_1.Req)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
+    __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
 ], EstudianteController.prototype, "findAll", null);
 __decorate([
     (0, common_1.Get)(':id'),
+    (0, roles_decorator_1.Roles)(1, 2, 3, 4),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
@@ -64,14 +66,17 @@ __decorate([
 ], EstudianteController.prototype, "findOne", null);
 __decorate([
     (0, common_1.Patch)(':id'),
+    (0, roles_decorator_1.Roles)(1, 4),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
+    __param(2, (0, common_1.Req)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, update_estudiante_dto_1.UpdateEstudianteDto]),
+    __metadata("design:paramtypes", [String, update_estudiante_dto_1.UpdateEstudianteDto, Object]),
     __metadata("design:returntype", void 0)
 ], EstudianteController.prototype, "update", null);
 __decorate([
     (0, common_1.Delete)(':id'),
+    (0, roles_decorator_1.Roles)(1, 4),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),

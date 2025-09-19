@@ -25,8 +25,8 @@ let UserController = class UserController {
     create(createUserDto) {
         return this.userService.create(createUserDto);
     }
-    findAll() {
-        return this.userService.findAll();
+    findAll(req) {
+        return this.userService.findAll(req.user);
     }
     findOne(id) {
         return this.userService.findOne(+id);
@@ -48,8 +48,9 @@ __decorate([
 ], UserController.prototype, "create", null);
 __decorate([
     (0, common_1.Get)(),
+    __param(0, (0, common_1.Req)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
+    __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
 ], UserController.prototype, "findAll", null);
 __decorate([

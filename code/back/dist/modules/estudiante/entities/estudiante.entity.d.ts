@@ -10,5 +10,5 @@ export declare class Estudiante {
     grado: Grado;
     jornada: Jornada;
     tipo_doc: Doc;
-    colegio: Colegio;
+    colegio: Colegio | null;
 }

@@ -9,5 +9,5 @@ export declare class User {
     numero_documento: string;
     tipo_doc: Doc;
     rol: Rol;
-    colegio: Colegio;
+    colegio: Colegio | null;
 }

@@ -13,7 +13,7 @@ import { EstudianteModule } from './modules/estudiante/estudiante.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { GradoModule } from './modules/grado/grado.module';
 import { JornadaModule } from './modules/jornada/jornada.module';
-import { APP_GUARD, Reflector } from '@nestjs/core';
+import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from './modules/auth/jwt-auth/jwt-auth.guard';
 import { RolesGuard } from './modules/auth/roles/roles.guard';
 
@@ -58,7 +58,6 @@ import { RolesGuard } from './modules/auth/roles/roles.guard';
     JornadaModule,
   ],
   providers: [
-    // Register global guards in the correct order
     {
       provide: APP_GUARD,
       useClass: JwtAuthGuard,

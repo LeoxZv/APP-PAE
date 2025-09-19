@@ -36,7 +36,10 @@ export class Estudiante {
   @JoinColumn({ name: 'tipo_doc_id' })
   tipo_doc: Doc;
 
-  @ManyToOne(() => Colegio)
-  @JoinColumn({ name: 'colegio_id' })
-  colegio: Colegio;
+  @ManyToOne(() => Colegio, {
+    nullable: true,
+    onDelete: 'CASCADE',
+  })
+  @JoinColumn({ name: 'id_colegio' })
+  colegio: Colegio | null;
 }

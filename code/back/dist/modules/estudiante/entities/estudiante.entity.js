@@ -58,9 +58,12 @@ __decorate([
     __metadata("design:type", doc_entity_1.Doc)
 ], Estudiante.prototype, "tipo_doc", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => colegio_entity_1.Colegio),
-    (0, typeorm_1.JoinColumn)({ name: 'colegio_id' }),
-    __metadata("design:type", colegio_entity_1.Colegio)
+    (0, typeorm_1.ManyToOne)(() => colegio_entity_1.Colegio, {
+        nullable: true,
+        onDelete: 'CASCADE',
+    }),
+    (0, typeorm_1.JoinColumn)({ name: 'id_colegio' }),
+    __metadata("design:type", Object)
 ], Estudiante.prototype, "colegio", void 0);
 exports.Estudiante = Estudiante = __decorate([
     (0, typeorm_1.Entity)()

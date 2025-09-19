@@ -15,6 +15,7 @@ const user_entity_1 = require("./entities/user.entity");
 const rol_entity_1 = require("../rol/entities/rol.entity");
 const colegio_entity_1 = require("../colegio/entities/colegio.entity");
 const doc_entity_1 = require("../doc/entities/doc.entity");
+const entity_validation_service_1 = require("../../common/services/entity-validation.service");
 let UserModule = class UserModule {
 };
 exports.UserModule = UserModule;
@@ -22,7 +23,7 @@ exports.UserModule = UserModule = __decorate([
     (0, common_1.Module)({
         imports: [typeorm_1.TypeOrmModule.forFeature([user_entity_1.User, rol_entity_1.Rol, colegio_entity_1.Colegio, doc_entity_1.Doc])],
         controllers: [user_controller_1.UserController],
-        providers: [user_service_1.UserService],
+        providers: [user_service_1.UserService, entity_validation_service_1.EntityValidationService],
         exports: [typeorm_1.TypeOrmModule],
     })
 ], UserModule);

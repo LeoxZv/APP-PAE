@@ -20,7 +20,7 @@ export async function fetchData(endpoint, selectId, valueKey, textKey) {
         
         // This line is where the change happens
         const formattedEndpoint = endpoint.charAt(0).toUpperCase() + endpoint.slice(1).replace('_', ' ');
-        defaultOption.textContent = `Selecciona ${formattedEndpoint}`;
+        defaultOption.textContent = `${formattedEndpoint}`;
         
         defaultOption.value = '';
         defaultOption.disabled = true;
@@ -40,7 +40,7 @@ export async function fetchData(endpoint, selectId, valueKey, textKey) {
     }
 }
 
-export async function obtenerEntidades(endpoint, buildTableFunction) {
+export async function obtenerEntidades(endpoint, buildTableFunction, user) { // <-- Se agrega el parámetro 'user'
     try {
         const response = await fetch(`http://localhost:3000/${endpoint}`, {
             method: 'GET',
@@ -53,10 +53,10 @@ export async function obtenerEntidades(endpoint, buildTableFunction) {
         }
 
         const data = await response.json();
-        const entities = data.message || data; 
+        const entities = data.message || data;
 
         if (Array.isArray(entities)) {
-            buildTableFunction(entities); 
+            buildTableFunction(entities, user); // <-- Se pasa 'user' aquí
         } else {
             alert('No pudimos obtener los datos. La respuesta del servidor es inesperada.');
         }

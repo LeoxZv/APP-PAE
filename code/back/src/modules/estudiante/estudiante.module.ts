@@ -7,13 +7,14 @@ import { Colegio } from '../colegio/entities/colegio.entity';
 import { Doc } from '../doc/entities/doc.entity';
 import { Grado } from '../grado/entities/grado.entity';
 import { Jornada } from '../jornada/entities/jornada.entity';
+import { EntityValidationService } from 'src/common/services/entity-validation.service';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([Estudiante, Colegio, Doc, Grado, Jornada]),
   ],
   controllers: [EstudianteController],
-  providers: [EstudianteService],
+  providers: [EstudianteService, EntityValidationService],
   exports: [TypeOrmModule],
 })
 export class EstudianteModule {}

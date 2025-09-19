@@ -16,6 +16,7 @@ const colegio_entity_1 = require("../colegio/entities/colegio.entity");
 const doc_entity_1 = require("../doc/entities/doc.entity");
 const grado_entity_1 = require("../grado/entities/grado.entity");
 const jornada_entity_1 = require("../jornada/entities/jornada.entity");
+const entity_validation_service_1 = require("../../common/services/entity-validation.service");
 let EstudianteModule = class EstudianteModule {
 };
 exports.EstudianteModule = EstudianteModule;
@@ -25,7 +26,7 @@ exports.EstudianteModule = EstudianteModule = __decorate([
             typeorm_1.TypeOrmModule.forFeature([estudiante_entity_1.Estudiante, colegio_entity_1.Colegio, doc_entity_1.Doc, grado_entity_1.Grado, jornada_entity_1.Jornada]),
         ],
         controllers: [estudiante_controller_1.EstudianteController],
-        providers: [estudiante_service_1.EstudianteService],
+        providers: [estudiante_service_1.EstudianteService, entity_validation_service_1.EntityValidationService],
         exports: [typeorm_1.TypeOrmModule],
     })
 ], EstudianteModule);

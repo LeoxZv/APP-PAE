@@ -21,65 +21,51 @@ const colegio_entity_1 = require("../colegio/entities/colegio.entity");
 const doc_entity_1 = require("../doc/entities/doc.entity");
 const grado_entity_1 = require("../grado/entities/grado.entity");
 const jornada_entity_1 = require("../jornada/entities/jornada.entity");
+const entity_validation_service_1 = require("../../common/services/entity-validation.service");
 let EstudianteService = class EstudianteService {
     estudianteRepository;
     colegioRepository;
     docRepository;
     gradoRepository;
     jornadaRepository;
-    constructor(estudianteRepository, colegioRepository, docRepository, gradoRepository, jornadaRepository) {
+    validationService;
+    constructor(estudianteRepository, colegioRepository, docRepository, gradoRepository, jornadaRepository, validationService) {
         this.estudianteRepository = estudianteRepository;
         this.colegioRepository = colegioRepository;
         this.docRepository = docRepository;
         this.gradoRepository = gradoRepository;
         this.jornadaRepository = jornadaRepository;
+        this.validationService = validationService;
     }
-    capitalize(str) {
-        if (!str)
-            return str;
-        return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+    async create(createEstudianteDto) {
+        const { id_doc, id_grado, id_jornada, colegio, ...estudianteData } = createEstudianteDto;
+        const docEntity = await this.validationService.findEntityById(this.docRepository, id_doc, 'id_doc');
+        const gradoEntity = await this.validationService.findEntityById(this.gradoRepository, id_grado, 'id_grado');
+        const jornadaEntity = await this.validationService.findEntityById(this.jornadaRepository, id_jornada, 'id_jornada');
+        let colegioEntity = null;
+        if (colegio) {
+            colegioEntity = await this.validationService.findEntityById(this.colegioRepository, colegio, 'id_colegio');
+        }
+        const nuevoEstudiante = this.estudianteRepository.create({
+            ...estudianteData,
+            tipo_doc: docEntity,
+            grado: gradoEntity,
+            jornada: jornadaEntity,
+            colegio: colegioEntity,
+        });
+        return this.estudianteRepository.save(nuevoEstudiante);
     }
-    async create(estudianteDto) {
-        const colegio = await this.colegioRepository.findOne({
-            where: { id_colegio: estudianteDto.colegio },
-        });
-        if (!colegio) {
-            throw new common_1.HttpException('Colegio not found', common_1.HttpStatus.NOT_FOUND);
-        }
-        const doc = await this.docRepository.findOne({
-            where: { id_doc: estudianteDto.id_doc },
-        });
-        if (!doc) {
-            throw new common_1.HttpException('Doc not found', common_1.HttpStatus.NOT_FOUND);
-        }
-        const grado = await this.gradoRepository.findOne({
-            where: { id_grado: estudianteDto.id_grado },
-        });
-        if (!grado) {
-            throw new common_1.HttpException('Grado not found', common_1.HttpStatus.NOT_FOUND);
-        }
-        const jornada = await this.jornadaRepository.findOne({
-            where: { id_jornada: estudianteDto.id_jornada },
-        });
-        if (!jornada) {
-            throw new common_1.HttpException('Jornada not found', common_1.HttpStatus.NOT_FOUND);
-        }
-        const newEstudiante = this.estudianteRepository.create({
-            nombre_estudiante: this.capitalize(estudianteDto.nombre_estudiante),
-            apellido_estudiante: this.capitalize(estudianteDto.apellido_estudiante),
-            numero_documento: estudianteDto.numero_documento,
-            colegio: colegio,
-            tipo_doc: doc,
-            grado: grado,
-            jornada: jornada,
-        });
-        return this.estudianteRepository.save(newEstudiante);
-    }
-    async findAll() {
-        return this.estudianteRepository.find({
+    async findAll(user) {
+        const queryOptions = {
             relations: ['colegio', 'tipo_doc', 'grado', 'jornada'],
             order: { id_estudiante: 'ASC' },
-        });
+            where: {},
+        };
+        const userRole = user.rol.nombre_rol;
+        if ((userRole == 'colegio' || userRole == 'profesor') && user.colegio) {
+            queryOptions.where.colegio = { id_colegio: user.colegio.id_colegio };
+        }
+        return this.estudianteRepository.find(queryOptions);
     }
     async findOne(id) {
         const estudiante = await this.estudianteRepository.findOne({
@@ -91,55 +77,38 @@ let EstudianteService = class EstudianteService {
         }
         return estudiante;
     }
-    async update(id, updateEstudianteDto) {
+    async update(id, updateEstudianteDto, requestingUser) {
         const estudiante = await this.estudianteRepository.findOne({
             where: { id_estudiante: id },
         });
         if (!estudiante) {
             throw new common_1.HttpException('Estudiante not found', common_1.HttpStatus.NOT_FOUND);
         }
+        const updatedData = {};
         if (updateEstudianteDto.nombre_estudiante) {
-            estudiante.nombre_estudiante = this.capitalize(updateEstudianteDto.nombre_estudiante);
+            updatedData.nombre_estudiante = this.validationService.capitalize(updateEstudianteDto.nombre_estudiante);
         }
         if (updateEstudianteDto.apellido_estudiante) {
-            estudiante.apellido_estudiante = this.capitalize(updateEstudianteDto.apellido_estudiante);
+            updatedData.apellido_estudiante = this.validationService.capitalize(updateEstudianteDto.apellido_estudiante);
         }
         if (updateEstudianteDto.numero_documento) {
-            estudiante.numero_documento = updateEstudianteDto.numero_documento;
+            updatedData.numero_documento = updateEstudianteDto.numero_documento;
         }
         if (updateEstudianteDto.id_doc) {
-            const doc = await this.docRepository.findOne({
-                where: { id_doc: updateEstudianteDto.id_doc },
-            });
-            if (!doc)
-                throw new common_1.HttpException('Doc not found', common_1.HttpStatus.NOT_FOUND);
-            estudiante.tipo_doc = doc;
+            updatedData.tipo_doc = await this.validationService.findEntityById(this.docRepository, updateEstudianteDto.id_doc, 'id_doc');
         }
         if (updateEstudianteDto.id_grado) {
-            const grado = await this.gradoRepository.findOne({
-                where: { id_grado: updateEstudianteDto.id_grado },
-            });
-            if (!grado)
-                throw new common_1.HttpException('Grado not found', common_1.HttpStatus.NOT_FOUND);
-            estudiante.grado = grado;
+            updatedData.grado = await this.validationService.findEntityById(this.gradoRepository, updateEstudianteDto.id_grado, 'id_grado');
         }
         if (updateEstudianteDto.id_jornada) {
-            const jornada = await this.jornadaRepository.findOne({
-                where: { id_jornada: updateEstudianteDto.id_jornada },
-            });
-            if (!jornada)
-                throw new common_1.HttpException('Jornada not found', common_1.HttpStatus.NOT_FOUND);
-            estudiante.jornada = jornada;
+            updatedData.jornada = await this.validationService.findEntityById(this.jornadaRepository, updateEstudianteDto.id_jornada, 'id_jornada');
         }
-        if (updateEstudianteDto.colegio) {
-            const colegio = await this.colegioRepository.findOne({
-                where: { id_colegio: updateEstudianteDto.colegio },
-            });
-            if (!colegio)
-                throw new common_1.HttpException('Colegio not found', common_1.HttpStatus.NOT_FOUND);
-            estudiante.colegio = colegio;
+        if (requestingUser.rol.nombre_rol !== 'aseador' &&
+            updateEstudianteDto.colegio) {
+            updatedData.colegio = await this.validationService.findEntityById(this.colegioRepository, updateEstudianteDto.colegio, 'id_colegio');
         }
-        return this.estudianteRepository.save(estudiante);
+        const updatedEstudiante = Object.assign(estudiante, updatedData);
+        return this.estudianteRepository.save(updatedEstudiante);
     }
     async remove(id) {
         const deleteResult = await this.estudianteRepository.delete(id);
@@ -161,6 +130,7 @@ exports.EstudianteService = EstudianteService = __decorate([
         typeorm_2.Repository,
         typeorm_2.Repository,
         typeorm_2.Repository,
-        typeorm_2.Repository])
+        typeorm_2.Repository,
+        entity_validation_service_1.EntityValidationService])
 ], EstudianteService);
 //# sourceMappingURL=estudiante.service.js.map

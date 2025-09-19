@@ -6,10 +6,11 @@ import { Entrega } from './entities/entrega.entity';
 import { User } from '../user/entities/user.entity';
 import { Alimento } from '../alimento/entities/alimento.entity';
 import { Estudiante } from '../estudiante/entities/estudiante.entity';
+import { EntityValidationService } from 'src/common/services/entity-validation.service';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Entrega, User, Alimento, Estudiante])],
   controllers: [EntregaController],
-  providers: [EntregaService],
+  providers: [EntregaService, EntityValidationService],
 })
 export class EntregaModule {}

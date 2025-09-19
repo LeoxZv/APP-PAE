@@ -21,46 +21,32 @@ const rol_entity_1 = require("../rol/entities/rol.entity");
 const colegio_entity_1 = require("../colegio/entities/colegio.entity");
 const doc_entity_1 = require("../doc/entities/doc.entity");
 const bcrypt = require("bcrypt");
+const entity_validation_service_1 = require("../../common/services/entity-validation.service");
 let UserService = class UserService {
     userRepository;
     rolRepository;
     colegioRepository;
     docRepository;
-    constructor(userRepository, rolRepository, colegioRepository, docRepository) {
+    validationService;
+    constructor(userRepository, rolRepository, colegioRepository, docRepository, validationService) {
         this.userRepository = userRepository;
         this.rolRepository = rolRepository;
         this.colegioRepository = colegioRepository;
         this.docRepository = docRepository;
-    }
-    capitalize(str) {
-        if (!str)
-            return str;
-        return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+        this.validationService = validationService;
     }
     async create(user) {
-        const rolEntity = await this.rolRepository.findOne({
-            where: { id_rol: user.rol },
-        });
-        if (!rolEntity) {
-            throw new common_1.HttpException('Rol not found', common_1.HttpStatus.NOT_FOUND);
-        }
-        const colegioEntity = await this.colegioRepository.findOne({
-            where: { id_colegio: user.colegio },
-        });
-        if (!colegioEntity) {
-            throw new common_1.HttpException('Colegio not found', common_1.HttpStatus.NOT_FOUND);
-        }
-        const docEntity = await this.docRepository.findOne({
-            where: { id_doc: user.tipo_doc },
-        });
-        if (!docEntity) {
-            throw new common_1.HttpException('Doc not found', common_1.HttpStatus.NOT_FOUND);
+        const rolEntity = await this.validationService.findEntityById(this.rolRepository, user.rol, 'id_rol');
+        const docEntity = await this.validationService.findEntityById(this.docRepository, user.tipo_doc, 'id_doc');
+        let colegioEntity = null;
+        if (user.colegio) {
+            colegioEntity = await this.validationService.findEntityById(this.colegioRepository, user.colegio, 'id_colegio');
         }
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(user.password_user, salt);
         const newUser = this.userRepository.create({
-            nombre_user: this.capitalize(user.nombre_user),
-            apellido_user: this.capitalize(user.apellido_user),
+            nombre_user: this.validationService.capitalize(user.nombre_user),
+            apellido_user: this.validationService.capitalize(user.apellido_user),
             password_user: hashedPassword,
             numero_documento: user.numero_documento,
             rol: rolEntity,
@@ -69,11 +55,35 @@ let UserService = class UserService {
         });
         return this.userRepository.save(newUser);
     }
-    async findAll() {
-        return this.userRepository.find({
+    async findAll(user) {
+        const userRole = user.rol.nombre_rol;
+        const findOptions = {
             relations: ['rol', 'colegio', 'tipo_doc'],
-            order: { id_user: 'ASC' },
-        });
+        };
+        switch (userRole) {
+            case 'aseador':
+                break;
+            case 'admin':
+                findOptions.where = {
+                    rol: {
+                        nombre_rol: (0, typeorm_2.In)(['colegio', 'Profesor']),
+                    },
+                };
+                break;
+            case 'colegio':
+                if (!user.colegio || !user.colegio.id_colegio) {
+                    return [];
+                }
+                findOptions.where = {
+                    colegio: {
+                        id_colegio: user.colegio.id_colegio,
+                    },
+                };
+                break;
+            default:
+                throw new common_1.UnauthorizedException('No tienes permisos para ver esta información.');
+        }
+        return await this.userRepository.find(findOptions);
     }
     async findOne(id) {
         const user = await this.userRepository.findOne({
@@ -92,10 +102,10 @@ let UserService = class UserService {
         }
         const updatedData = {};
         if (updateUserDto.nombre_user) {
-            updatedData.nombre_user = this.capitalize(updateUserDto.nombre_user);
+            updatedData.nombre_user = this.validationService.capitalize(updateUserDto.nombre_user);
         }
         if (updateUserDto.apellido_user) {
-            updatedData.apellido_user = this.capitalize(updateUserDto.apellido_user);
+            updatedData.apellido_user = this.validationService.capitalize(updateUserDto.apellido_user);
         }
         if (updateUserDto.numero_documento) {
             updatedData.numero_documento = updateUserDto.numero_documento;
@@ -105,30 +115,15 @@ let UserService = class UserService {
             updatedData.password_user = await bcrypt.hash(updateUserDto.password_user, salt);
         }
         if (updateUserDto.rol) {
-            const rolEntity = await this.rolRepository.findOne({
-                where: { id_rol: updateUserDto.rol },
-            });
-            if (!rolEntity) {
-                throw new common_1.HttpException('Rol not found', common_1.HttpStatus.NOT_FOUND);
-            }
+            const rolEntity = await this.validationService.findEntityById(this.rolRepository, updateUserDto.rol, 'id_rol');
             updatedData.rol = rolEntity;
         }
         if (updateUserDto.colegio) {
-            const colegioEntity = await this.colegioRepository.findOne({
-                where: { id_colegio: updateUserDto.colegio },
-            });
-            if (!colegioEntity) {
-                throw new common_1.HttpException('Colegio not found', common_1.HttpStatus.NOT_FOUND);
-            }
+            const colegioEntity = await this.validationService.findEntityById(this.colegioRepository, updateUserDto.colegio, 'id_colegio');
             updatedData.colegio = colegioEntity;
         }
         if (updateUserDto.tipo_doc) {
-            const docEntity = await this.docRepository.findOne({
-                where: { id_doc: updateUserDto.tipo_doc },
-            });
-            if (!docEntity) {
-                throw new common_1.HttpException('Doc not found', common_1.HttpStatus.NOT_FOUND);
-            }
+            const docEntity = await this.validationService.findEntityById(this.docRepository, updateUserDto.tipo_doc, 'id_doc');
             updatedData.tipo_doc = docEntity;
         }
         const updatedUser = Object.assign(user, updatedData);
@@ -152,6 +147,7 @@ exports.UserService = UserService = __decorate([
     __metadata("design:paramtypes", [typeorm_2.Repository,
         typeorm_2.Repository,
         typeorm_2.Repository,
-        typeorm_2.Repository])
+        typeorm_2.Repository,
+        entity_validation_service_1.EntityValidationService])
 ], UserService);
 //# sourceMappingURL=user.service.js.map

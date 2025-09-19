@@ -130,14 +130,15 @@ h1 {
 }
 
 .selects-estudiante {
-    border: 5px;
+    margin-bottom: 15px;
     margin-top: 20px;
-    max-width: 300px;
+    max-width: 400px;
 }
 
 .selects-estudiante select {
-    padding: 3px;
-    width: 80px;
+    padding: 5px;
+    font-size: 12px;
+    width: 90px;
     border: none;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
     background-color: #5592bb6b;
@@ -146,14 +147,28 @@ h1 {
     text-align: center;
     cursor: pointer;
     appearance: none;
-    border: 1px solid #dddddd;
-    background: #eeeeee;
-    transition: 0.4s;
 }
 
-.selects-estudiante select:hover,
-.selects-estudiante select:focus {
-    background: #dddddd;
+.selects-estudiante select,
+::picker(select) {
+  appearance: base-select;
+}
+
+
+select:hover,
+select:focus {
+  background: #dddddd;
+  border:none;
+}
+select::picker-icon {
+  color: #999999;
+  transition: 0.4s rotate;
+}
+select:open::picker-icon {
+  rotate: 180deg;
+}
+::picker(select) {
+  border: none;
 }
 
 /* ... (el resto de tu CSS para los selectores de opción es correcto) ... */
@@ -177,7 +192,7 @@ h1 {
 }
 
 .dashboard-table tr th {
-    padding: 5px;
+    padding: 13px;
     background-color: #6b8ee5;
     font-weight: 300;
     font-size: 0.9em;
@@ -230,7 +245,7 @@ h1 {
 }
 
 .editar_btn {
-    background-color: #77DD77;
+    background-color: #77dd77;
     padding: 5px;
     font-size: 12px;
     margin: 5px;

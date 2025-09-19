@@ -1,8 +1,23 @@
 // dashboard_users.js
 
-import { fetchData, obtenerEntidades } from './api_fetch.js';
+import { fetchData, obtenerEntidades } from '../util/api_fetch.js';
+import { verifyAuthAndRoles } from '../util/auth.js';
+import { 
+    toggleAddStudentButton,
+    toggleColegioColumn,
+    toggleAccionesColumn, 
+    toggleColegioSelect
+} from '../util/dom_dashboard_estudiante.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
+
+    const permittedRoles = ['aseador', 'admin', 'colegio'];
+
+    const user = await verifyAuthAndRoles(permittedRoles);
+    if (!user) {
+        return;
+    }
+
     const boton_abrir = document.getElementById("formulario_crear");
     const boton_cerrar = document.getElementById("cerrar_formulario");
     const formulario_añadir = document.getElementById("formulario_añadir");
@@ -12,7 +27,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     async function inicializarDashboard() {
         try {
-            await obtenerEntidades('user', construir_tabla);
+            await obtenerEntidades('user', construir_tabla, user);
         } catch (error) {
             if (error.message.includes('401')) {
                 alert("Sesión no autorizada. Por favor, inicie sesión.");
@@ -63,7 +78,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
                     const result = await response.json();
                     
-                    obtenerEntidades('user', construir_tabla);
+                    // CORRECCIÓN: Ahora se pasa el objeto 'user' para refrescar la tabla
+                    await obtenerEntidades('user', construir_tabla, user);
 
                 } catch (error) {
                     console.error('Error al eliminar usuario:', error);
@@ -92,7 +108,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             const id_rol = document.getElementById('rol').value;
             const id_doc = document.getElementById('tipo_doc').value;
             
-            // Ajuste aquí: los nombres de las propiedades deben coincidir con tu DTO
             const userData = {
                 nombre_user,
                 apellido_user,
@@ -103,7 +118,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                 tipo_doc: Number(id_doc),
             };
 
-            // Para la actualización, elimina el campo de contraseña si está vacío
             if (isUpdating && password === '') {
                 delete userData.password_user;
             }
@@ -126,7 +140,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             formulario_añadir.classList.remove("open");
             currentUserId = null;
             
-            obtenerEntidades('user', construir_tabla);
+            // CORRECCIÓN: Pasa el objeto 'user' a la función para que tenga acceso a él.
+            await obtenerEntidades('user', construir_tabla, user);
             
         } catch (error) {
             console.error(`Error al ${isUpdating ? 'actualizar' : 'registrar'} usuario:`, error);
@@ -150,23 +165,29 @@ document.addEventListener('DOMContentLoaded', async () => {
             document.querySelector('input[name="apellido"]').value = usuario.apellido_user;
             document.querySelector('input[name="documento"]').value = usuario.numero_documento;
 
-            // Al editar, el campo de contraseña no es requerido
             const passwordInput = document.querySelector('input[name="contraseña"]');
             passwordInput.value = '';
             passwordInput.placeholder = 'Dejar vacío para no cambiar';
             passwordInput.removeAttribute('required');
 
+            // Lógica de llenado para los selectores, con comprobaciones
             await fetchData('doc', 'tipo_doc', 'id_doc', 'siglas');
-            document.getElementById('tipo_doc').value = usuario.tipo_doc.id_doc;
+            if (usuario.tipo_doc) {
+                document.getElementById('tipo_doc').value = usuario.tipo_doc.id_doc;
+            }
 
             await fetchData('colegio', 'colegio', 'id_colegio', 'nombre_colegio');
-            document.getElementById('colegio').value = usuario.colegio.id_colegio;
+            // Comprobación para evitar el error
+            if (usuario.colegio) {
+                document.getElementById('colegio').value = usuario.colegio.id_colegio;
+            }
 
             await fetchData('rol', 'rol', 'id_rol', 'nombre_rol');
-            document.getElementById('rol').value = usuario.rol.id_rol;
+            if (usuario.rol) {
+                document.getElementById('rol').value = usuario.rol.id_rol;
+            }
 
             currentUserId = id; 
-            
             formulario_añadir.classList.add('open');
 
         } catch (error) {
@@ -176,18 +197,22 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 });
 
-function construir_tabla(data) {
+function construir_tabla(data,user) {
     const tabla = document.getElementById("cuerpo_tabla");
     tabla.innerHTML = '';
     data.forEach(usuario => {
+        // Usa el operador de encadenamiento opcional para evitar el error
+        const tipoDocSiglas = usuario.tipo_doc?.siglas || 'N/A';
+        const colegioNombre = usuario.colegio?.nombre_colegio || 'N/A';
+
         const fila = `
             <tr class="fila-cuerpo">
                 <td>${usuario.nombre_user}</td>
                 <td>${usuario.apellido_user}</td>
-                <td>${usuario.tipo_doc.siglas}</td>
+                <td>${tipoDocSiglas}</td>
                 <td>${usuario.numero_documento}</td>
                 <td>${usuario.rol.nombre_rol}</td>
-                <td>${usuario.colegio.nombre_colegio}</td>
+                <td>${colegioNombre}</td>
                 <td>
                     <button class="editar_btn" data-id="${usuario.id_user}">Editar ✍️</button>
                     <button class="confirmacion_btn" data-id="${usuario.id_user}">Eliminar 🗑️</button>
@@ -195,4 +220,7 @@ function construir_tabla(data) {
             </tr>`;
         tabla.innerHTML += fila;
     });
+
+    toggleColegioColumn(user);
+    toggleAccionesColumn(user);
 }

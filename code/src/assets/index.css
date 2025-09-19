@@ -5,26 +5,57 @@
     font-family: 'Arial', sans-serif;
 }
 
+body {
+    display: flex; /* Activa Flexbox */
+    flex-direction: column; /* Organiza los elementos en una columna */
+    min-height: 100vh; /* Asegura que el cuerpo ocupe al menos el 100% de la altura de la ventana */
+}
 
+.nav {
+    display: flex;
+    justify-content: space-between; /* Alinea los elementos a los extremos */
+    align-items: center; /* Centra los elementos verticalmente */
+    padding: 10px 20px; /* Agrega un padding a los lados */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
 
-.nav img{
+.nav img {
     width: auto;
     height: 8vh;
-    margin-inline-end: auto;
     cursor: pointer;
 }
 
-.nav{
-    display: flex;
-    padding: 10px 0;
-    background: rgba(238, 238, 238, 0.322);
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-
+.nav .nav-links {
+    display: flex; /* Convierte los enlaces en un contenedor flex */
+    gap: 20px; /* Espacio entre los enlaces */
 }
 
-.nav-links{
- margin-right: 69px;
- margin-top: 15px;
+/* Este es el nuevo contenedor para los íconos de usuario y logout */
+.nav .user-actions {
+    display: flex; /* Convierte los íconos en un contenedor flex */
+    align-items: center; /* Centra los íconos verticalmente */
+    gap: 15px; /* Espacio entre el ícono de usuario y el botón de logout */
+}
+
+.nav .logout-icon-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 4vh; /* Ajusta el tamaño del ícono */
+    color: #6b8ee5;
+    transition: transform 0.5s;
+}
+
+.nav .fa-user {
+    font-size: 4vh;
+    color: #6b8ee5;
+    cursor: pointer;
+    transition: transform 0.5s;
+}
+
+.nav .logout-icon-button:hover,
+.nav .fa-user:hover {
+    transform: scale(1.1);
 }
 
 
@@ -43,13 +74,6 @@
     transition: 0.3s;
 }
 
-.nav i{
-    font-size: 4vh;
-    color: #6b8ee5;
-    margin-top: 10px;    
-    margin-right: 20px;
-    cursor: pointer;
-}
 
 h1{
     text-align: center;
@@ -98,6 +122,21 @@ h2{
     display: flex;
     justify-content: center;
     max-width: 100%;
+}
+
+.logout-icon-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5em; /* Ajusta el tamaño del icono */
+    color: #333; /* Ajusta el color del icono */
+    margin-left: 10px;
+}
+
+.text_informacion {
+    margin-top: auto; /* Empuja el elemento hacia abajo, ocupando el espacio disponible */
+    padding: 5%;
+    text-align: center;
 }
 
 @keyframes desvanecerYmover{

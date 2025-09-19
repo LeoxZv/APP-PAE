@@ -1,18 +1,9 @@
 // src/auth/auth.controller.ts
-import {
-  Controller,
-  Post,
-  Body,
-  Res,
-  HttpStatus,
-  Get,
-  UseGuards,
-} from '@nestjs/common';
+import { Controller, Post, Body, Res, HttpStatus, Get } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { Response } from 'express';
 import { LoginDto } from './dto/login.dto';
 import { Public } from './roles/roles.decorator'; // Import the new decorator
-import { JwtAuthGuard } from './jwt-auth/jwt-auth.guard';
 import { Request as Req } from '@nestjs/common';
 
 @Controller('auth')
@@ -57,8 +48,8 @@ export class AuthController {
       message: 'Logout exitoso',
     });
   }
+
   @Get('me')
-  @UseGuards(JwtAuthGuard) // Asegúrate de que el JWTAuthGuard está aplicado
   getProfile(@Req() req) {
     return req.user; // `req.user` contiene los datos del payload del JWT
   }

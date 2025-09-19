@@ -20,36 +20,24 @@ const typeorm_2 = require("typeorm");
 const user_entity_1 = require("../user/entities/user.entity");
 const estudiante_entity_1 = require("../estudiante/entities/estudiante.entity");
 const alimento_entity_1 = require("../alimento/entities/alimento.entity");
+const entity_validation_service_1 = require("../../common/services/entity-validation.service");
 let EntregaService = class EntregaService {
     entregaRepository;
     userRepository;
     estudianteRepository;
     alimentoRepository;
-    constructor(entregaRepository, userRepository, estudianteRepository, alimentoRepository) {
+    validationService;
+    constructor(entregaRepository, userRepository, estudianteRepository, alimentoRepository, validationService) {
         this.entregaRepository = entregaRepository;
         this.userRepository = userRepository;
         this.estudianteRepository = estudianteRepository;
         this.alimentoRepository = alimentoRepository;
+        this.validationService = validationService;
     }
     async create(createEntregaDto) {
-        const emisor = await this.userRepository.findOne({
-            where: { id_user: createEntregaDto.emisor },
-        });
-        if (!emisor) {
-            throw new common_1.HttpException('Emisor not found', common_1.HttpStatus.NOT_FOUND);
-        }
-        const receptor = await this.estudianteRepository.findOne({
-            where: { id_estudiante: createEntregaDto.receptor },
-        });
-        if (!receptor) {
-            throw new common_1.HttpException('Receptor not found', common_1.HttpStatus.NOT_FOUND);
-        }
-        const alimento = await this.alimentoRepository.findOne({
-            where: { id_alimento: createEntregaDto.alimento },
-        });
-        if (!alimento) {
-            throw new common_1.HttpException('Alimento not found', common_1.HttpStatus.NOT_FOUND);
-        }
+        const emisor = await this.validationService.findEntityById(this.userRepository, createEntregaDto.emisor, 'Emisor');
+        const receptor = await this.validationService.findEntityById(this.estudianteRepository, createEntregaDto.receptor, 'Receptor');
+        const alimento = await this.validationService.findEntityById(this.alimentoRepository, createEntregaDto.alimento, 'Alimento');
         const entrega = this.entregaRepository.create({
             hora_entrega: createEntregaDto.hora_entrega,
             emisor: emisor,
@@ -94,7 +82,6 @@ let EntregaService = class EntregaService {
 };
 exports.EntregaService = EntregaService;
 exports.EntregaService = EntregaService = __decorate([
-    (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(entrega_entity_1.Entrega)),
     __param(1, (0, typeorm_1.InjectRepository)(user_entity_1.User)),
     __param(2, (0, typeorm_1.InjectRepository)(estudiante_entity_1.Estudiante)),
@@ -102,6 +89,7 @@ exports.EntregaService = EntregaService = __decorate([
     __metadata("design:paramtypes", [typeorm_2.Repository,
         typeorm_2.Repository,
         typeorm_2.Repository,
-        typeorm_2.Repository])
+        typeorm_2.Repository,
+        entity_validation_service_1.EntityValidationService])
 ], EntregaService);
 //# sourceMappingURL=entrega.service.js.map

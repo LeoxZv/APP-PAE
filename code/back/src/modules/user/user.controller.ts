@@ -6,10 +6,12 @@ import {
   Patch,
   Param,
   Delete,
+  Req,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { RequestWithUser } from '../../common/interfaces/request-with-user.interface'; // Import the new interface
 
 @Controller('user')
 export class UserController {
@@ -21,8 +23,8 @@ export class UserController {
   }
 
   @Get()
-  findAll() {
-    return this.userService.findAll();
+  findAll(@Req() req: RequestWithUser) {
+    return this.userService.findAll(req.user);
   }
 
   @Get(':id')

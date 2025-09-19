@@ -55,8 +55,8 @@ __decorate([
     __metadata("design:type", Number)
 ], CreateUserDto.prototype, "rol", void 0);
 __decorate([
-    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsNumber)(),
-    __metadata("design:type", Number)
+    __metadata("design:type", Object)
 ], CreateUserDto.prototype, "colegio", void 0);
 //# sourceMappingURL=create-user.dto.js.map

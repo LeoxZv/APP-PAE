@@ -7,8 +7,7 @@ import { Repository } from 'typeorm';
 import { User } from '../user/entities/user.entity';
 import { Estudiante } from '../estudiante/entities/estudiante.entity';
 import { Alimento } from '../alimento/entities/alimento.entity';
-
-@Injectable()
+import { EntityValidationService } from 'src/common/services/entity-validation.service';
 export class EntregaService {
   constructor(
     @InjectRepository(Entrega)
@@ -22,27 +21,29 @@ export class EntregaService {
 
     @InjectRepository(Alimento)
     private readonly alimentoRepository: Repository<Alimento>,
+
+    private readonly validationService: EntityValidationService,
   ) {}
 
   async create(createEntregaDto: CreateEntregaDto) {
-    const emisor = await this.userRepository.findOne({
-      where: { id_user: createEntregaDto.emisor },
-    });
-    if (!emisor) {
-      throw new HttpException('Emisor not found', HttpStatus.NOT_FOUND);
-    }
-    const receptor = await this.estudianteRepository.findOne({
-      where: { id_estudiante: createEntregaDto.receptor },
-    });
-    if (!receptor) {
-      throw new HttpException('Receptor not found', HttpStatus.NOT_FOUND);
-    }
-    const alimento = await this.alimentoRepository.findOne({
-      where: { id_alimento: createEntregaDto.alimento },
-    });
-    if (!alimento) {
-      throw new HttpException('Alimento not found', HttpStatus.NOT_FOUND);
-    }
+    const emisor = await this.validationService.findEntityById(
+      this.userRepository,
+      createEntregaDto.emisor,
+      'Emisor',
+    );
+
+    const receptor = await this.validationService.findEntityById(
+      this.estudianteRepository,
+      createEntregaDto.receptor,
+      'Receptor',
+    );
+
+    const alimento = await this.validationService.findEntityById(
+      this.alimentoRepository,
+      createEntregaDto.alimento,
+      'Alimento',
+    );
+
     const entrega = this.entregaRepository.create({
       hora_entrega: createEntregaDto.hora_entrega,
       emisor: emisor,
@@ -80,6 +81,7 @@ export class EntregaService {
     if (!entrega_existente) {
       throw new HttpException('Entrega not found', HttpStatus.NOT_FOUND);
     }
+    // No hay relaciones que actualizar en tu DTO de actualización
     const updatedEntrega = Object.assign(entrega_existente, updateEntregaDto);
     return this.entregaRepository.save(updatedEntrega);
   }

@@ -12,7 +12,7 @@
     <body>
         <nav class="nav">
             <div class="volver">
-                <i class="fa-solid fa-arrow-left"></i>
+                <a href="index.html"><i class="fa-solid fa-arrow-left"></i></a>
                 <a href="index.html">Volver</a>
             </div>
             <div class="icon-user">
@@ -21,26 +21,60 @@
         </nav>
 
         <h1>Estudiantes Registrados</h1>
+
         <div class="filtros">
             <button id="formulario_crear" class="boton_añadir">Añadir estudiante</button>
             <button id="generar_reporte" class="boton_añadir">Generar reporte</button>
-            
-            <div class="formulario_añadir" id="formulario_añadir">
-                <div class="formulario_contenido">
-                    <h2>Registro estudiantes</h2>
-                    <button id="cerrar_formulario" class="cerrar_btn">X</button>
-                    <form action="" method="post">
-                        <input type="text" name="nombre_usuario" placeholder="Nombre" class="input" required>
-                        <input type="text" name="apellido" placeholder="Apellido" class="input" required>
-                        <input type="text" name="documento" placeholder="Documento" class="input" required>
-                        <div class="selects-estudiante">
-                            <select name="Grado" id="grado"></select>
-                            <select name="Jornada" id="Jornada"></select>
-                            <select name="Tipo de documento" id="tipo_doc"></select>
-                        </div>
-                        <button type="submit" class="btn-default">Registrar</button>
-                    </form>
-                </div>
+            <button id="toggle-filtros" class="boton_añadir">Filtros ↓</button>
+        </div>
+
+        <div id="filter-options-bar" class="filter-options-bar">
+            <div class="filter-group">
+                <label for="filter-nombre">Nombre:</label>
+                <input type="text" id="filter-nombre" placeholder="Nombre del estudiante">
+            </div>
+            <div class="filter-group">
+                <label for="filter-apellido">Apellido:</label>
+                <input type="text" id="filter-apellido" placeholder="Apellido del estudiante">
+            </div>
+            <div class="filter-group">
+                <label for="filter-documento">Documento:</label>
+                <input type="text" id="filter-documento" placeholder="Número de documento">
+            </div>
+            <div class="filter-group">
+                <label for="filter-tipo-doc">Tipo Doc:</label>
+                <select id="filter-tipo-doc"></select>
+            </div>
+            <div class="filter-group">
+                <label for="filter-colegio">Colegio:</label>
+                <select id="filter-colegio" class="select-colegio"></select>
+            </div>
+            <div class="filter-group">
+                <label for="filter-grado">Grado:</label>
+                <select id="filter-grado"></select>
+            </div>
+            <div class="filter-group">
+                <label for="filter-jornada">Jornada:</label>
+                <select id="filter-jornada"></select>
+            </div>
+        </div>
+
+        <div class="formulario_añadir" id="formulario_añadir">
+            <div class="formulario_contenido">
+                <h2>Registro estudiantes</h2>
+                <button id="cerrar_formulario" class="cerrar_btn">X</button>
+                <form action="" method="post">
+                    <input type="text" name="nombre_usuario" placeholder="Nombre" class="input" required>
+                    <input type="text" name="apellido" placeholder="Apellido" class="input" required>
+                    <input type="text" name="documento" placeholder="Documento" class="input" required>
+                    <div class="selects-estudiante">
+                        <select name="Grado" id="grado"></select>
+                        <select name="Jornada" id="Jornada"></select>
+                        <select name="Tipo de documento" id="tipo_doc"></select>
+                        <select name="Colegio" id="colegio" class="select-colegio" style="display: none;"></select>
+                    </div>
+                    <button type="submit" class="btn-default">Registrar</button>
+                </form>
             </div>
         </div>
 
@@ -53,8 +87,8 @@
                     <th>Documento</th>
                     <th>Curso</th>
                     <th>Jornada</th>
-                    <th>Colegio</th>
-                    <th>Acciones</th>
+                    <th id="header-colegio">Colegio</th>
+                    <th id="header-acciones">Acciones</th>
                 </tr>
                 <tbody id="cuerpo_tabla">
                 </tbody>

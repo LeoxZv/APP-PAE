@@ -35,7 +35,7 @@ export class User {
   @JoinColumn({ name: 'rol_id' }) // Especifica el nombre de la columna de la clave foránea
   rol: Rol;
 
-  @ManyToOne(() => Colegio, (colegio) => colegio.users)
-  @JoinColumn({ name: 'colegio_id' }) // Especifica el nombre de la columna de la clave foránea
-  colegio: Colegio;
+  @ManyToOne(() => Colegio, (colegio) => colegio.users, { nullable: true })
+  @JoinColumn({ name: 'colegio_id' })
+  colegio: Colegio | null;
 }

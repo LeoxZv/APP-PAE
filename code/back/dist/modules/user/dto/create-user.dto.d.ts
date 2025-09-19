@@ -5,5 +5,5 @@ export declare class CreateUserDto {
     numero_documento: string;
     tipo_doc: number;
     rol: number;
-    colegio: number;
+    colegio: number | null;
 }
