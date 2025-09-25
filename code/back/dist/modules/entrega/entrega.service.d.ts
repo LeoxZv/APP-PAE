@@ -13,6 +13,7 @@ export declare class EntregaService {
     private readonly alimentoRepository;
     private readonly validationService;
     constructor(entregaRepository: Repository<Entrega>, userRepository: Repository<User>, estudianteRepository: Repository<Estudiante>, alimentoRepository: Repository<Alimento>, validationService: EntityValidationService);
+    createLog(id_estudiante: number, id_emisor: number, id_alimento: number): Promise<Entrega>;
     create(createEntregaDto: CreateEntregaDto): Promise<Entrega>;
     findAll(): Promise<Entrega[]>;
     findOne(id: number): Promise<Entrega>;

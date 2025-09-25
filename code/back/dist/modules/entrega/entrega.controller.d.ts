@@ -4,6 +4,7 @@ import { UpdateEntregaDto } from './dto/update-entrega.dto';
 export declare class EntregaController {
     private readonly entregaService;
     constructor(entregaService: EntregaService);
+    createLog(id_estudiante: number, req: any): Promise<import("./entities/entrega.entity").Entrega>;
     create(createEntregaDto: CreateEntregaDto): Promise<import("./entities/entrega.entity").Entrega>;
     findAll(): Promise<import("./entities/entrega.entity").Entrega[]>;
     findOne(id: string): Promise<import("./entities/entrega.entity").Entrega>;

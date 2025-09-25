@@ -16,7 +16,6 @@ const user_entity_1 = require("../../user/entities/user.entity");
 const typeorm_1 = require("typeorm");
 let Entrega = class Entrega {
     id_entrega;
-    cantidad;
     hora_entrega;
     emisor;
     receptor;
@@ -27,10 +26,6 @@ __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
     __metadata("design:type", Number)
 ], Entrega.prototype, "id_entrega", void 0);
-__decorate([
-    (0, typeorm_1.Column)({ type: 'int', default: 1 }),
-    __metadata("design:type", Number)
-], Entrega.prototype, "cantidad", void 0);
 __decorate([
     (0, typeorm_1.Column)({ type: 'timestamp' }),
     __metadata("design:type", Date)

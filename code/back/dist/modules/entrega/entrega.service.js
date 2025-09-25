@@ -34,6 +34,18 @@ let EntregaService = class EntregaService {
         this.alimentoRepository = alimentoRepository;
         this.validationService = validationService;
     }
+    async createLog(id_estudiante, id_emisor, id_alimento) {
+        const emisor = await this.validationService.findEntityById(this.userRepository, id_emisor, 'Emisor');
+        const receptor = await this.validationService.findEntityById(this.estudianteRepository, id_estudiante, 'Estudiante');
+        const alimento = await this.validationService.findEntityById(this.alimentoRepository, id_alimento, 'Alimento');
+        const entrega = this.entregaRepository.create({
+            hora_entrega: new Date(),
+            emisor,
+            receptor,
+            alimento,
+        });
+        return this.entregaRepository.save(entrega);
+    }
     async create(createEntregaDto) {
         const emisor = await this.validationService.findEntityById(this.userRepository, createEntregaDto.emisor, 'Emisor');
         const receptor = await this.validationService.findEntityById(this.estudianteRepository, createEntregaDto.receptor, 'Receptor');
@@ -43,7 +55,6 @@ let EntregaService = class EntregaService {
             emisor: emisor,
             receptor: receptor,
             alimento: alimento,
-            cantidad: createEntregaDto.cantidad,
         });
         return this.entregaRepository.save(entrega);
     }
@@ -82,6 +93,7 @@ let EntregaService = class EntregaService {
 };
 exports.EntregaService = EntregaService;
 exports.EntregaService = EntregaService = __decorate([
+    (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(entrega_entity_1.Entrega)),
     __param(1, (0, typeorm_1.InjectRepository)(user_entity_1.User)),
     __param(2, (0, typeorm_1.InjectRepository)(estudiante_entity_1.Estudiante)),

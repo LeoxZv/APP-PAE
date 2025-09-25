@@ -1,3 +1,4 @@
+// src/modules/entrega/entrega.service.ts
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateEntregaDto } from './dto/create-entrega.dto';
 import { UpdateEntregaDto } from './dto/update-entrega.dto';
@@ -8,6 +9,8 @@ import { User } from '../user/entities/user.entity';
 import { Estudiante } from '../estudiante/entities/estudiante.entity';
 import { Alimento } from '../alimento/entities/alimento.entity';
 import { EntityValidationService } from 'src/common/services/entity-validation.service';
+
+@Injectable()
 export class EntregaService {
   constructor(
     @InjectRepository(Entrega)
@@ -25,6 +28,41 @@ export class EntregaService {
     private readonly validationService: EntityValidationService,
   ) {}
 
+  // Método para crear una entrega desde un escaneo de QR
+  async createLog(
+    id_estudiante: number,
+    id_emisor: number,
+    id_alimento: number,
+  ) {
+    const emisor = await this.validationService.findEntityById(
+      this.userRepository,
+      id_emisor,
+      'Emisor',
+    );
+
+    const receptor = await this.validationService.findEntityById(
+      this.estudianteRepository,
+      id_estudiante,
+      'Estudiante',
+    );
+
+    const alimento = await this.validationService.findEntityById(
+      this.alimentoRepository,
+      id_alimento,
+      'Alimento',
+    );
+
+    const entrega = this.entregaRepository.create({
+      hora_entrega: new Date(),
+      emisor,
+      receptor,
+      alimento,
+    });
+
+    return this.entregaRepository.save(entrega);
+  }
+
+  // Métodos CRUD existentes...
   async create(createEntregaDto: CreateEntregaDto) {
     const emisor = await this.validationService.findEntityById(
       this.userRepository,
@@ -49,7 +87,6 @@ export class EntregaService {
       emisor: emisor,
       receptor: receptor,
       alimento: alimento,
-      cantidad: createEntregaDto.cantidad,
     });
     return this.entregaRepository.save(entrega);
   }
@@ -81,7 +118,6 @@ export class EntregaService {
     if (!entrega_existente) {
       throw new HttpException('Entrega not found', HttpStatus.NOT_FOUND);
     }
-    // No hay relaciones que actualizar en tu DTO de actualización
     const updatedEntrega = Object.assign(entrega_existente, updateEntregaDto);
     return this.entregaRepository.save(updatedEntrega);
   }

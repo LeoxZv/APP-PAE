@@ -17,10 +17,18 @@ const common_1 = require("@nestjs/common");
 const entrega_service_1 = require("./entrega.service");
 const create_entrega_dto_1 = require("./dto/create-entrega.dto");
 const update_entrega_dto_1 = require("./dto/update-entrega.dto");
+const passport_1 = require("@nestjs/passport");
+const roles_decorator_1 = require("../auth/roles/roles.decorator");
+const roles_guard_1 = require("../auth/roles/roles.guard");
 let EntregaController = class EntregaController {
     entregaService;
     constructor(entregaService) {
         this.entregaService = entregaService;
+    }
+    async createLog(id_estudiante, req) {
+        const id_emisor = req.user.id_user;
+        const id_alimento = 1;
+        return this.entregaService.createLog(+id_estudiante, id_emisor, id_alimento);
     }
     create(createEntregaDto) {
         return this.entregaService.create(createEntregaDto);
@@ -39,6 +47,16 @@ let EntregaController = class EntregaController {
     }
 };
 exports.EntregaController = EntregaController;
+__decorate([
+    (0, common_1.UseGuards)((0, passport_1.AuthGuard)('jwt'), roles_guard_1.RolesGuard),
+    (0, roles_decorator_1.Roles)(1, 4),
+    (0, common_1.Post)('log/:id_estudiante'),
+    __param(0, (0, common_1.Param)('id_estudiante')),
+    __param(1, (0, common_1.Request)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number, Object]),
+    __metadata("design:returntype", Promise)
+], EntregaController.prototype, "createLog", null);
 __decorate([
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
