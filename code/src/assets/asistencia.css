@@ -88,9 +88,7 @@
 
 .filtros h2 {
     color: #6b8ee5e3;
-    /* Usamos 'rem' para el tamaño de fuente */
     font-size: 1.25rem;
-    margin-bottom: 0.3rem;
     font-weight: 600;
     width: 100%; /* Aseguramos que el título tome todo el ancho */
 }
@@ -121,7 +119,7 @@
 .generar-reporte {
     /* Usamos 'rem' para el padding y el tamaño de fuente */
     padding: 0.5rem 1rem;
-    margin-top: 1rem; /* Separamos del último campo de filtro */
+    margin-top: 0.3rem; /* Separamos del último campo de filtro */
     background-color: #6b8ee5;
     color: white;
     border-radius: 5px;

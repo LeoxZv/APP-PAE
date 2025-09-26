@@ -25,40 +25,24 @@
         <div class="filtros">
             <button id="formulario_crear" class="boton_añadir">Añadir estudiante</button>
             <button id="generar_reporte" class="boton_añadir">Generar reporte</button>
-            <button id="toggle-filtros" class="boton_añadir">Filtros ↓</button>
+            <button id="toggle-filtros" class="boton_añadir">Filtros</button>
         </div>
-
-        <div id="filter-options-bar" class="filter-options-bar">
-            <div class="filter-group">
-                <label for="filter-nombre">Nombre:</label>
-                <input type="text" id="filter-nombre" placeholder="Nombre del estudiante">
+        <div id="contenedor-filtros" class="filtros" >
+            <h2>Filtros de búsqueda</h2>
+            <div class="campo-filtro">
+                <label for="filtro-nombre">Nombre / Apellido</label>
+                <input type="text" id="filtro-nombre" class="input-filtro" placeholder="Buscar por nombre o apellido">
             </div>
-            <div class="filter-group">
-                <label for="filter-apellido">Apellido:</label>
-                <input type="text" id="filter-apellido" placeholder="Apellido del estudiante">
+            <div class="campo-filtro">
+                <label for="filtro-grado">Grado</label>
+                <input type="text" id="filtro-grado" class="input-filtro" placeholder="Buscar por grado">
             </div>
-            <div class="filter-group">
-                <label for="filter-documento">Documento:</label>
-                <input type="text" id="filter-documento" placeholder="Número de documento">
+            <div class="campo-filtro">
+                <label for="filtro-documento">Documento</label>
+                <input type="text" id="filtro-documento" class="input-filtro" placeholder="Buscar por documento">
             </div>
-            <div class="filter-group">
-                <label for="filter-tipo-doc">Tipo Doc:</label>
-                <select id="filter-tipo-doc"></select>
-            </div>
-            <div class="filter-group">
-                <label for="filter-colegio">Colegio:</label>
-                <select id="filter-colegio" class="select-colegio"></select>
-            </div>
-            <div class="filter-group">
-                <label for="filter-grado">Grado:</label>
-                <select id="filter-grado"></select>
-            </div>
-            <div class="filter-group">
-                <label for="filter-jornada">Jornada:</label>
-                <select id="filter-jornada"></select>
-            </div>
+            <button class="generar-reporte">Aplicar Filtros</button>
         </div>
-
         <div class="formulario_añadir" id="formulario_añadir">
             <div class="formulario_contenido">
                 <h2>Registro estudiantes</h2>
