@@ -11,19 +11,23 @@ import {
 
 document.addEventListener('DOMContentLoaded', async () => {
 
-    const permittedRoles = ['aseador', 'admin', 'colegio'];
+    // const permittedRoles = ['aseador', 'admin', 'colegio'];
 
-    const user = await verifyAuthAndRoles(permittedRoles);
-    if (!user) {
-        return;
-    }
+    // const user = await verifyAuthAndRoles(permittedRoles);
+    // if (!user) {
+    //     return;
+    // }
 
     const boton_abrir = document.getElementById("formulario_crear");
     const boton_cerrar = document.getElementById("cerrar_formulario");
     const formulario_añadir = document.getElementById("formulario_añadir");
     const form = document.querySelector(".formulario_añadir form");
-
+    const botonFiltro = document.getElementById("btnFiltro");
+    const contenedorFiltros = document.getElementById("contenedorFiltros");
     let currentUserId = null;
+
+
+
 
     async function inicializarDashboard() {
         try {
@@ -50,6 +54,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         fetchData('colegio', 'colegio', 'id_colegio', 'nombre_colegio').catch(err => console.error("Error al cargar colegios:", err));
         fetchData('rol', 'rol', 'id_rol', 'nombre_rol').catch(err => console.error("Error al cargar roles:", err));
     });
+
+    botonFiltro.addEventListener('click', function() {
+    // 3. Alternar la clase 'mostrar' en el div
+    // Si tiene la clase, se la quita (y se oculta).
+    // Si NO tiene la clase, se la añade (y se muestra).
+    contenedorFiltros.classList.toggle('mostrar');
+});
 
     boton_cerrar.addEventListener("click", () => {
         formulario_añadir.classList.remove("open");

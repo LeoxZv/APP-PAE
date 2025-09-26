@@ -85,8 +85,8 @@ body {
 .filtros {
     /* Centramos el contenedor y le damos un ancho máximo */
     margin: 1.5rem auto 1.5rem auto; 
-    width: 95%; 
-    max-width: 1200px; 
+    width: 100%; 
+    max-width: 1500px; 
     padding: 1rem; 
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -123,7 +123,17 @@ body {
     transform: scale(1.05);
 }
 
-.input-filtro {
+#contenedorFiltros {
+    padding: 10px; /* Solo un estilo de ejemplo */
+    display: none;
+}
+
+
+.mostrar{
+    display: block !important;
+}
+
+.input-nombre {
     /* Le damos un ancho flexible pero con un mínimo */
     flex-grow: 1;
     min-width: 180px;
@@ -134,10 +144,81 @@ body {
     font-size: 0.9rem; 
 }
 
-.input-filtro:focus {
+.input-nombre:focus {
     outline: none;
     border-color: #6b8ee5;
     box-shadow: 0 0 5px rgba(107, 142, 229, 0.5);
+}
+
+.input-apellido {
+    /* Le damos un ancho flexible pero con un mínimo */
+    flex-grow: 1;
+    min-width: 180px;
+    height: 40px;
+    border: 1px solid #6b6b6b1f;
+    border-radius: 10px;
+    padding: 0.625rem;
+    font-size: 0.9rem; 
+}
+
+.input-apellido:focus {
+    outline: none;
+    border-color: #6b8ee5;
+    box-shadow: 0 0 5px rgba(107, 142, 229, 0.5);
+}
+
+.input-documento {
+    /* Le damos un ancho flexible pero con un mínimo */
+    flex-grow: 1;
+    min-width: 180px;
+    height: 40px;
+    border: 1px solid #6b6b6b1f;
+    border-radius: 10px;
+    padding: 0.625rem;
+    font-size: 0.9rem; 
+}
+
+.input-documento:focus {
+    outline: none;
+    border-color: #6b8ee5;
+    box-shadow: 0 0 5px rgba(107, 142, 229, 0.5);
+}
+
+.filtro-boton {
+    padding: 0.6rem 1.2rem;
+    background-color: #6b8ee5;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, transform 0.3s;
+    white-space: nowrap;
+}
+
+.select-rol{
+    padding: 0.4rem;
+    width: 85px;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+
+}
+
+.select-col{
+    padding: 0.4rem;
+    width: 85px;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.select-tipo-doc{
+    padding: 0.4rem;
+    width: 85px;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
 }
 
 
@@ -279,7 +360,7 @@ body {
     /* 3 selects por fila en escritorio, 100% en móvil */
     flex-basis: calc(33.33% - 0.3rem); 
     padding: 0.5rem;
-    font-size: 0.9rem;
+    font-size: 0.6rem;
     border: none;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
     background-color: #5592bb6b;
