@@ -1,4 +1,5 @@
 * {
+    /* Mantenemos el reinicio estándar */
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -6,149 +7,189 @@
 }
 
 
-/* Background styling */
-/* body {
-    height: 100vh;
-    width: 100%;
+/* NAV (Barra de Navegación) */
+.nav {
     display: flex;
-    justify-content: center;
+    /* Usamos 'rem' para un padding más escalable */
+    padding: 0.625rem 1rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    /* Aseguramos que haya espacio entre los elementos */
     align-items: center;
-    background-color: white;
-    overflow: hidden;
-} */
+    justify-content: space-between; /* Distribuye los elementos */
+}
 
-.nav img{
+.nav img {
+    /* Usamos 'vh' para la altura de la imagen, que es adecuada para logos en navbars */
+    height: 6vh; /* Reducido ligeramente para dar más espacio en pantallas pequeñas */
     width: auto;
-    height: 8vh;
-    margin-inline-end: auto;
+    /* Eliminamos margin-inline-end: auto; y usamos flexbox para el espaciado */
     cursor: pointer;
 }
 
-.nav{
-    display: flex;
-    padding: 10px 0;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+.nav i {
+    /* Usamos 'vmin' para un tamaño de icono que escala con la ventana */
+    font-size: 4vmin;
+    color: #6b8ee5;
+    /* Ajustamos el margen para que esté centrado verticalmente si es necesario, pero lo eliminamos para depender del 'align-items: center' del .nav */
+    cursor: pointer;
 }
 
-
-.icon-user{
-    margin-left: 88%;
-
+/* Ajustes de los íconos (Usuario y Volver) */
+.icon-user {
+    /* ¡CAMBIO CLAVE! Eliminamos el margen fijo (margin-left: 88%) */
+    /* El flexbox del .nav (justify-content: space-between) se encargará de separarlo del logo */
+    margin-left: auto; /* Empuja el ícono de usuario al extremo derecho */
+    padding-left: 1rem; /* Pequeño espacio a la izquierda para que no toque otros elementos */
 }
 
-.icon-user:hover{
+.icon-user:hover, .volver a:hover {
     transform: scale(1.1);
     transition: 0.5s;
 }
 
 .volver {
-    margin-left: 10px;
+    /* Separamos el botón "Volver" con un margen */
+    margin-right: 1rem; 
     text-decoration: none;
     color: black;
-    text-align: end;
     font-weight: 500;
     display: flex;
     align-items: center;
-    padding: auto;
 }
 
-.volver a{
+.volver a {
     text-decoration: none;
     color: black;
     font-weight: 500;
-    margin: 10px 0px 0px 10px;
-    font-size: 20px;
-    padding: 5px;
+    /* Usamos 'rem' para el tamaño de fuente y el margen */
+    font-size: 1.1rem;
+    margin-left: 0.5rem;
+    padding: 0.3rem;
+    white-space: nowrap; /* Evita que el texto se rompa en varias líneas */
 }
 
-.volver a:hover{
-    transform: scale(1.1);
-    transition: 0.5s; 
-
-}
-
-.nav i{
-    font-size: 4vh;
-    color: #6b8ee5;
-    margin-top: 10px;    
-    cursor: pointer;
-}
-
-
+/* FILTROS */
 .filtros {
-    margin: 40px 5px 35px 135px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 80%;
-    padding: 20px;
+    /* ¡CAMBIO CLAVE! Usamos 'margin' y 'width' relativos (porcentajes) */
+    /* Centramos horizontalmente con 'margin: 2rem auto;' y solo ajustamos el margen superior/inferior */
+    margin: 2.5rem auto 2rem auto; 
+    /* El ancho es relativo, dejando 10% de espacio a cada lado */
+    width: 90%; 
+    max-width: 1200px; /* Ancho máximo para pantallas muy grandes */
+    padding: 1rem; /* Usamos 'rem' para el padding */
     border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     display: flex;
+    /* Permitimos que los elementos se envuelvan */
+    flex-wrap: wrap; 
     justify-content: space-between;
-    flex-wrap: wrap;
+    gap: 1rem; /* Espacio entre los elementos de filtro */
 }
-.filtros h2{
-    color: #6b8ee5e3;
-    font-size: 1.5rem;
-    margin-bottom: 5px;
-    font-weight: 600;
 
+.filtros h2 {
+    color: #6b8ee5e3;
+    font-size: 1.25rem;
+    font-weight: 600;
+    width: 100%; /* Aseguramos que el título tome todo el ancho */
 }
-.input-filtro{
+
+/* Si los campos de filtro tienen un contenedor padre, le damos un ancho relativo */
+/* Asumiendo que el campo de filtro y su etiqueta están en un div */
+.campo-filtro {
+    /* Permite que haya 2 o 3 campos en una línea en pantallas grandes, pero se envuelvan si el espacio es menor */
+    flex-basis: calc(50% - 0.5rem); 
+    min-width: 250px; /* Ancho mínimo para mantener la usabilidad */
+}
+
+.input-filtro {
     width: 100%;
     height: 40px;
     border-color: #6b6b6b1f;
     border-radius: 10px;
-    padding: 10px;
-    font-size: 15px;
+    /* Usamos 'rem' para el padding */
+    padding: 0.625rem;
+    /* Usamos 'rem' para el tamaño de fuente */
+    font-size: 0.9rem; 
 }
 
-
-.input-filtro:focus{
+.input-filtro:focus {
     outline: none;
 }
 
-.generar-reporte{
-    padding: 5px;
-    margin-bottom: 5px;
+.generar-reporte {
+    /* Usamos 'rem' para el padding y el tamaño de fuente */
+    padding: 0.5rem 1rem;
+    margin-top: 0.3rem; /* Separamos del último campo de filtro */
     background-color: #6b8ee5;
     color: white;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 12px;
+    font-size: 0.9rem;
     transition: background-color 0.3s ease;
     border: none;
 }
-.generar-reporte:hover{
-    color: white; 
-    transform: scale(1.1); 
+
+.generar-reporte:hover {
+    color: white;
+    transform: scale(1.1);
     transition: 0.5s;
 }
 
-
-.table-div{
-  display: flex;
-  justify-content: center;
-  font-weight: bold;
-  color: #333;
+/* TABLA */
+.table-div {
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    color: #333;
+    padding: 0 1rem; /* Añadimos padding a los lados para pantallas pequeñas */
 }
 
-.dashboard-table{
-    width: 80%;
+.dashboard-table {
+    /* Usamos ancho relativo y ancho máximo */
+    width: 95%; 
+    max-width: 1200px; 
+    margin-bottom: 2rem; /* Espacio inferior */
     border-collapse: collapse;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
     background-color: #fff;
     border-radius: 8px;
     overflow: hidden;
     text-align: center;
+    /* Hacemos la tabla "scrollable" en pantallas pequeñas */
+    display: block; 
+    overflow-x: auto;
+    white-space: nowrap; /* Evita que el contenido de las celdas se rompa, la barra de scroll lo manejará */
 }
 
-.dashboard-table tr th{
-  padding: 5px;
-  background-color: #6b8ee5;
-  font-weight: 300;
-  font-size: 0.9em;
-  padding-left: 10px;
-  color: black;
-  
+.dashboard-table thead, .dashboard-table tbody, .dashboard-table tr, .dashboard-table th, .dashboard-table td {
+    display: block; /* Para permitir el scroll en el eje X, si no funciona correctamente, puedes quitar esta línea */
+}
+
+.dashboard-table tr {
+    /* Aseguramos que las filas también sean bloques */
+    display: flex; 
+    width: 100%;
+}
+
+.dashboard-table tr th, .dashboard-table tr td {
+    flex: 1 1 0%; /* Reparte el espacio equitativamente */
+    display: block; /* Mantiene la celda como bloque dentro de la fila */
+    padding: 0.6rem; /* Usamos 'rem' para el padding */
+}
+
+
+.dashboard-table tr th {
+    background-color: #6b8ee5;
+    font-weight: 300;
+    /* Usamos 'em' para el tamaño de fuente relativo */
+    font-size: 0.9em; 
+    color: black;
+}
+
+.fila-cuerpo {
+    font-weight: 200;
+    /* Usamos 'em' para el tamaño de fuente relativo */
+    font-size: 0.9em;
 }
 
 .fila-cuerpo:nth-of-type(even) {
@@ -159,14 +200,58 @@
     background-color: #6b8ee56c;
 }
 
-.fila-cuerpo{
-  font-weight: 200;
-  font-size: 0.5;
+
+
+@media (max-width: 768px) {
+    .nav {
+        padding: 0.5rem;
+    }
+
+    .nav img {
+        height: 8vh; 
+    }
+
+    .volver a {
+        font-size: 1rem;
+        margin-left: 0.2rem;
+    }
+
+    /* Filtros */
+    .filtros {
+
+        width: 95%; 
+        padding: 0.8rem;
+    }
+    
+    .campo-filtro {
+        flex-basis: 100%; 
+        min-width: auto;
+    }
+    
+    .filtros h2 {
+        font-size: 1.15rem;
+    }
+
+    .generar-reporte {
+        width: 100%; 
+        font-size: 1rem;
+        padding: 0.75rem 1rem;
+    }
 }
 
-.cuerpo-tabla{
-  padding: 10px;
+
+@media (max-width: 480px) {
+    .volver a {
+        display: none; 
+    }
+    
+    .nav i {
+        font-size: 6vmin; 
+    }
+
+    .dashboard-table {
+        display: block; 
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
 }
-
-
-

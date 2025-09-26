@@ -1,324 +1,241 @@
+/* ======================================================================
+   1. RESET BÁSICO Y PROPIEDADES GLOBALES
+   ====================================================================== */
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    box-sizing: border-box; /* Fundamental para el responsive */
     font-family: 'Arial', sans-serif;
 }
 
-
-/* Background styling */
-/* body {
-    height: 100vh;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+body {
     background-color: white;
-    overflow: hidden;
-} */
+}
 
-.nav img{
+/* ======================================================================
+   2. NAVEGACIÓN (.nav)
+   ====================================================================== */
+.nav {
+    display: flex;
+    /* Usamos 'rem' y 'vh' para unidades relativas */
+    padding: 0.625rem 1rem; 
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav img {
+    height: 6vh; /* Altura más manejable */
     width: auto;
-    height: 8vh;
-    margin-inline-end: auto;
     cursor: pointer;
 }
 
-.nav{
+/* Contenedor del icono de Volver y texto */
+.volver {
     display: flex;
-    padding: 10px 0;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    align-items: center;
+    text-decoration: none;
+    color: black;
+    font-weight: 500;
 }
 
-
-.icon-user{
-    margin-left: 88%;
-
-}
-
-.icon-user:hover{
-    transform: scale(1.1);
+.volver a {
+    text-decoration: none;
+    color: black;
+    font-weight: 500;
+    font-size: 1.1rem;
+    margin-left: 0.5rem;
+    padding: 0.3rem;
+    white-space: nowrap;
     transition: 0.5s;
 }
 
-.volver {
-    margin-left: 10px;
-    text-decoration: none;
-    color: black;
-    text-align: end;
-    font-weight: 500;
-    display: flex;
-    align-items: center;
-    padding: auto;
-}
-
-.volver a{
-    text-decoration: none;
-    color: black;
-    font-weight: 500;
-    margin: 10px 0px 0px 10px;
-    font-size: 20px;
-    padding: 5px;
-}
-
-.volver a:hover{
-    transform: scale(1.1);
-    transition: 0.5s; 
-
-}
-
-.nav i{
-    font-size: 4vh;
+.nav i {
+    font-size: 4vmin; /* Escala con el viewport */
     color: #6b8ee5;
-    margin-top: 10px;    
     cursor: pointer;
+    transition: 0.5s;
 }
 
-h1{
-    text-align: center;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-weight: 500;
-    margin-top: 5vh;
+/* Empujamos el ícono de usuario al extremo derecho */
+.icon-user {
+    margin-left: auto; 
+    padding-left: 1rem;
 }
 
-.botones {
-    display: flex;
-    justify-content: center;
-    margin: 20px;
+.icon-user:hover,
+.volver a:hover,
+.nav i:hover {
+    transform: scale(1.1);
 }
 
-/* Estilos para la barra de filtros */
-.filter-options-bar {
-    display: none; /* Oculta el contenedor por defecto */
-    justify-content: center;
-    align-items: center;
-    gap: 15px;
-    margin-top: 20px;
-    padding: 15px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    flex-wrap: wrap;
-}
-
-.filter-options-bar.show {
-    display: flex; /* Muestra el contenedor al tener la clase 'show' */
-}
-
-.filter-group {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 0;
-}
-
-.filter-group label {
-    font-weight: bold;
-    margin-bottom: 5px;
-    white-space: nowrap;
-}
-
-.filter-group input, .filter-group select {
-    padding: 8px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-    width: auto;
-}
-
-/* Ocultar el colegio por defecto, el JS se encargará de mostrarlo */
-#filter-colegio {
-    display: none;
-}
-
-/* elementos del formulario */
-
-.formulario_añadir {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    transition: all 0.3s ease;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    z-index: -1;
-}
-
-.formulario_añadir.open {
-    opacity: 1;
-    z-index: 999;
-}
-
-.formulario_contenido h2{
-    color: #6b8ee5;
+/* ======================================================================
+   3. TÍTULO Y CONTROLES (HEAD-TITLE y FILTROS)
+   ====================================================================== */
+.head-title {
+    color: #1e2c52;
+    font-size: 1.75rem; /* Ajustado para mejor responsividad */
+    font-weight: 600;
+    margin-bottom: 1rem; 
+    width: 100%;
     text-align: center;
 }
-/* Estilos para el contenido del popup */
-.formulario_contenido {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    position: relative;
-    width: 50%;
-    max-width: 400px;
-    padding: 15px;
-    
-}
 
-.formulario_contenido form {
-    padding: 30px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.formulario_contenido form input{
-    margin: 8px 0;
-    padding: 5px;
-    border: none;
+/* Contenedor de Filtros (que ahora contiene el título, botones y búsqueda) */
+.filtros {
+    /* Centramos el contenedor y le damos un ancho máximo */
+    margin: 1.5rem auto 1.5rem auto; 
+    width: 100%; 
+    max-width: 1500px; 
+    padding: 1rem; 
     border-radius: 10px;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    background-color: #6b8ee536;
-    width: 85%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: flex-start; /* Alinea los elementos de control a la izquierda */
+    align-items: center;
+    gap: 0.75rem; /* Espacio entre botones y el input */
 }
-.formulario_contenido button{
+
+/* Estilo del título dentro del contenedor de filtros */
+.filtros h1 {
+    width: 100%; /* El título ocupa toda la primera línea */
+    margin-bottom: 0.5rem;
+}
+
+/* Botones y Búsqueda */
+.boton_añadir,
+.generar-reporte {
+    padding: 0.6rem 1.2rem;
     background-color: #6b8ee5;
     color: white;
     border: none;
-    padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 12px;
-    transition: background-color 0.3s ease;
-    margin-top: 25px;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, transform 0.3s;
+    white-space: nowrap;
 }
 
-.selects-estudiante{
-    border:5px;
-    margin-top:20px;
-    max-width:400px;
+.generar-reporte:hover,
+.boton_añadir:hover {
+    background-color: #4a6ec7;
+    transform: scale(1.05);
 }
 
-.selects-estudiante select{
-    padding: 3px;
-    width: 90px;
-    border: none;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    background-color: #5592bb6b;
+#contenedorFiltros {
+    padding: 10px; /* Solo un estilo de ejemplo */
+    display: none;
+}
+
+
+.mostrar{
+    display: block !important;
+}
+
+.input-nombre {
+    /* Le damos un ancho flexible pero con un mínimo */
+    flex-grow: 1;
+    min-width: 180px;
+    height: 40px;
+    border: 1px solid #6b6b6b1f;
     border-radius: 10px;
-    font-family: 'Arial', sans-serif;
+    padding: 0.625rem;
+    font-size: 0.9rem; 
+}
+
+.input-nombre:focus {
+    outline: none;
+    border-color: #6b8ee5;
+    box-shadow: 0 0 5px rgba(107, 142, 229, 0.5);
+}
+
+.input-apellido {
+    /* Le damos un ancho flexible pero con un mínimo */
+    flex-grow: 1;
+    min-width: 180px;
+    height: 40px;
+    border: 1px solid #6b6b6b1f;
+    border-radius: 10px;
+    padding: 0.625rem;
+    font-size: 0.9rem; 
+}
+
+.input-apellido:focus {
+    outline: none;
+    border-color: #6b8ee5;
+    box-shadow: 0 0 5px rgba(107, 142, 229, 0.5);
+}
+
+.input-documento {
+    /* Le damos un ancho flexible pero con un mínimo */
+    flex-grow: 1;
+    min-width: 180px;
+    height: 40px;
+    border: 1px solid #6b6b6b1f;
+    border-radius: 10px;
+    padding: 0.625rem;
+    font-size: 0.9rem; 
+}
+
+.input-documento:focus {
+    outline: none;
+    border-color: #6b8ee5;
+    box-shadow: 0 0 5px rgba(107, 142, 229, 0.5);
+}
+
+.filtro-boton {
+    padding: 0.6rem 1.2rem;
+    background-color: #6b8ee5;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, transform 0.3s;
+    white-space: nowrap;
+}
+
+.select-rol{
+    padding: 0.4rem;
+    width: 85px;
+    border-radius: 10px;
     text-align: center;
     cursor: pointer;
-    appearance: none;
+
 }
 
-
-.selects-estudiante select,
-::picker(select) {
-  appearance: base-select;
-}
-
-
-.selects-estudiante select{
-  border: 1px solid #dddddd;
-  background: #eeeeee;
-  transition: 0.4s;
-}
-
-select:hover,
-select:focus {
-  background: #dddddd;
-}
-select::picker-icon {
-  color: #999999;
-  transition: 0.4s rotate;
-}
-select:open::picker-icon {
-  rotate: 180deg;
-}
-::picker(select) {
-  border: none;
-}
-option {
-  display: flex;
-  justify-content: flex-start;
-  gap: 5px;
-  font-size: 15px;
-  border: 2px solid #dddddd;
-  background: #eeeeee;
-  padding: 7px;
-  transition: 0.4s;
-}
-option:first-of-type {
-  border-radius: 8px 8px 0 0;
-}
-
-option:last-of-type {
-  border-radius: 0 0 8px 8px;
-}
-
-option:not(option:last-of-type) {
-  border-bottom: none;
-}
-option:nth-of-type(odd) {
-  background: white;
-}
-
-option:hover,
-option:focus {
-  background: #6b8ee573;
-}
-
-option:checked {
-  font-weight: bold;
-}
-::picker(select) {
-  opacity: 0;
-  transition: all 0.4s allow-discrete;
-}
-::picker(select):popover-open {
-  opacity: 1;
-}
-@starting-style {
-  ::picker(select):popover-open {
-    opacity: 0;
-  }
-}
-::picker(select) {
-  top: calc(anchor(bottom) + 1px);
-  left: anchor(10%);
-}
-
-/* option:hover{
-    background-color: black;
-    transform: scale(1.1);
-    transition: 0.5s;
-} */
-/* Estilos para el botón de cerrar */
-.cerrar_btn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: none;
-    border: none;
-    font-size: 5px;
+.select-col{
+    padding: 0.4rem;
+    width: 85px;
+    border-radius: 10px;
+    text-align: center;
     cursor: pointer;
-    color: #333;
 }
 
-.table-div{
-  display: flex;
-  justify-content: center;
-  font-weight: bold;
-  color: #333;
+.select-tipo-doc{
+    padding: 0.4rem;
+    width: 85px;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
 }
 
-.dashboard-table{
-    width: 80%;
+
+/* ======================================================================
+   4. TABLA DE DATOS RESPONSIVA
+   ====================================================================== */
+.table-div {
+    width: 100%; /* Ocupa todo el ancho del contenedor .filtros */
+    display: block; /* Permite el scroll horizontal */
+    overflow-x: auto;
+    white-space: nowrap; /* Evita que el contenido de las celdas se rompa */
+    margin-top: 1rem;
+}
+
+.dashboard-table {
+    width: 100%;
+    min-width: 700px; /* Ancho mínimo para la tabla en desktop */
     border-collapse: collapse;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
     background-color: #fff;
@@ -327,14 +244,19 @@ option:checked {
     text-align: center;
 }
 
-.dashboard-table tr th{
-  padding: 5px;
-  background-color: #6b8ee5;
-  font-weight: 300;
-  font-size: 0.9em;
-  padding-left: 10px;
-  color: black;
-  
+.dashboard-table th, 
+.dashboard-table td {
+    padding: 0.75rem 0.5rem;
+    border-bottom: 1px solid #ddd;
+    /* Ancho de columna base para la responsividad */
+    min-width: 100px; 
+}
+
+.dashboard-table th {
+    background-color: #6b8ee5;
+    font-weight: 600;
+    font-size: 0.9em;
+    color: black;
 }
 
 .fila-cuerpo:nth-of-type(even) {
@@ -345,92 +267,225 @@ option:checked {
     background-color: #6b8ee56c;
 }
 
-.fila-cuerpo{
-  font-weight: 200;
-  font-size: 0.5;
+/* Estilos de botones de acción de la tabla */
+.editar_btn, 
+.confirmacion_btn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.75rem;
+    margin: 0 0.2rem;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.3s;
 }
 
-.cuerpo-tabla{
-  padding: 10px;
+.editar_btn { background-color: #77dd77; }
+.confirmacion_btn { background-color: #ff6961; }
+
+.editar_btn:hover, 
+.confirmacion_btn:hover {
+    transform: scale(1.15);
 }
 
-.boton_añadir {
+
+/* ======================================================================
+   5. FORMULARIO MODAL (.formulario_añadir)
+   ====================================================================== */
+.formulario_añadir {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Controlado por JS para mostrarse/ocultarse */
+    opacity: 0; 
+    z-index: -1;
+    transition: opacity 0.3s ease;
+}
+
+.formulario_añadir.open {
+    opacity: 1;
+    z-index: 999;
+}
+
+.formulario_contenido {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    position: relative;
+    width: 90%;
+    max-width: 450px;
+    padding: 1.5rem;
+}
+
+.formulario_contenido h2 {
+    color: #6b8ee5;
+    text-align: center;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.formulario_contenido form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.formulario_contenido form input {
+    width: 100%;
+    margin-bottom: 0.75rem;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    background-color: #6b8ee536;
+    font-size: 1rem;
+}
+
+.selects-estudiante {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+    margin: 1rem 0;
+    gap: 0.5rem;
+}
+
+.selects-estudiante select {
+    /* 3 selects por fila en escritorio, 100% en móvil */
+    flex-basis: calc(33.33% - 0.3rem); 
+    padding: 0.5rem;
+    font-size: 0.6rem;
+    border: none;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    background-color: #5592bb6b;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    appearance: none;
+    transition: 0.4s;
+}
+
+.selects-estudiante select:hover,
+.selects-estudiante select:focus {
+    background: #dddddd;
+}
+
+.btn-default {
+    width: 80%;
+    padding: 0.75rem;
+    font-size: 1.1rem;
     background-color: #6b8ee5;
     color: white;
     border: none;
-    padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-    margin-right: 10px;
+    transition: background-color 0.3s ease, transform 0.3s;
+    margin-top: 1.5rem;
 }
 
+.btn-default:hover {
+    background-color: #4a6ec7;
+    transform: scale(1.05);
+}
 
-.boton_añadir:hover{
-    color: white; 
-    transform: scale(1.1); 
-    transition: 0.5s;
+/* Botón de cerrar 'X' */
+.cerrar_btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 1.5rem; /* Usamos rem para un tamaño consistente */
+    cursor: pointer;
+    color: #333;
+    padding: 0;
+    transition: color 0.3s;
 }
 
 .cerrar_btn:hover {
-    color: white; 
-    transform: scale(1.1); 
-    transition: 0.5s;
+    color: #ff0000;
+    transform: none; /* Quitamos el scale para la X */
 }
 
+/* ======================================================================
+   6. MEDIA QUERIES (Responsividad) 📱
+   ====================================================================== */
 
-.editar_btn {
-    background-color: #77DD77;
-    color: white;
-    border: none;
-    padding: 5px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 12px;
-    transition: background-color 0.3s ease;
-    margin: 5px;
-    text-align: center;
+/* --- TABLETS (Máximo 768px de ancho) --- */
+@media (max-width: 768px) {
+    /* Navegación */
+    .nav img { height: 5vh; }
+    .volver a { font-size: 1rem; margin-left: 0.2rem; }
+
+    /* Controles (Botones y Búsqueda) */
+    .filtros {
+        justify-content: center; /* Centramos los botones en tabletas */
+        gap: 0.5rem;
+    }
+    .head-title {
+        font-size: 1.5rem;
+    }
+
+    .boton_añadir,
+    .generar-reporte {
+        font-size: 0.9rem;
+        padding: 0.5rem 1rem;
+    }
+
+    /* Modal */
+    .selects-estudiante select {
+        flex-basis: calc(50% - 0.25rem); /* 2 selects por fila */
+    }
 }
 
-.editar_btn:hover {
-    color: white; 
-    transform: scale(1.1); 
-    transition: 0.5s;
-}
+/* --- MÓVILES (Máximo 480px de ancho) --- */
+@media (max-width: 480px) {
+    /* Navegación */
+    .volver a:nth-child(2) {
+        display: none; /* Oculta el texto "Volver" */
+    }
+    .nav i {
+        font-size: 6vmin; 
+    }
 
-.confirmacion_btn {
-    background-color: #ff6961;
-    color: white;
-    border: none;
-    padding: 5px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 12px;
-    transition: background-color 0.3s ease;
-    text-align: center;
-}
+    /* Controles (Botones y Búsqueda) */
+    .filtros {
+        padding: 0.75rem;
+        flex-direction: column; /* Apilamos los botones y la búsqueda */
+        align-items: stretch;
+    }
+    .head-title {
+        font-size: 1.3rem;
+    }
 
-.confirmacion_btn:hover {
-    color: white; 
-    transform: scale(1.1); 
-    transition: 0.5s;
-}
+    .boton_añadir,
+    .generar-reporte,
+    .input-filtro {
+        width: 100%; /* Ocupan todo el ancho disponible */
+        margin-bottom: 0.5rem;
+    }
 
-.btn-default{
-    background-color: #6b8ee5;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 20px;
-    width: 50%;
-    transition: background-color 0.3s ease;
+    /* Tabla: Aseguramos el scroll */
+    .table-div {
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    /* Modal */
+    .formulario_contenido {
+        padding: 1rem;
+    }
+    .selects-estudiante select {
+        flex-basis: 100%; /* 1 select por fila */
+        margin-bottom: 0.5rem;
+    }
+    .btn-default {
+        width: 100%;
+        font-size: 1rem;
+    }
 }
-
-.btn-default:hover{
-    color: white; 
-    transform: scale(1.1); 
-    transition: 0.5s;
-}  
