@@ -14,11 +14,13 @@ body {
 }
 
 /* Título principal */
-h1 {
+.head-title {
+    color: #1e2c52;
+    font-size: 1.75rem; /* Ajustado para mejor responsividad */
+    font-weight: 600;
+    margin-bottom: 1rem; 
+    width: 100%;
     text-align: center;
-    color: #333;
-    margin-top: 1.5rem;
-    font-size: 2rem;
 }
 
 /* ======================================================================
@@ -79,25 +81,98 @@ h1 {
     transition: 0.5s; 
 }
 
-/* ======================================================================
-   3. CONTENEDOR DE BOTONES Y FILTROS
-   ====================================================================== */
 
-/* Contenedor de los 3 botones de acción (Añadir, Reporte, Filtros) */
-.filtros:first-child {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    /* Margen: centrado horizontalmente, cerca del título */
-    margin: 1rem auto 1rem auto; 
-    width: 90%;
-    max-width: 1200px;
-    box-shadow: none; 
-    padding: 0;
-    flex-wrap: wrap;
+.input-nombre {
+    /* Le damos un ancho flexible pero con un mínimo */
+    flex-grow: 1;
+    min-width: 180px;
+    height: 40px;
+    border: 1px solid #6b6b6b1f;
+    border-radius: 10px;
+    padding: 0.625rem;
+    font-size: 0.9rem; 
 }
 
-.boton_añadir {
+.input-nombre:focus {
+    outline: none;
+    border-color: #6b8ee5;
+    box-shadow: 0 0 5px rgba(107, 142, 229, 0.5);
+}
+
+.input-apellido {
+    /* Le damos un ancho flexible pero con un mínimo */
+    flex-grow: 1;
+    min-width: 180px;
+    height: 40px;
+    border: 1px solid #6b6b6b1f;
+    border-radius: 10px;
+    padding: 0.625rem;
+    font-size: 0.9rem; 
+}
+
+.input-apellido:focus {
+    outline: none;
+    border-color: #6b8ee5;
+    box-shadow: 0 0 5px rgba(107, 142, 229, 0.5);
+}
+
+.input-documento {
+    /* Le damos un ancho flexible pero con un mínimo */
+    flex-grow: 1;
+    min-width: 180px;
+    height: 40px;
+    border: 1px solid #6b6b6b1f;
+    border-radius: 10px;
+    padding: 0.625rem;
+    font-size: 0.9rem; 
+}
+
+.input-documento:focus {
+    outline: none;
+    border-color: #6b8ee5;
+    box-shadow: 0 0 5px rgba(107, 142, 229, 0.5);
+}
+
+.filtro-boton {
+    padding: 0.6rem 1.2rem;
+    background-color: #6b8ee5;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, transform 0.3s;
+    white-space: nowrap;
+}
+
+.select-rol{
+    padding: 0.4rem;
+    width: 85px;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+
+}
+
+.select-col{
+    padding: 0.4rem;
+    width: 85px;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.select-tipo-doc{
+    padding: 0.4rem;
+    width: 85px;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.boton_añadir,
+.boton_generar,
+.boton_filtro {
     padding: 0.6rem 1.2rem;
     background-color: #6b8ee5;
     color: white;
@@ -110,119 +185,68 @@ h1 {
     margin: 0.5rem; /* Espacio entre botones */
 }
 
-.boton_añadir:hover {
+.boton_añadir:hover,
+.boton_generar:hover,
+.boton_filtro:hover {
     background-color: #4a6ec7;
     transform: scale(1.05);
 }
 
 /* Contenedor de filtros que se oculta/muestra (#contenedor-filtros) */
-#contenedor-filtros {
-    /* Mantenemos el estilo de caja con sombra para los filtros */
-    margin: 1rem auto 2rem auto; 
-    width: 90%; 
-    max-width: 1200px;
+#contenedorFiltros {
+    padding: 10px; /* Solo un estilo de ejemplo */
+    display: none;
+}
+
+
+.mostrar{
+    display: block !important;
+}
+
+.filtros {
+    /* Centramos el contenedor y le damos un ancho máximo */
+    margin: 1.5rem auto 1.5rem auto; 
+    width: 100%; 
+    max-width: 1500px; 
     padding: 1rem; 
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    display: flex; /* Importante para el layout */
-    flex-wrap: wrap; 
-    justify-content: space-between;
-    gap: 1rem; /* Espacio entre los campos de filtro */
-}
-
-#contenedor-filtros h2 {
-    color: #6b8ee5e3;
-    font-size: 1.25rem;
-    margin-bottom: 1rem;
-    font-weight: 600;
-    width: 100%;
-}
-
-.campo-filtro {
-    /* 3 campos por fila en escritorio */
-    flex-basis: calc(33.333% - 0.7rem); 
-    min-width: 200px; 
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap; 
+    justify-content: flex-start; /* Alinea los elementos de control a la izquierda */
+    align-items: center;
+    gap: 0.75rem; /* Espacio entre botones y el input */
 }
 
-.campo-filtro label {
-    font-weight: 500;
-    color: #444;
-    margin-bottom: 0.3rem;
-    font-size: 0.9rem;
-}
-
-/* El input-filtro se mantiene de tu código original, con ajustes de tamaño */
-.input-filtro {
-    width: 100%;
-    height: 40px;
-    border: 1px solid #6b6b6b1f;
-    border-radius: 10px;
-    padding: 0.625rem;
-    font-size: 0.9rem;
-}
-
-.input-filtro:focus {
-    outline: none;
-    border-color: #6b8ee5;
-    box-shadow: 0 0 5px rgba(107, 142, 229, 0.5);
-}
-
-/* Botón Aplicar Filtros dentro del contenedor */
-#contenedor-filtros .generar-reporte {
-    padding: 0.7rem 1.5rem;
-    background-color: #6b8ee5;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: background-color 0.3s, transform 0.3s;
-    margin-top: 1rem;
-    align-self: flex-end; /* Alinea a la derecha del contenedor */
-}
-
-#contenedor-filtros .generar-reporte:hover {
-    background-color: #4a6ec7;
-    transform: scale(1.05);
-}
 
 
 /* ======================================================================
    4. TABLA DE DATOS RESPONSIVA
    ====================================================================== */
 .table-div {
-    display: flex;
-    justify-content: center;
-    font-weight: bold;
-    color: #333;
-    padding: 0 0.5rem; /* Pequeño padding para móviles */
+    width: 100%; /* Ocupa todo el ancho del contenedor .filtros */
+    display: block; /* Permite el scroll horizontal */
+    overflow-x: auto;
+    white-space: nowrap; /* Evita que el contenido de las celdas se rompa */
+    margin-top: 0.5rem;
 }
 
 .dashboard-table {
-    width: 95%; /* Ancho relativo */
-    max-width: 1200px;
+    width: 100%;
+    min-width: 700px; /* Ancho mínimo para la tabla en desktop */
     border-collapse: collapse;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
     background-color: #fff;
     border-radius: 8px;
     overflow: hidden;
     text-align: center;
-    /* Importante para la responsividad de tablas: permite scroll horizontal */
-    display: block; 
-    overflow-x: auto;
-    white-space: nowrap; /* Evita saltos de línea dentro de las celdas */
-    margin-bottom: 2rem;
 }
 
 .dashboard-table tr th {
-    padding: 0.75rem 0.5rem;
     background-color: #6b8ee5;
-    font-weight: 500;
-    font-size: 0.95em;
+    font-weight: 600;
+    font-size: 0.9em;
     color: black;
-    white-space: nowrap;
 }
 
 .fila-cuerpo {
@@ -230,18 +254,13 @@ h1 {
     font-size: 0.9em;
 }
 
-/* Alineación de las celdas para el scroll horizontal */
-.dashboard-table tr {
-    display: inline-flex; /* Permite el scroll horizontal */
-    width: 100%;
-}
-.dashboard-table th, .dashboard-table td {
+.dashboard-table th, 
+.dashboard-table td {
     padding: 0.75rem 0.5rem;
-    /* Asegura que cada columna tenga un ancho base, ajusta según el número de columnas */
+    border-bottom: 1px solid #ddd;
+    /* Ancho de columna base para la responsividad */
     min-width: 100px; 
-    text-align: center;
 }
-
 
 .fila-cuerpo:nth-of-type(even) {
     background-color: #6b8ee54b;

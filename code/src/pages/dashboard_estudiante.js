@@ -9,19 +9,19 @@ import {
 
 document.addEventListener('DOMContentLoaded', async () => {
 
-    const permittedRoles = ['admin', 'aseador', 'Profesor', 'colegio'];
+    // const permittedRoles = ['admin', 'aseador', 'Profesor', 'colegio'];
 
-    const user = await verifyAuthAndRoles(permittedRoles);
-    if (!user) {
-        return;
-    }
+    // const user = await verifyAuthAndRoles(permittedRoles);
+    // if (!user) {
+    //     return;
+    // }
 
     const boton_abrir = document.getElementById("formulario_crear");
     const boton_cerrar = document.getElementById("cerrar_formulario");
     const formulario_añadir = document.getElementById("formulario_añadir");
     const form = document.querySelector(".formulario_añadir form");
-    const boton_filtros = document.getElementById("toggle-filtros");
-    const filtros_container = document.getElementById("filter-options-bar"); 
+    const botonFiltro = document.getElementById("btnFiltro");
+    const contenedorFiltros = document.getElementById("contenedorFiltros");
 
     let currentEstudianteId = null;
 
@@ -71,6 +71,13 @@ document.addEventListener('DOMContentLoaded', async () => {
             formulario_añadir.classList.remove("open");
         });
     }
+
+    botonFiltro.addEventListener('click', function() {
+    // 3. Alternar la clase 'mostrar' en el div
+    // Si tiene la clase, se la quita (y se oculta).
+    // Si NO tiene la clase, se la añade (y se muestra).
+    contenedorFiltros.classList.toggle('mostrar');
+    });
 
     document.getElementById('cuerpo_tabla').addEventListener('click', async (e) => {
         if (e.target.classList.contains('editar_btn')) {

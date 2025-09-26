@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Si tiene la clase, se la quita (y se oculta).
     // Si NO tiene la clase, se la añade (y se muestra).
     contenedorFiltros.classList.toggle('mostrar');
-});
+    });
 
     boton_cerrar.addEventListener("click", () => {
         formulario_añadir.classList.remove("open");
