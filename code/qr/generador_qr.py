@@ -1,8 +1,8 @@
-import pandas as pd
-import qrcode as qr
-import mysql.connector as mysql
+import pandas as pd # type: ignore
+import qrcode as qr # type: ignore
+import mysql.connector as mysql # type: ignore
 import os
-from dotenv import load_dotenv
+from dotenv import load_dotenv # type: ignore
 
 def generar_qrs_desde_db(excel_path):
     # Cargar las variables de entorno del archivo .env
