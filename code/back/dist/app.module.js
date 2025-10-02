@@ -24,6 +24,7 @@ const jornada_module_1 = require("./modules/jornada/jornada.module");
 const core_1 = require("@nestjs/core");
 const jwt_auth_guard_1 = require("./modules/auth/jwt-auth/jwt-auth.guard");
 const roles_guard_1 = require("./modules/auth/roles/roles.guard");
+const path = require("path");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -31,22 +32,27 @@ exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
             config_1.ConfigModule.forRoot({
+                envFilePath: path.join(__dirname, '..', '..', '.env'),
                 isGlobal: true,
             }),
             typeorm_1.TypeOrmModule.forRootAsync({
                 imports: [config_1.ConfigModule],
                 inject: [config_1.ConfigService],
-                useFactory: (config) => ({
-                    type: 'mysql',
-                    host: config.get('DB_HOST'),
-                    port: config.get('DB_PORT'),
-                    username: config.get('DB_USER'),
-                    database: config.get('DB_NAME'),
-                    entities: [__dirname + '/**/entities/*.entity{.ts,.js}'],
-                    autoLoadEntities: true,
-                    synchronize: true,
-                    charset: 'utf8mb4',
-                }),
+                useFactory: (config) => {
+                    const dbPassword = config.get('DB_PASSWORD');
+                    return {
+                        type: 'mysql',
+                        host: config.get('DB_HOST'),
+                        port: config.get('DB_PORT'),
+                        username: config.get('DB_USER'),
+                        database: config.get('DB_NAME'),
+                        password: dbPassword,
+                        entities: [__dirname + '/**/entities/*.entity{.ts,.js}'],
+                        autoLoadEntities: true,
+                        synchronize: true,
+                        charset: 'utf8mb4',
+                    };
+                },
             }),
             jwt_1.JwtModule.registerAsync({
                 imports: [config_1.ConfigModule],

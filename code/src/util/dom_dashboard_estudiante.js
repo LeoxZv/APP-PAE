@@ -9,7 +9,7 @@ export function toggleAddStudentButton(user) {
     const botonCrear = document.getElementById('formulario_crear');
     if (botonCrear) {
         const userRole = user.rol.nombre_rol;
-        if (userRole === 'aseador' || userRole === 'colegio') {
+        if (userRole === 'Aseador' || userRole === 'colegio') {
             botonCrear.style.display = 'block';
         } else {
             botonCrear.style.display = 'none';
@@ -27,7 +27,7 @@ export function toggleColegioColumn(user) {
     const celdasColegio = document.querySelectorAll('.celda-colegio');
 
     const userRole = user.rol.nombre_rol;
-    const isVisible = userRole === 'aseador' || userRole === 'admin';
+    const isVisible = userRole === 'Aseador' || userRole === 'admin';
 
     if (headerColegio) {
         headerColegio.style.display = isVisible ? 'table-cell' : 'none';
@@ -48,7 +48,7 @@ export function toggleAccionesColumn(user) {
     const celdasAcciones = document.querySelectorAll('.celda-acciones');
 
     const userRole = user.rol.nombre_rol;
-    const isVisible = userRole === 'aseador' || userRole === 'colegio';
+    const isVisible = userRole === 'Aseador' || userRole === 'colegio';
 
     if (headerAcciones) {
         headerAcciones.style.display = isVisible ? 'table-cell' : 'none';
@@ -70,7 +70,7 @@ export function toggleColegioSelect(user) {
     const userRole = user.rol.nombre_rol;
 
     if (selectColegio) {
-        if (userRole === 'aseador') {
+        if (userRole === 'Aseador') {
             selectColegio.style.display = 'block';
         } else {
             selectColegio.style.display = 'none';

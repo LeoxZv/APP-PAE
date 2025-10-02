@@ -9,7 +9,7 @@ import {
 
 document.addEventListener('DOMContentLoaded', async () => {
 
-    const permittedRoles = ['admin', 'aseador', 'Profesor', 'colegio'];
+    const permittedRoles = ['Admin', 'Aseador', 'Profesor', 'Colegio'];
 
     const user = await verifyAuthAndRoles(permittedRoles);
     if (!user) {

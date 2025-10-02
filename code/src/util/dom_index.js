@@ -14,13 +14,13 @@ export function updateWelcomeMessage(user) {
 
 /**
  * Muestra u oculta el enlace al dashboard de usuarios según el rol.
- * Solo es visible para el superadmin ('aseador').
+ * Solo es visible para el superadmin ('Aseador').
  * @param {object} user - El objeto de usuario.
  */
 export function toggleDashboardUsuariosLink(user) {
   const dashboardLink = document.getElementById('dashboard-usuarios-link');
   if (dashboardLink) {
-    if (user.rol.nombre_rol === 'aseador' || user.rol.nombre_rol === 'colegio') {
+    if (user.rol.nombre_rol === 'Aseador' || user.rol.nombre_rol === 'colegio') {
       dashboardLink.style.display = 'block';
     } else {
       dashboardLink.style.display = 'none';
@@ -37,7 +37,7 @@ export function updateRoleMessage(user) {
   if (messageElement) {
     let message = '';
     switch (user.rol.nombre_rol) {
-      case 'aseador':
+      case 'Aseador':
         message = '<h3>¡Eres el Super Administrador! Tienes control total sobre todos los colegios y usuarios.</h3>';
         break;
       case 'colegio':

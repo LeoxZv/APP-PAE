@@ -16,26 +16,32 @@ import { JornadaModule } from './modules/jornada/jornada.module';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from './modules/auth/jwt-auth/jwt-auth.guard';
 import { RolesGuard } from './modules/auth/roles/roles.guard';
+import * as path from 'path';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
+      envFilePath: path.join(__dirname, '..', '..', '.env'),
       isGlobal: true,
     }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
-      useFactory: (config: ConfigService) => ({
-        type: 'mysql',
-        host: config.get('DB_HOST'),
-        port: config.get<number>('DB_PORT'),
-        username: config.get('DB_USER'),
-        database: config.get('DB_NAME'),
-        entities: [__dirname + '/**/entities/*.entity{.ts,.js}'],
-        autoLoadEntities: true,
-        synchronize: true,
-        charset: 'utf8mb4',
-      }),
+      useFactory: (config: ConfigService) => {
+        const dbPassword = config.get<string>('DB_PASSWORD'); // Forzar la lectura como string
+        return {
+          type: 'mysql',
+          host: config.get('DB_HOST'),
+          port: config.get<number>('DB_PORT'),
+          username: config.get('DB_USER'),
+          database: config.get('DB_NAME'),
+          password: dbPassword, // Usar la variable forzada
+          entities: [__dirname + '/**/entities/*.entity{.ts,.js}'],
+          autoLoadEntities: true,
+          synchronize: true,
+          charset: 'utf8mb4',
+        };
+      },
     }),
     JwtModule.registerAsync({
       imports: [ConfigModule],

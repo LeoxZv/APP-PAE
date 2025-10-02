@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   # 1. SERVICIO DE BASE DE DATOS
   db:
@@ -21,7 +19,7 @@ services:
     # 3. Mapeo de puertos (Opcional, solo si necesitas acceder desde tu máquina local)
     # Recomendación: No mapear el puerto si solo el backend lo usará para mayor seguridad.
     ports:
-      - "3307:3307"
+      - "3307:3306"
 
     # 4. Persistencia de datos (¡CRUCIAL!)
     # Esto asegura que los datos no se pierdan al detener o eliminar el contenedor.
