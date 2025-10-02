@@ -79,23 +79,22 @@ export class UserService {
   async findAll(user: any): Promise<User[]> {
     const userRole = user.rol.nombre_rol;
     const findOptions: any = {
-      // Agrega 'tipo_doc' a la lista de relaciones
       relations: ['rol', 'colegio', 'tipo_doc'],
     };
 
     switch (userRole) {
-      case 'aseador':
+      case 'Aseador':
         break;
 
-      case 'admin':
+      case 'Admin':
         findOptions.where = {
           rol: {
-            nombre_rol: In(['colegio', 'Profesor']),
+            nombre_rol: In(['Colegio', 'Profesor']),
           },
         };
         break;
 
-      case 'colegio':
+      case 'Colegio':
         if (!user.colegio || !user.colegio.id_colegio) {
           return [];
         }
@@ -111,7 +110,6 @@ export class UserService {
           'No tienes permisos para ver esta información.',
         );
     }
-
     return await this.userRepository.find(findOptions);
   }
 

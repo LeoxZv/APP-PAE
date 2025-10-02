@@ -7,8 +7,9 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule); // Habilita CORS con credenciales
 
   app.enableCors({
+    origin: true, // Esto acepta todas las peticiones (Ideal para desarrollo)
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
-    origin: 'http://localhost:5500', // O una lista de orígenes permitidos
   });
 
   app.use(cookieParser()); // Los guards se registrarán globalmente en app.module.ts

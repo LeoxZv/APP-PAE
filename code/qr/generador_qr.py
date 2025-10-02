@@ -5,10 +5,8 @@ import os
 from dotenv import load_dotenv # type: ignore
 
 def generar_qrs_desde_db(excel_path):
-    # Cargar las variables de entorno del archivo .env
     load_dotenv()
 
-    # 1. Conexión a la base de datos
     try:
         conn = mysql.connect(
             host=os.getenv('DB_HOST'),
@@ -21,7 +19,6 @@ def generar_qrs_desde_db(excel_path):
 
         print("Conexión a la base de datos establecida exitosamente.")
         
-        # 2. Obtener datos de estudiantes de la base de datos
         cursor.execute("SELECT id_estudiante, numero_documento FROM estudiante")
         db_data = cursor.fetchall()
         conn.close()
@@ -29,7 +26,6 @@ def generar_qrs_desde_db(excel_path):
         # Crear un diccionario para un acceso más rápido
         estudiantes_db = {str(doc): id for id, doc in db_data}
         
-        # 3. Leer el archivo de Excel usando el parámetro excel_path
         dtf1 = pd.read_excel(excel_path)
         
         # Crear la carpeta para guardar los QR si no existe

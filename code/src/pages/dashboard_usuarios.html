@@ -24,16 +24,19 @@
 
         <div class="filtros">
             <h1 class="head-title">Usuarios Registrados</h1>
-            <button class="generar-reporte" onclick="generarPdf()">Generar Reporte</button>
-            <button id="formulario_crear" class="boton_añadir">Añadir usuarios</button>
-            <button id="btnFiltro" class="filtro-boton">Mostrar/Ocultar</button>
+            <div class="botones_filtro">
+                <button id="formulario_crear" class="boton_añadir">Añadir usuarios</button>
+                <button class="generar-reporte" onclick="generarPdf()">Generar Reporte</button>
+                <button id="btnFiltro" class="filtro-boton">Mostrar/Ocultar</button>
+            </div>
             <div id="contenedorFiltros" class="input-filtro">
                 <input type="text" placeholder="Nombre" id="inputBusqueda" class="input-nombre" >
-                <input type="text" placeholder="Apellido" id="" class="input-apellido">
+                <input type="text" placeholder="Apellido" id="inputApellido" class="input-apellido">
                 <input type="text" placeholder="Documento" id="inputDocumento" class="input-documento">
-                <select name="Tipo De Documento" id="tipo_doc" class="select-tipo-doc"></select>
-                <select name="Rol" id="rol" class="select-rol"></select>
-                <select name="Colegio" id="colegio" class="select-col"></select>    
+                <div id="filtro_tipo_doc" class="filtro-checkbox-group"></div>
+                <div id="filtro_grado" class="filtro-checkbox-group"></div>
+                <div id="filtro_jornada" class="filtro-checkbox-group"></div>
+                <div id="filtro_colegio" class="filtro-checkbox-group"></div>   
             </div>
             <div class="table-div">
                 <table class="dashboard-table">
@@ -61,9 +64,9 @@
                     <input type="text" name="documento" placeholder="Documento" class="input" required>
                     <input type="password" name="contraseña" placeholder="Contraseña" class="input" required>
                     <div class="selects-estudiante">
-                        <select name="Colegio" id="colegio"></select>
-                        <select name="Rol" id="rol"></select>
-                        <select name="Tipo de documento" id="tipo_doc"></select>
+                        <select name="Colegio" id="form_colegio"></select>
+                        <select name="Rol" id="form_rol"></select>
+                        <select name="Tipo de documento" id="form_tipo_doc"></select>
                     </div>
                     <button type="submit" class="btn-default">Registrar</button>
                 </form>

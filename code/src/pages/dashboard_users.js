@@ -11,12 +11,12 @@ import {
 
 document.addEventListener('DOMContentLoaded', async () => {
 
-    // const permittedRoles = ['aseador', 'admin', 'colegio'];
+    const permittedRoles = ['Aseador', 'Admin', 'Colegio'];
 
-    // const user = await verifyAuthAndRoles(permittedRoles);
-    // if (!user) {
-    //     return;
-    // }
+    const user = await verifyAuthAndRoles(permittedRoles);
+    if (!user) {
+        return;
+    }
 
     const boton_abrir = document.getElementById("formulario_crear");
     const boton_cerrar = document.getElementById("cerrar_formulario");
@@ -25,8 +25,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     const botonFiltro = document.getElementById("btnFiltro");
     const contenedorFiltros = document.getElementById("contenedorFiltros");
     let currentUserId = null;
-
-
 
 
     async function inicializarDashboard() {
@@ -45,20 +43,20 @@ document.addEventListener('DOMContentLoaded', async () => {
     inicializarDashboard();
 
     boton_abrir.addEventListener("click", () => {
-        formulario_añadir.classList.add("open");
-        form.reset();
-        currentUserId = null;
-        document.querySelector('input[name="contraseña"]').setAttribute('required', '');
-        document.querySelector('input[name="contraseña"]').placeholder = 'Contraseña';
-        fetchData('doc', 'tipo_doc', 'id_doc', 'siglas').catch(err => console.error("Error al cargar docs:", err));
-        fetchData('colegio', 'colegio', 'id_colegio', 'nombre_colegio').catch(err => console.error("Error al cargar colegios:", err));
-        fetchData('rol', 'rol', 'id_rol', 'nombre_rol').catch(err => console.error("Error al cargar roles:", err));
-    });
+    formulario_añadir.classList.add("open");
+    form.reset();
+    currentUserId = null;
+    document.querySelector('input[name="contraseña"]').setAttribute('required', '');
+    document.querySelector('input[name="contraseña"]').placeholder = 'Contraseña';
+    console.log("entraste")
+
+    fetchData('doc', 'form_tipo_doc', 'id_doc', 'siglas').catch(err => console.error("Error al cargar docs:", err));
+    
+    fetchData('colegio', 'form_colegio', 'id_colegio', 'nombre_colegio').catch(err => console.error("Error al cargar colegios:", err));
+    
+    fetchData('rol', 'form_rol', 'id_rol', 'nombre_rol').catch(err => console.error("Error al cargar roles:", err));});
 
     botonFiltro.addEventListener('click', function() {
-    // 3. Alternar la clase 'mostrar' en el div
-    // Si tiene la clase, se la quita (y se oculta).
-    // Si NO tiene la clase, se la añade (y se muestra).
     contenedorFiltros.classList.toggle('mostrar');
     });
 

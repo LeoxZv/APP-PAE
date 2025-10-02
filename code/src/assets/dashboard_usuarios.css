@@ -83,7 +83,6 @@ body {
 
 /* Contenedor de Filtros (que ahora contiene el título, botones y búsqueda) */
 .filtros {
-    /* Centramos el contenedor y le damos un ancho máximo */
     margin: 1.5rem auto 1.5rem auto; 
     width: 100%; 
     max-width: 1500px; 
@@ -92,11 +91,20 @@ body {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-wrap: wrap; 
-    justify-content: flex-start; /* Alinea los elementos de control a la izquierda */
+    justify-content: flex; /* Alinea los elementos de control a la izquierda */
+    align-self: center;
     align-items: center;
     gap: 0.75rem; /* Espacio entre botones y el input */
 }
 
+
+.botones_filtro {
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+}
 /* Estilo del título dentro del contenedor de filtros */
 
 
@@ -121,8 +129,13 @@ body {
 }
 
 #contenedorFiltros {
-    padding: 10px; /* Solo un estilo de ejemplo */
+    width: 100%;
+    padding: 10px;
     display: none;
+    align-items: center;
+    align-self: center;
+    text-align: center;
+    justify-content: center
 }
 
 
@@ -231,6 +244,8 @@ body {
     overflow-x: auto;
     white-space: nowrap; /* Evita que el contenido de las celdas se rompa */
     margin-top: 1rem;
+    align-items: center;
+    align-self: center;
 }
 
 .dashboard-table {

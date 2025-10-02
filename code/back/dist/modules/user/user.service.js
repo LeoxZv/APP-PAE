@@ -61,16 +61,16 @@ let UserService = class UserService {
             relations: ['rol', 'colegio', 'tipo_doc'],
         };
         switch (userRole) {
-            case 'aseador':
+            case 'Aseador':
                 break;
-            case 'admin':
+            case 'Admin':
                 findOptions.where = {
                     rol: {
-                        nombre_rol: (0, typeorm_2.In)(['colegio', 'Profesor']),
+                        nombre_rol: (0, typeorm_2.In)(['Colegio', 'Profesor']),
                     },
                 };
                 break;
-            case 'colegio':
+            case 'Colegio':
                 if (!user.colegio || !user.colegio.id_colegio) {
                     return [];
                 }

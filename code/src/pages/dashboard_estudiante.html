@@ -21,17 +21,35 @@
         </nav>
         <div class="filtros">
             <h1 class="head-title">Estudiantes Registrados</h1>
-            <button id="formulario_crear" class="boton_añadir">Añadir estudiante</button>
-            <button id="generar_reporte" class="boton_generar">Generar reporte</button>
-            <button id="btnFiltro" class="boton_filtro">Mostrar/Ocultar</button>
+            <div class="botones_filtro">
+                <button id="formulario_crear" class="boton_añadir">Añadir estudiante</button>
+                <button id="generar_reporte" class="boton_generar">Generar reporte</button>
+                <button id="btnFiltro" class="boton_filtro">Mostrar/Ocultar</button>
+            </div>
             <div id="contenedorFiltros" class="input-filtro">
                 <input type="text" placeholder="Nombre" id="inputBusqueda" class="input-nombre" >
-                <input type="text" placeholder="Apellido" id="" class="input-apellido">
+                <input type="text" placeholder="Apellido" id="inputApellido" class="input-apellido">
                 <input type="text" placeholder="Documento" id="inputDocumento" class="input-documento">
-                <select name="Curso" id="grado" class="select-curso"></select>
-                <select name="Tipo De Documento" id="tipo_doc" class="select-tipo-doc"></select>
-                <select name="Rol" id="rol" class="select-rol"></select>
-                <select name="Colegio" id="colegio" class="select-col"></select>  
+                
+                <div class="dropdown-filtro-container" data-filter-id="tipo_doc">
+                    <button class="dropdown-filtro-btn">Tipo de Documento ▼</button>
+                    <div id="filtro_tipo_doc" class="dropdown-content"></div>
+                </div>
+
+                <div class="dropdown-filtro-container" data-filter-id="grado">
+                    <button class="dropdown-filtro-btn">Grado ▼</button>
+                    <div id="filtro_grado" class="dropdown-content"></div>
+                </div>
+
+                <div class="dropdown-filtro-container" data-filter-id="jornada">
+                    <button class="dropdown-filtro-btn">Jornada ▼</button>
+                    <div id="filtro_jornada" class="dropdown-content"></div>
+                </div>
+
+                <div class="dropdown-filtro-container" data-filter-id="colegio">
+                    <button class="dropdown-filtro-btn">Colegio ▼</button>
+                    <div id="filtro_colegio" class="dropdown-content"></div>
+                </div>
             </div>
             <div class="table-div">
                 <table class="dashboard-table">

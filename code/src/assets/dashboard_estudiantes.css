@@ -133,6 +133,52 @@ body {
     box-shadow: 0 0 5px rgba(107, 142, 229, 0.5);
 }
 
+.dropdown-filtro-container {
+    position: relative; /* Clave para posicionar el dropdown relativo al botón */
+    display: inline-block; /* Ocupa el espacio necesario, al lado de los inputs */
+    margin-right: 15px;
+}
+
+/* Estilo del botón (el encabezado que se hace clic) */
+.dropdown-filtro-btn {
+    padding: 8px 12px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 4px;
+}
+
+/* Contenido del Dropdown (el div con los checkboxes) */
+.dropdown-content {
+    display: none; /* Oculto por defecto */
+    position: absolute; /* Clave: flotará sobre otros elementos */
+    background-color: #fff;
+    min-width: 50px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px;
+    z-index: 1000; /* Asegura que esté por encima de la tabla y otros elementos */
+    border: 1px solid #ddd;
+    border-top: none;
+    max-height: 250px;
+    overflow-y: auto; /* scroll si la lista es muy larga */
+}
+
+/* Clase para mostrar el contenido */
+.dropdown-content.show {
+    display: block;
+}
+
+/* Estilos para los items de checkbox */
+.filtro-item {
+    margin: 4px 0;
+}
+.filtro-item label {
+    margin-left: 5px;
+    cursor: pointer;
+    user-select: none;
+}
+
 .filtro-boton {
     padding: 0.6rem 1.2rem;
     background-color: #6b8ee5;
@@ -199,8 +245,13 @@ body {
 
 /* Contenedor de filtros que se oculta/muestra (#contenedor-filtros) */
 #contenedorFiltros {
-    padding: 10px; /* Solo un estilo de ejemplo */
+    width: 100%;
+    padding: 10px;
     display: none;
+    align-items: center;
+    align-self: center;
+    text-align: center;
+    justify-content: center
 }
 
 
@@ -226,7 +277,13 @@ body {
     gap: 0.75rem; /* Espacio entre botones y el input */
 }
 
-
+.botones_filtro {
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+}
 
 /* ======================================================================
    4. TABLA DE DATOS RESPONSIVA
@@ -276,6 +333,26 @@ body {
 
 .fila-cuerpo:hover {
     background-color: #6b8ee56c;
+}
+
+.editar_btn, 
+.confirmacion_btn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.75rem;
+    margin: 0 0.2rem;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.editar_btn { background-color: #77dd77; }
+.confirmacion_btn { background-color: #ff6961; }
+
+.editar_btn:hover, 
+.confirmacion_btn:hover {
+    transform: scale(1.15);
 }
 
 /* ======================================================================
