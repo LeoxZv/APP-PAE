@@ -25,6 +25,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     let currentEstudianteId = null;
 
+    botonFiltro.addEventListener('click', function() {
+    // 3. Alternar la clase 'mostrar' en el div
+    // Si tiene la clase, se la quita (y se oculta).
+    // Si NO tiene la clase, se la añade (y se muestra).
+    contenedorFiltros.classList.toggle('mostrar');
+    });
+
     toggleAddStudentButton(user); 
 
     if (boton_filtros) {
@@ -47,8 +54,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         });
     }
-
- if (boton_abrir) {
+    if (boton_abrir) {
         boton_abrir.addEventListener("click", () => {
             formulario_añadir.classList.add("open");
             form.reset();
@@ -65,19 +71,13 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         });
     }
-
     if (boton_cerrar) {
         boton_cerrar.addEventListener("click", () => {
             formulario_añadir.classList.remove("open");
         });
     }
 
-    botonFiltro.addEventListener('click', function() {
-    // 3. Alternar la clase 'mostrar' en el div
-    // Si tiene la clase, se la quita (y se oculta).
-    // Si NO tiene la clase, se la añade (y se muestra).
-    contenedorFiltros.classList.toggle('mostrar');
-    });
+
 
     document.getElementById('cuerpo_tabla').addEventListener('click', async (e) => {
         if (e.target.classList.contains('editar_btn')) {

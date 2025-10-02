@@ -145,13 +145,19 @@ body {
     white-space: nowrap;
 }
 
+.select-curso{
+    padding: 0.4rem;
+    width: 85px;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+}
 .select-rol{
     padding: 0.4rem;
     width: 85px;
     border-radius: 10px;
     text-align: center;
     cursor: pointer;
-
 }
 
 .select-col{
@@ -182,7 +188,6 @@ body {
     font-size: 1rem;
     transition: background-color 0.3s ease, transform 0.3s;
     white-space: nowrap;
-    margin: 0.5rem; /* Espacio entre botones */
 }
 
 .boton_añadir:hover,
@@ -200,7 +205,10 @@ body {
 
 
 .mostrar{
-    display: block !important;
+    display: flex !important;
+    justify-content: center;
+    gap: 10px;
+    width: 85%;
 }
 
 .filtros {
