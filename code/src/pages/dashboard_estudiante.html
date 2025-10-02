@@ -19,29 +19,36 @@
                 <i class="fa-solid fa-user"></i>
             </div>
         </nav>
-
-        <h1>Estudiantes Registrados</h1>
-
         <div class="filtros">
+            <h1 class="head-title">Estudiantes Registrados</h1>
             <button id="formulario_crear" class="boton_añadir">Añadir estudiante</button>
-            <button id="generar_reporte" class="boton_añadir">Generar reporte</button>
-            <button id="toggle-filtros" class="boton_añadir">Filtros</button>
-        </div>
-        <div id="contenedor-filtros" class="filtros" >
-            <h2>Filtros de búsqueda</h2>
-            <div class="campo-filtro">
-                <label for="filtro-nombre">Nombre / Apellido</label>
-                <input type="text" id="filtro-nombre" class="input-filtro" placeholder="Buscar por nombre o apellido">
+            <button id="generar_reporte" class="boton_generar">Generar reporte</button>
+            <button id="btnFiltro" class="boton_filtro">Mostrar/Ocultar</button>
+            <div id="contenedorFiltros" class="input-filtro">
+                <input type="text" placeholder="Nombre" id="inputBusqueda" class="input-nombre" >
+                <input type="text" placeholder="Apellido" id="" class="input-apellido">
+                <input type="text" placeholder="Documento" id="inputDocumento" class="input-documento">
+                <select name="Curso" id="grado" class="select-curso"></select>
+                <select name="Tipo De Documento" id="tipo_doc" class="select-tipo-doc"></select>
+                <select name="Rol" id="rol" class="select-rol"></select>
+                <select name="Colegio" id="colegio" class="select-col"></select>  
             </div>
-            <div class="campo-filtro">
-                <label for="filtro-grado">Grado</label>
-                <input type="text" id="filtro-grado" class="input-filtro" placeholder="Buscar por grado">
+            <div class="table-div">
+                <table class="dashboard-table">
+                    <tr class="titulos-table">
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Tipo doc</th>
+                        <th>Documento</th>
+                        <th>Curso</th>
+                        <th>Jornada</th>
+                        <th id="header-colegio">Colegio</th>
+                        <th id="header-acciones">Acciones</th>
+                    </tr>
+                    <tbody id="cuerpo_tabla">
+                    </tbody>
+                </table>
             </div>
-            <div class="campo-filtro">
-                <label for="filtro-documento">Documento</label>
-                <input type="text" id="filtro-documento" class="input-filtro" placeholder="Buscar por documento">
-            </div>
-            <button class="generar-reporte">Aplicar Filtros</button>
         </div>
         <div class="formulario_añadir" id="formulario_añadir">
             <div class="formulario_contenido">
@@ -61,24 +68,6 @@
                 </form>
             </div>
         </div>
-
-        <div class="table-div">
-            <table class="dashboard-table">
-                <tr class="titulos-table">
-                    <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>Tipo doc</th>
-                    <th>Documento</th>
-                    <th>Curso</th>
-                    <th>Jornada</th>
-                    <th id="header-colegio">Colegio</th>
-                    <th id="header-acciones">Acciones</th>
-                </tr>
-                <tbody id="cuerpo_tabla">
-                </tbody>
-            </table>
-        </div>
-
         <script type="module" src="dashboard_estudiante.js"></script>
     </body>
 </html>

@@ -98,10 +98,7 @@ body {
 }
 
 /* Estilo del título dentro del contenedor de filtros */
-.filtros h1 {
-    width: 100%; /* El título ocupa toda la primera línea */
-    margin-bottom: 0.5rem;
-}
+
 
 /* Botones y Búsqueda */
 .boton_añadir,
@@ -130,7 +127,10 @@ body {
 
 
 .mostrar{
-    display: block !important;
+    display: flex !important;
+    justify-content: center;
+    gap: 10px;
+    width: 85%;
 }
 
 .input-nombre {
