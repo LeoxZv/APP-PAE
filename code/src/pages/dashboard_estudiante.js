@@ -237,23 +237,21 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     });
 
-    // Lógica para formulario de creación/edición (se mantiene)
     toggleAddStudentButton(user); 
     if (boton_abrir) {
-        boton_abrir.addEventListener("click", () => {
+        boton_abrir.addEventListener("click", async () => { // <--- Importante el 'async'
             formulario_añadir.classList.add("open");
             form.reset();
             currentEstudianteId = null;
             
-            // Cargar datos para SELECTS de Formulario (usando IDs del formulario, ej. 'tipo_doc')
-            fetchData('doc', 'tipo_doc', 'id_doc', 'siglas');
-            fetchData('grado', 'grado', 'id_grado', 'numero_grado');
-            fetchData('jornada', 'Jornada', 'id_jornada', 'nombre_jornada');
+            await fetchData('doc', 'tipo_doc', 'id_doc', 'siglas'); 
+            await fetchData('grado', 'grado', 'id_grado', 'numero_grado');
+            await fetchData('jornada', 'Jornada', 'id_jornada', 'nombre_jornada');
 
             toggleColegioSelect(user);
 
             if (user.rol.nombre_rol === 'aseador') {
-                fetchData('colegio', 'colegio', 'id_colegio', 'nombre_colegio');
+                await fetchData('colegio', 'colegio', 'id_colegio', 'nombre_colegio');
             }
         });
     }
@@ -263,9 +261,46 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     }
 
-    // Lógica para eliminar y editar (se mantiene)
     document.getElementById('cuerpo_tabla').addEventListener('click', async (e) => {
-        // ... (Tu lógica de editar y eliminar) ...
+        if (e.target.classList.contains('editar_btn')) {
+            const estudianteId = e.target.dataset.id;
+            // Asegúrate que esta función exista y esté dentro del mismo scope
+            await abrirFormularioEdicion(estudianteId); 
+        } else if (e.target.matches('.confirmacion_btn')) {
+            const estudianteId = e.target.dataset.id;
+            
+            const confirmacion = confirm('¿Estás seguro de que quieres eliminar a este estudiante? Esta acción es irreversible.');
+
+            if (confirmacion) {
+                try {
+                    // Endpoint de eliminación para estudiantes: /estudiante/:id
+                    const response = await fetch(`http://localhost:3000/estudiante/${estudianteId}`, {
+                        method: 'DELETE',
+                        credentials: 'include',
+                    });
+
+                    if (!response.ok) {
+                        // Intentar obtener un mensaje de error si no fue exitoso
+                        let errorDetail = `HTTP error! status: ${response.status}`;
+                        try {
+                             const errorData = await response.json();
+                             errorDetail = errorData.message || errorDetail;
+                        } catch (jsonError) {
+                            // Ignorar error de JSON si la respuesta no era JSON
+                        }
+                        throw new Error(errorDetail);
+                    }
+
+                    // Después de la eliminación exitosa, recargar los datos
+                    // (Nota: estudiantesData es una variable global, la recarga debe actualizarla)
+                    await loadFilters(); // Usar loadFilters para recargar estudiantes y construir la tabla
+
+                } catch (error) {
+                    console.error('Error al eliminar estudiante:', error);
+                    alert(`Error al eliminar estudiante: ${error.message}`);
+                }
+            }
+        }
     });
 
     // Lógica para enviar formulario (se mantiene)
@@ -275,45 +310,45 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
     // =================================================================
-    // Carga Inicial de Datos y Filtros
+    // Carga Inicial de Datos y Filtros (CORREGIDA)
     // =================================================================
 
     // 2. Cargar datos de filtros y construir checkboxes
     const loadFilters = async () => {
-        // NOTA: 'fetchData' debe modificarse para devolver los datos en lugar de solo poblar un select
-        // Si fetchData no devuelve los datos, necesitas una función 'fetchEntities' separada o modificar fetchData.
         
         const fetchAndBuild = async (endpoint, category, valueKey, textKey) => {
-             const response = await fetch(`http://localhost:3000/${endpoint}`, { 
-                 method: 'GET',
-                 headers: { 'Content-Type': 'application/json' },
-                 credentials: 'include',
-             });
-             if (response.ok) {
-                 const data = await response.json();
-                 construirCheckboxes(data, category, valueKey, textKey);
-                 return data;
-             }
-             return [];
+            const response = await fetch(`http://localhost:3000/${endpoint}`, { 
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json' },
+                credentials: 'include',
+            });
+            if (response.ok) {
+                const data = await response.json();
+                construirCheckboxes(data, category, valueKey, textKey);
+                return data;
+            }
+            return [];
         };
 
+        const shouldLoadColegioFilter = (user.rol.nombre_rol === 'Admin' || user.rol.nombre_rol === 'Aseador');
+
         await Promise.all([
-            fetchAndBuild('doc', 'tipo_doc', 'id_doc', 'siglas'),
-            fetchAndBuild('grado', 'grado', 'id_grado', 'numero_grado'),
-            fetchAndBuild('jornada', 'jornada', 'id_jornada', 'nombre_jornada'),
-            // Solo cargar colegios si el rol lo permite
-            user.rol.nombre_rol === 'aseador' ? fetchAndBuild('colegio', 'colegio', 'id_colegio', 'nombre_colegio') : Promise.resolve(),
+            fetchAndBuild('doc', 'tipo_doc', 'id_doc', 'siglas').catch(err => console.error("Error al cargar docs:", err)),
+            fetchAndBuild('grado', 'grado', 'id_grado', 'numero_grado').catch(err => console.error("Error al cargar grados:", err)),
+            fetchAndBuild('jornada', 'jornada', 'id_jornada', 'nombre_jornada').catch(err => console.error("Error al cargar jornada:", err)),
+            
+            // Carga de Colegios CON la condición de rol
+            shouldLoadColegioFilter ? fetchAndBuild('colegio', 'colegio', 'id_colegio', 'nombre_colegio') : Promise.resolve(),
         ]);
         
         // 3. Carga Inicial de Estudiantes
-        // Modificamos el callback de obtenerEntidades para almacenar los datos
         obtenerEntidades('estudiante', (data) => {
             estudiantesData = data; // Guarda la data original
             construir_tabla(data, user); // Construye la tabla inicial
         });
         
     };
-    
+
     loadFilters();
 
     async function abrirFormularioEdicion(id) {
@@ -356,8 +391,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             await fetchData('colegio', 'colegio', 'id_colegio', 'nombre_colegio');
             document.getElementById('colegio').value = estudiante.colegio?.id_colegio || '';
         }
-        
-        // 4. Finalizar
         currentEstudianteId = id;
         formulario_añadir.classList.add('open');
         
@@ -366,4 +399,3 @@ document.addEventListener('DOMContentLoaded', async () => {
         alert('No se pudo cargar la información del estudiante para editar.');
     }
 }});
-

@@ -65,7 +65,6 @@ export function toggleAccionesColumn(user) {
  * @param {object} user - El objeto de usuario.
  */
 export function toggleColegioSelect(user) {
-    console.log('toggleColegioSelect user:', user); // Depuración
     const selectColegio = document.getElementById('colegio');
     const userRole = user.rol.nombre_rol;
 

@@ -87,7 +87,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
                     const result = await response.json();
                     
-                    // CORRECCIÓN: Ahora se pasa el objeto 'user' para refrescar la tabla
                     await obtenerEntidades('user', construir_tabla, user);
 
                 } catch (error) {
