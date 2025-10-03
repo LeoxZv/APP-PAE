@@ -250,7 +250,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             toggleColegioSelect(user);
 
-            if (user.rol.nombre_rol === 'aseador') {
+            if (user.rol.nombre_rol === 'Aseador') {
                 await fetchData('colegio', 'colegio', 'id_colegio', 'nombre_colegio');
             }
         });
@@ -387,7 +387,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         // 3. Manejo Condicional del Select de Colegio
         toggleColegioSelect(window.user); // Muestra/Oculta el select de Colegio según el rol
-        if (window.user.rol.nombre_rol === 'aseador') {
+        if (window.user.rol.nombre_rol === 'Aseador') {
             await fetchData('colegio', 'colegio', 'id_colegio', 'nombre_colegio');
             document.getElementById('colegio').value = estudiante.colegio?.id_colegio || '';
         }

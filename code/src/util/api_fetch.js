@@ -14,21 +14,7 @@ export async function fetchData(endpoint, selectId, valueKey, textKey) {
         }
 
         const data = await response.json(); 
-        
-        // 🚨 CRÍTICO: Debugging de la data y el elemento
-        console.groupCollapsed(`DEBUG: ${endpoint}`);
-        console.log(`[1] selectId (Buscado): ${selectId}`);
-        console.log(`[2] valueKey (ID): ${valueKey}`);
-        console.log(`[3] textKey (Texto): ${textKey}`);
-        console.log(`[4] Datos recibidos:`, data);
-        
         const selectElement = document.getElementById(selectId);
-        console.log(`[5] Elemento Select encontrado:`, selectElement);
-        console.log(`[6] Data es array y no vacía: ${Array.isArray(data) && data.length > 0}`);
-        console.groupEnd();
-        // 🚨 FIN DEL DEBUGGING
-        
-        // ... (el resto de tu lógica para crear el defaultOption) ...
         selectElement.innerHTML = '';
         const defaultOption = document.createElement('option');
         

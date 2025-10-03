@@ -359,34 +359,87 @@ body {
    5. FORMULARIO MODAL DE REGISTRO (.formulario_añadir)
    ====================================================================== */
 .formulario_añadir {
-    position: fixed; 
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-    display: none;
+    display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000; 
+    opacity: 0; 
+    z-index: -1;
+    transition: opacity 0.3s ease;
+}
+
+.formulario_añadir.open {
+    opacity: 1;
+    z-index: 999;
 }
 
 .formulario_contenido {
-    background: white;
-    padding: 2rem;
-    border-radius: 10px;
+    background-color: #fff;
+    border-radius: 8px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    width: 90%;
-    max-width: 500px;
     position: relative;
+    width: 90%;
+    max-width: 450px;
+    padding: 1.5rem;
 }
 
 .formulario_contenido h2 {
-    color: #6b8ee5e3;
-    font-size: 1.8rem;
-    margin-bottom: 1.5rem;
-    font-weight: 600;
+    color: #6b8ee5;
     text-align: center;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.formulario_contenido form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.formulario_contenido form input {
+    width: 100%;
+    margin-bottom: 0.75rem;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    background-color: #6b8ee536;
+    font-size: 1rem;
+}
+
+
+.selects-estudiante {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+    margin: 1rem 0;
+    gap: 0.5rem;
+}
+
+.selects-estudiante select {
+    /* 3 selects por fila en escritorio, 100% en móvil */
+    flex-basis: calc(33.33% - 0.3rem); 
+    padding: 0.5rem;
+    font-size: 0.6rem;
+    border: none;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    background-color: #5592bb6b;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    appearance: none;
+    transition: 0.4s;
+}
+
+.selects-estudiante select:hover,
+.selects-estudiante select:focus {
+    background: #dddddd;
 }
 
 .cerrar_btn {

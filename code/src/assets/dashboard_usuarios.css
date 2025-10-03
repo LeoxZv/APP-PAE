@@ -317,7 +317,6 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* Controlado por JS para mostrarse/ocultarse */
     opacity: 0; 
     z-index: -1;
     transition: opacity 0.3s ease;
